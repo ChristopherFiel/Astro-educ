@@ -5,17 +5,16 @@
 
 # Idk what to name Alice or Dawn
 define a = Character("Alice", color="#f0f8ff")
-    
 
-transform bottom:
-    xalign 0.5
-    yalign 0.0
+
+
+# Splashscreen to show before main menu
 
 label splashscreen:
     scene black
     with Pause(1)
 
-    show text "Fiel & Sarmiento presents..." with dissolve
+    show text "{size=40}Fiel & Sarmiento presents...{/size}" with dissolve
     with Pause(2)
 
     hide text with dissolve
@@ -32,7 +31,7 @@ label start:
     scene black
     with Pause(1)
 
-    show text "{font=HowdyLemon.otf}{size=80}Somewhere in the southern hemisphere{/size}{/font}" with dissolve
+    show text "{font=HowdyLemon.otf}{size=60}Somewhere in the southern hemisphere{/size}{/font}" with dissolve
     pause 
 
     hide text with dissolve
@@ -91,7 +90,9 @@ label lost_in_forest:
     hide Alice
 
     # Cinema, magnum opus, imdb 10/10, rotten tomato 100%, cannes film festival film of the year
-    # Game of the year 2026, Oscars best cinematic, MMFF best film, 
+    # Game of the year 2026, Oscars best cinematography, MMFF best film,
+    # NBA 2026 Champions & finals MVP, 2026 Anime of the year, 
+    # MAMA Song of the year, Peak fiction, kino has been served
 
     $ quick_menu = False
     window hide
@@ -99,7 +100,7 @@ label lost_in_forest:
     scene black
     with Pause(1)
 
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Look Up{/size}{/font}"
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Look Up{/size}{/font}" with dissolve
     pause 
 
     hide text with dissolve
