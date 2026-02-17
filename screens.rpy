@@ -452,7 +452,7 @@ screen main_menu():
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("New Game"), xalign=0.5, yalign=0.6, color='#f2d983', size=50)
+                    idle_foreground Text(_("New Game"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
                     hover_foreground Text(_("New Game"), xalign=0.5, yalign=0.6, color='#161832', size=50)
                     action Start()
                     focus_mask True
@@ -460,7 +460,7 @@ screen main_menu():
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("Load Game"), xalign=0.5, yalign=0.6, color='#f2d983', size=50)
+                    idle_foreground Text(_("Load Game"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
                     hover_foreground Text(_("Load Game"), xalign=0.5, yalign=0.6, color='#161832', size=50)
                     action ShowMenu('load')
                     focus_mask True
@@ -468,7 +468,7 @@ screen main_menu():
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("Settings"), xalign=0.5, yalign=0.6, color='#f2d983', size=50)
+                    idle_foreground Text(_("Settings"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
                     hover_foreground Text(_("Settings"), xalign=0.5, yalign=0.6, color='#161832', size=50)
                     action [SetVariable("settings", False), ShowMenu('settings')]
                     focus_mask True
@@ -476,7 +476,7 @@ screen main_menu():
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#f2d983', size=50)
+                    idle_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
                     hover_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#161832', size=50)
                     action ShowMenu('credits')
                     focus_mask True
@@ -484,7 +484,7 @@ screen main_menu():
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("Quit"), xalign=0.5, yalign=0.6, color='#f2d983', size=50)
+                    idle_foreground Text(_("Quit"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
                     hover_foreground Text(_("Quit"), xalign=0.5, yalign=0.6, color='#161832', size=50)
                     action Quit(confirm=not main_menu)
                     focus_mask True
