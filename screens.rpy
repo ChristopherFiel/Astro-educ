@@ -337,6 +337,17 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
+# Tranforms for the menu screen
+transform menu_dissolve:
+    on show:
+        alpha 0.0 yoffset 20
+        linear 1.0 alpha 1.0 yoffset 0
+
+transform bg_dissolve:
+    on show, replace:
+        alpha 0.0
+        linear 0.5 alpha 1.0
+
 screen navigation():
 
     vbox:
@@ -438,8 +449,8 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add "main_menu"
-    add "gui/title.png":
+    add "main_menu" at bg_dissolve
+    add "gui/title.png" at bg_dissolve:
         xpos 610
         ypos 130
 
@@ -448,6 +459,8 @@ screen main_menu():
 
     vbox:
             align (0.5, 0.85)
+
+            at menu_dissolve
 
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
