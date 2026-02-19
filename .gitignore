@@ -8,7 +8,7 @@
 cache/
 saves/
 .vscode/
-persistent
+persistent/
 
 # System / OS files
 .DS_Store
