@@ -1,0 +1,34 @@
+# Ren'Py Auto-generated files
+*.rpyc
+*.rpymc
+*.pyo
+*.pyc
+
+# Save data and cache
+cache/
+saves/
+.vscode/
+
+# System / OS files
+.DS_Store
+Thumbs.db
+
+# Ren'Py Editor/Traceback logs
+traceback.txt
+errors.txt
+log.txt
+lint.txt
+
+# Android/iOS Build artifacts
+android-icon.png
+android-presplash.jpg
+ios-icon.png
+ios-presplash.jpg
+
+# Temporary / Backup files
+tmp/
+**/.copying.*
+
+# Distribution/Build outputs
+/archives/
+/build/

@@ -12,6 +12,18 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
+init python:
+    config.mouse = { }
+    
+    # Standard Pointer (Arrow)
+    config.mouse['default'] = [ ( "gui/custom_cursors/Arrow V3.png", 0, 0) ]
+    
+    # Hover State (Sparkle) - Use this when hovering over houses/buttons
+    config.mouse['button'] = [ ( "gui/custom_cursors/Sparkle V3.png", 0, 0) ]
+    
+    # Optional: Waiting/Special state (Moon)
+    config.mouse['wait'] = [ ( "gui/custom_cursors/Moon V3.png", 0, 0) ]
+
 define config.name = _("Look Up")
 
 
