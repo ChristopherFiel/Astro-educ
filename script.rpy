@@ -204,8 +204,18 @@ label lost_in_forest_2:
 
     show Dawn pout
     a "Lets go"
+    a "test"
 
-    return
+    menu:
+        a "Where shall we go?"
+        "Straight ahead":
+            a "Ok"
+            return
+        "Let's stay":
+            a "aight"
+            return
+
+label lost_in_forest_3:
 
 # Chapter 2: Midnight Challenge
 
