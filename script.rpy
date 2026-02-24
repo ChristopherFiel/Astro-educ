@@ -124,12 +124,16 @@ label start:
 
     "Well it's time to go home now!"
 
+    show Dawn surprised
+
+    a "Hi"
+
     jump lost_in_forest
 
 # Chapter 1: Dawn at Sunset
 
 label lost_in_forest:
-    $ renpy.block_rollback()
+    # $ renpy.block_rollback()
 
     scene bg forest 1 with dissolve
 
@@ -152,7 +156,7 @@ label lost_in_forest:
 
     if player_name == "":
         $ player_name="#1 Netanyahu Hater"
-    $ renpy.block_rollback()
+    # $ renpy.block_rollback()
 
     a "Nice to meet you %(player_name)s"
     a "Don't worry I am a hiker too"
