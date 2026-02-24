@@ -1,3 +1,3 @@
 # Astro-educ
-Game development sa astro-educ
-banana
+* Game development sa astro-educ
+* banana
