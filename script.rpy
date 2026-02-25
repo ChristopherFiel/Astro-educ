@@ -1,91 +1,8 @@
-﻿# The script of the game goes in this file.
-
-# Declare characters used by this game. The color argument colorizes the
-# Idk what to name Alice or Dawn
-define a = Character("Dawn", image="sprites/Dawn", color="#e6cc90")
-
-# Transforms/transitions for expressions/blinks
-define config.say_attribute_transition = Dissolve(0.1)
-# Randomize blinking time
-transform blinkwait:
-    choice:
-        6.0
-    choice:
-        5.0
-    choice:
-        4.0
-    choice:
-        2.0
-
-#Blinking Character Images
-image Dawn normal:
-    zoom 1.5
-    "sprites/Dawn/Dawn_normal.png"
-    blinkwait
-    "sprites/Dawn/Dawn_normal_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_normal.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-image Dawn normal2:
-    zoom 1.5
-    "sprites/Dawn/Dawn_normal2.png"
-    blinkwait
-    "sprites/Dawn/Dawn_normal2_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_normal2.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-image Dawn lookaway:
-    zoom 1.5
-    "sprites/Dawn/Dawn_lookaway.png"
-    blinkwait
-    "sprites/Dawn/Dawn_lookaway_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_lookaway.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-image Dawn surprised:
-    zoom 1.5
-    "sprites/Dawn/Dawn_surprised.png"
-    blinkwait
-    "sprites/Dawn/Dawn_surprised_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_surprised.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-image Dawn pout:
-    zoom 1.5
-    "sprites/Dawn/Dawn_pout.png"
-    blinkwait
-    "sprites/Dawn/Dawn_pout_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_pout.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-image Dawn smile:
-    zoom 1.5
-    "sprites/Dawn/Dawn_smile.png"
-    blinkwait
-    "sprites/Dawn/Dawn_smile_blink.png" with Dissolve(0.1)
-    0.3
-    "sprites/Dawn/Dawn_smile.png" with Dissolve(0.1)
-    0.1
-    repeat
-
-
-# Splashscreen to show before main menu
-
-label splashscreen:
+﻿label splashscreen:
     scene black
     with Pause(1)
 
-    show text "{size=40}Fiel & Sarmiento presents...{/size}" with dissolve
+    show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
     with Pause(2)
 
     hide text with dissolve
@@ -111,7 +28,7 @@ label start:
     $ quick_menu = True 
     window show
 
-    # Change the bg mountain top to a stylize real life image when you have time
+    $ time_of_day = 'NIGHT'
     scene bg mountain top with dissolve
 
     # The scenario is the player is talking to himself admiring the view at the
@@ -126,11 +43,11 @@ label start:
 
     show Dawn surprised
 
-    a "Hi"
+    d "Hi"
 
     jump lost_in_forest
 
-# Chapter 1: Dawn at Sunset
+### Chapter 1: Dawn at Sunset ###
 
 label lost_in_forest:
     # $ renpy.block_rollback()
@@ -149,7 +66,7 @@ label lost_in_forest:
     "???" "Are you lost?"
     "???" "Oppss, sorry didn't mean to startle you hehe"
     "???" "By the way my name is Dawn"
-    a "How about you what's your name?"
+    d "How about you what's your name?"
 
     $ player_name = renpy.input("Type your name")
     $ player_name = player_name.strip()
@@ -158,11 +75,11 @@ label lost_in_forest:
         $ player_name="#1 Netanyahu Hater"
     # $ renpy.block_rollback()
 
-    a "Nice to meet you %(player_name)s"
-    a "Don't worry I am a hiker too"
-    a "Eh?? so I guess you're indeed lost"
-    a "Don't worry I know a way to navigate the forest without a compass or map"
-    a "Just... Look Up"
+    d "Nice to meet you %(player_name)s"
+    d "Don't worry I am a hiker too"
+    d "Eh?? so I guess you're indeed lost"
+    d "Don't worry I know a way to navigate the forest without a compass or map"
+    d "Just... Look Up"
 
     hide Dawn
 
@@ -192,38 +109,39 @@ label star_map:
     # $ renpy.block_rollback()
     # Dawn will teach the player how to read the map
 
-    scene bg map with dissolve
+    scene map with dissolve
 
-    a "Let me show you"
+    d "Let me show you"
 
     jump lost_in_forest_2
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
 
-    scene bg forest 1 with dissolve
+    scene bg mountain top with dissolve
+    with eyeopen
 
     show screen gameUI
     "The game UI is apprearing."
     "test2"
 
     show Dawn pout
-    a "Lets go"
-    a "test"
+    d "Lets go"
+    d "test"
 
     menu:
-        a "Where shall we go?"
+        d "Where shall we go?"
         "Straight ahead":
-            a "Ok"
+            d "Ok"
             return
         "Let's stay":
-            a "aight"
+            d "aight"
             return
 
 label lost_in_forest_3:
 
-# Chapter 2: 
+### Chapter 2: ###
 
 # Chapter 3: Star trail, and Shooting Stars
 
-# Chapter 4: At Dawn
+### Chapter 4: At Dawn ###

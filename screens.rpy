@@ -486,12 +486,20 @@ screen main_menu():
                     action [SetVariable("settings", False), ShowMenu('settings')]
                     focus_mask True
 
+            # imagebutton:
+            #         idle "gui/button/menubutton_idle.png"
+            #         hover "gui/button/menubutton_hover.png"
+            #         idle_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
+            #         hover_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#161832', size=50)
+            #         action ShowMenu('credits')
+            #         focus_mask True
+
             imagebutton:
                     idle "gui/button/menubutton_idle.png"
                     hover "gui/button/menubutton_hover.png"
-                    idle_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
-                    hover_foreground Text(_("Credits"), xalign=0.5, yalign=0.6, color='#161832', size=50)
-                    action ShowMenu('credits')
+                    idle_foreground Text(_("Help"), xalign=0.5, yalign=0.6, color='#f0f8ff', size=50)
+                    hover_foreground Text(_("Help"), xalign=0.5, yalign=0.6, color='#161832', size=50)
+                    action ShowMenu('help')
                     focus_mask True
 
             imagebutton:
