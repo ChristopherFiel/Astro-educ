@@ -190,6 +190,7 @@ label lost_in_forest:
 
 label star_map:
     # $ renpy.block_rollback()
+    # Dawn will teach the player how to read the map
 
     scene bg map with dissolve
 
@@ -221,7 +222,7 @@ label lost_in_forest_2:
 
 label lost_in_forest_3:
 
-# Chapter 2: Midnight Challenge
+# Chapter 2: 
 
 # Chapter 3: Star trail, and Shooting Stars
 
