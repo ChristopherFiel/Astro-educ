@@ -45,6 +45,8 @@ label start:
 
     d "Hi"
 
+    d "Hi"
+
     jump lost_in_forest
 
 ### Chapter 1: Dawn at Sunset ###
