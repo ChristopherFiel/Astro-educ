@@ -2,7 +2,7 @@
     scene black
     with Pause(1)
 
-    show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
+    show text "{size=40}Fiel & Sarmiento presents...{/size}" with dissolve
     with Pause(2)
 
     hide text with dissolve
@@ -28,7 +28,7 @@ label start:
     $ quick_menu = True 
     window show
 
-    $ time_of_day = 'NIGHT'
+    # Change the bg mountain top to a stylize real life image when you have time
     scene bg mountain top with dissolve
 
     # The scenario is the player is talking to himself admiring the view at the
@@ -41,18 +41,13 @@ label start:
 
     "Well it's time to go home now!"
 
-    show Dawn surprised
-
-    d "Hi"
-
-    d "Hi"
-
     jump lost_in_forest
 
-### Chapter 1: Dawn at Sunset ###
+# Chapter 1: Dawn at Sunset
+
 
 label lost_in_forest:
-    # $ renpy.block_rollback()
+    $ renpy.block_rollback()
 
     scene bg forest 1 with dissolve
 
@@ -68,20 +63,20 @@ label lost_in_forest:
     "???" "Are you lost?"
     "???" "Oppss, sorry didn't mean to startle you hehe"
     "???" "By the way my name is Dawn"
-    d "How about you what's your name?"
+    a "How about you what's your name?"
 
     $ player_name = renpy.input("Type your name")
     $ player_name = player_name.strip()
 
     if player_name == "":
         $ player_name="#1 Netanyahu Hater"
-    # $ renpy.block_rollback()
+    $ renpy.block_rollback()
 
-    d "Nice to meet you %(player_name)s"
-    d "Don't worry I am a hiker too"
-    d "Eh?? so I guess you're indeed lost"
-    d "Don't worry I know a way to navigate the forest without a compass or map"
-    d "Just... Look Up"
+    a "Nice to meet you %(player_name)s"
+    a "Don't worry I am a hiker too"
+    a "Eh?? so I guess you're indeed lost"
+    a "Don't worry I know a way to navigate the forest without a compass or map"
+    a "Just... Look Up"
 
     hide Dawn
 
@@ -109,41 +104,39 @@ label lost_in_forest:
 
 label star_map:
     # $ renpy.block_rollback()
-    # Dawn will teach the player how to read the map
 
-    scene map with dissolve
+    scene bg map with dissolve
 
-    d "Let me show you"
+    a "Let me show you"
 
     jump lost_in_forest_2
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
 
-    scene bg mountain top with dissolve
-    with eyeopen
+    scene bg forest 1 with dissolve
 
     show screen gameUI
     "The game UI is apprearing."
     "test2"
 
     show Dawn pout
-    d "Lets go"
-    d "test"
+    a "Lets go"
+    a "test"
 
     menu:
-        d "Where shall we go?"
+        a "Where shall we go?"
         "Straight ahead":
-            d "Ok"
+            a "Ok"
             return
         "Let's stay":
-            d "aight"
+            a "aight"
             return
 
 label lost_in_forest_3:
 
-### Chapter 2: ###
+# Chapter 2: Midnight Challenge
 
 # Chapter 3: Star trail, and Shooting Stars
 
-### Chapter 4: At Dawn ###
+# Chapter 4: At Dawn
