@@ -11,6 +11,8 @@ transform blinkwait:
         3.0
     choice:
         2.0
+    choice:
+        1.0
 
 #Blinking Character Images
 image Dawn normal:

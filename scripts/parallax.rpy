@@ -41,7 +41,7 @@ init -1 python:
     # 3. Assign Dawn and other tags to the correct layers
     config.tag_layer = {
         'bg': 'farBack',
-        'dawn': 'back',      # Your sprite Dawn is now assigned here
+        'dawn': 'back',
         'effects': 'front',
     }
 

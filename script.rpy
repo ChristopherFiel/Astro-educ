@@ -120,10 +120,11 @@ label star_map:
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
+    $ time_of_day = "NIGHT"
 
-    scene bg mountain top with dissolve
-    with eyeopen
-
+    scene black with eyeclose
+    scene bg park at resizer with eyeopen
+    
     show screen gameUI
     "The game UI is apprearing."
     "test2"

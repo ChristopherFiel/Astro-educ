@@ -7,29 +7,26 @@ init -1 python:
 transform resizer:
     size (SCREEN_W, SCREEN_H)
 
-# This transform fills the screen but keeps the aspect ratio (crops the edges)
 transform fill_screen:
+    subpixel True
     xalign 0.5 yalign 0.5
-    truecenter
-    # This ensures the image is at least as big as the screen
-    size (SCREEN_W, SCREEN_H)
+    size (SCREEN_W, None) 
+    fit "cover"
 
 init python:
     import os
 
-    # Change "bg" to whatever your background folder is named
     for file in renpy.list_files():
-        if file.startswith("images/bg/") and (file.endswith(".png") or file.endswith(".jpg") or file.endswith(".webp")):
+        # Make sure the path matches your folder structure exactly
+        if file.startswith("images/bg/") and file.lower().endswith((".png", ".jpg", ".webp")):
             
+            # This extracts 'park' from 'images/bg/park.png'
             name = os.path.splitext(os.path.basename(file))[0]
             
-            # This makes "show bg forest_day" automatically scale to your screen!
             renpy.image("bg " + name, At(file, resizer))
 
 init python:
     def auto_aspect_ratio(d):
-        # This function calculates if the image is too wide or too tall
-        # and scales it so it covers the screen without stretching.
         return Frame(d, size=(SCREEN_W, SCREEN_H))
 
 # Use 'At(file, resizer)' for stretching
