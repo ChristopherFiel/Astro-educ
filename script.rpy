@@ -1,16 +1,17 @@
-﻿label splashscreen:
-    scene black
-    with Pause(1)
+﻿# label splashscreen:
+#     scene black
+#     with Pause(1)
 
-    show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
-    with Pause(2)
+#     show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
+#     with Pause(2)
 
-    hide text with dissolve
-    with Pause(1)
+#     hide text with dissolve
+#     with Pause(1)
 
-    return
+#     return
 
 # The game starts here.
+
 
 label start:
     $ quick_menu = False
@@ -28,7 +29,7 @@ label start:
     $ quick_menu = True 
     window show
 
-    $ time_of_day = 'NIGHT'
+    $ time_of_day = 'DUSK'
     scene bg mountain top with dissolve
 
     # The scenario is the player is talking to himself admiring the view at the
@@ -45,12 +46,10 @@ label start:
 
     d "Hi"
 
-    d "Hi"
-
     jump lost_in_forest
 
-### Chapter 1: Dawn at Sunset ###
 
+### Chapter 1: Dawn at Sunset ###
 label lost_in_forest:
     # $ renpy.block_rollback()
 
@@ -107,6 +106,7 @@ label lost_in_forest:
 
     jump star_map
 
+
 label star_map:
     # $ renpy.block_rollback()
     # Dawn will teach the player how to read the map
@@ -116,6 +116,7 @@ label star_map:
     d "Let me show you"
 
     jump lost_in_forest_2
+
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
@@ -138,7 +139,8 @@ label lost_in_forest_2:
             return
         "Let's stay":
             d "aight"
-            return
+            jump lost_in_forest
+
 
 label lost_in_forest_3:
 
