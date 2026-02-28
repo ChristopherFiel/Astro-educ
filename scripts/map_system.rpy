@@ -37,6 +37,7 @@ label call_mapUI:
     hide map_bg
     $ quick_menu = True 
     window show
+    $ renpy.transition(eyeopen)
     return
 
 screen MapUI:
