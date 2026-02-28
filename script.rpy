@@ -53,7 +53,7 @@ label start:
 label lost_in_forest:
     # $ renpy.block_rollback()
 
-    scene bg forest 1 with dissolve
+    scene bg mountain top with eyeopen
 
     # Write dialogue that shows that the player is lost in the forest for hours
     # Indicate that the player don't bring that much of a supply
@@ -85,9 +85,6 @@ label lost_in_forest:
     hide Dawn
 
     # Cinema, magnum opus, imdb 10/10, rotten tomato 100%, cannes film festival film of the year
-    # Game of the year 2026, Oscars best cinematography, MMFF best film,
-    # 2026 NBA Champions & finals MVP, 2026 Anime of the year, 
-    # MAMA Song of the year, Peak fiction, kino has been served
 
     $ quick_menu = False
     window hide
@@ -110,17 +107,33 @@ label lost_in_forest:
 label star_map:
     # $ renpy.block_rollback()
     # Dawn will teach the player how to read the map
-
-    scene map with dissolve
+    
+    scene black with eyeclose
+    show star_sky with eyeopen
 
     d "Let me show you"
+
+    scene black with eyeclose
+    show big_dipper_tutorial with eyeopen
+
+    d "This is how you navigate using big dipper"
+
+    scene black with eyeclose
+    show orion_tutorial with eyeopen
+
+    d "This is how you navigate using orion"
+
+    scene black with eyeclose
+    show crux_tutorial with eyeopen
+
+    d "This is how you navigate using crux"
 
     jump lost_in_forest_2
 
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
-    $ time_of_day = "NIGHT"
+    $ time_of_day = "DAY"
 
     scene black with eyeclose
     scene bg park at resizer with eyeopen
@@ -140,6 +153,7 @@ label lost_in_forest_2:
             return
         "Let's stay":
             d "aight"
+            scene black with eyeclose
             jump lost_in_forest
 
 
