@@ -340,13 +340,13 @@ style quick_button_text:
 # Tranforms for the menu screen
 transform menu_dissolve:
     on show:
-        alpha 0.0 yoffset 20
-        linear 1.0 alpha 1.0 yoffset 0
+        alpha 0.0 yoffset 40
+        linear 1.5 alpha 1.0 yoffset 0
 
 transform bg_dissolve:
     on show, replace:
         alpha 0.0
-        linear 0.5 alpha 1.0
+        linear 1.0 alpha 1.0
 
 screen navigation():
 

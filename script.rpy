@@ -1,14 +1,14 @@
-﻿# label splashscreen:
-#     scene black
-#     with Pause(1)
+﻿label splashscreen:
+    scene black
+    with Pause(1)
 
-#     show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
-#     with Pause(2)
+    show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
+    with Pause(2)
 
-#     hide text with dissolve
-#     with Pause(1)
+    hide text with dissolve
+    with Pause(1)
 
-#     return
+    return
 
 # The game starts here.
 
@@ -155,10 +155,11 @@ label lost_in_forest_2:
         "Let's stay":
             d "aight"
             scene black with eyeclose
-            jump lost_in_forest
+            jump lost_in_forest_3
 
 
 label lost_in_forest_3:
+    return
 
 ### Chapter 2: ###
 
