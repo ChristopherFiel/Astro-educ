@@ -4,7 +4,6 @@ init python:
     # 1. Define Tints
     tint_dark = im.matrix.tint(0.44, 0.44, 0.75) * im.matrix.brightness(-0.02)
     tint_sunset = im.matrix.tint(0.85, 0.60, 0.45) * im.matrix.brightness(0.10)
-    # --- NEW DAWN TINT: Soft pinks/purples with slight brightness ---
     tint_dawn = im.matrix.tint(0.85, 0.82, 0.98) * im.matrix.brightness(0.02)
     tint_dim = im.matrix.tint(0.90, 0.90, 1.0) * im.matrix.brightness(-0.1)
 

@@ -52,7 +52,8 @@ label start:
 ### Chapter 1: Dawn at Sunset ###
 label lost_in_forest:
     # $ renpy.block_rollback()
-
+    $ time_of_day = 'DAY'
+    scene black with eyeclose
     scene bg mountain top with eyeopen
 
     # Write dialogue that shows that the player is lost in the forest for hours

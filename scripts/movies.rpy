@@ -4,4 +4,3 @@ image big_dipper_tutorial = Movie(size=(1920, 1080), play= "images/bg/big dipper
 image orion_tutorial = Movie(size=(1920, 1080), play= "images/bg/orion tutorial.webm", loop=-1)
 image crux_tutorial = Movie(size=(1920, 1080), play= "images/bg/crux tutorial.webm", loop=-1)
 image map = Movie(size=(1920, 1080), play= "images/map/map.webm", loop=-1)
-
