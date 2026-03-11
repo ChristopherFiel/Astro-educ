@@ -1,14 +1,14 @@
-﻿label splashscreen:
-    scene black
-    with Pause(1)
+﻿# label splashscreen:
+#     scene black
+#     with Pause(1)
 
-    show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
-    with Pause(2)
+#     show text "{size=60}A game by \n\nFiel, Sarmiento, & Friends{/size}" with dissolve
+#     with Pause(2)
 
-    hide text with dissolve
-    with Pause(1)
+#     hide text with dissolve
+#     with Pause(1)
 
-    return
+#     return
 
 # The game starts here.
 
@@ -134,7 +134,7 @@ label star_map:
 
 label lost_in_forest_2:
     # $ renpy.block_rollback()
-    $ time_of_day = "DAY"
+    $ time_of_day = "NIGHT"
 
     scene black with eyeclose
     scene bg park at resizer with eyeopen
@@ -147,18 +147,34 @@ label lost_in_forest_2:
     d "Lets go"
     d "test"
 
-    menu:
-        d "Where shall we go?"
-        "Straight ahead":
-            d "Ok"
-            return
-        "Let's stay":
-            d "aight"
-            scene black with eyeclose
-            jump lost_in_forest_3
+    d "Where shall we go"
+    hide Dawn with dissolve
+    $ quick_menu = False
+    window hide dissolve
+
+    $ choice = renpy.call_screen("direction_menu")
+
+    if choice == "straight":
+        d "Ok"
+        return
+
+    elif choice == "left":
+        d "aight"
+        scene black with eyeclose
+        jump lost_in_forest_3
+
+    elif choice == "right":
+        d "Ok"
+        return
+
+    elif choice == "back":
+        d "aight"
+        scene black with eyeclose
+        jump lost_in_forest_3
 
 
 label lost_in_forest_3:
+    d "Go back to menu"
     return
 
 ### Chapter 2: ###
