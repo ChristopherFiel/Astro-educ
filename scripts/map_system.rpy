@@ -23,20 +23,34 @@ screen gameUI:
         action Function(renpy.call_in_new_context, "call_mapUI")
 
 label call_mapUI:
+    # 1. Save the UI state as it was right BEFORE the map opened
+    $ old_quick_menu = quick_menu
+    $ old_window = _window 
+    
+    # Now we can safely hide them for the map screen
     $ quick_menu = False
     window hide
+    
     scene black with eyeclose
     
     show map as map_bg at mouse_parallax(-0.05):
         zoom 1.05
         anchor (0.5, 0.5) pos (0.5, 0.5)    
     with eyeopen
+    
     call screen MapUI
     
     scene black with eyeclose
     hide map_bg
-    $ quick_menu = True 
-    window show
+    
+    # 2. Restore the UI to its saved state instead of forcing it on
+    $ quick_menu = old_quick_menu
+    
+    if old_window:
+        window show
+    else:
+        window hide
+        
     $ renpy.transition(eyeopen)
     return
 
