@@ -1,7 +1,4 @@
 screen direction_menu():
-    $ quick_menu = False
-    on "show" action Hide("say")
-
     textbutton "Go Straight":
         xalign 0.5
         yalign 0.15
