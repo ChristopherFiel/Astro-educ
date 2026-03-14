@@ -19,7 +19,7 @@ screen gameUI:
         yalign 0.0
         xoffset -30
         yoffset 30
-        auto "map_UI/map_%s.png"
+        auto "map_UI/lookup_%s.png" 
         action Function(renpy.call_in_new_context, "call_mapUI")
 
 label call_mapUI:
@@ -53,12 +53,14 @@ label call_mapUI:
 
 screen MapUI:
     modal True
-
+    
     fixed at mouse_parallax(-0.05):
         imagebutton:
-            xalign 1.0 yalign 0.0
-            xoffset -30 yoffset 30
-            auto "map_UI/map_%s.png"
+            xalign 1.0 
+            yalign 0.0
+            xoffset -30 
+            yoffset 30
+            auto "map_UI/lookdown_%s.png" 
             action Return()
 
         imagebutton:

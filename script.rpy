@@ -54,7 +54,6 @@ label mountain_climb:
 
 ### Chapter 1: Dawn at Sunset ###
 label lost_in_forest:
-    # $ renpy.block_rollback()
     $ time_of_day = 'DAY'
     scene black with eyeclose
     scene bg mountain top with eyeopen
@@ -109,7 +108,6 @@ label lost_in_forest:
 
 
 label star_map:
-    # $ renpy.block_rollback()
     # Dawn will teach the player how to read the map
     
     scene black with eyeclose
@@ -136,7 +134,6 @@ label star_map:
 
 
 label lost_in_forest_2:
-    # $ renpy.block_rollback()
     $ time_of_day = "NIGHT"
 
     scene black with eyeclose
