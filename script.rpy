@@ -48,6 +48,9 @@ label start:
 
     jump lost_in_forest
 
+label mountain_climb:
+    return
+
 
 ### Chapter 1: Dawn at Sunset ###
 label lost_in_forest:
