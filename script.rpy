@@ -126,7 +126,7 @@ label star_map:
     d "This is how you navigate using orion"
 
     scene black with eyeclose
-    show crux_tutorial with eyeopen
+    show map with eyeopen
 
     d "This is how you navigate using crux"
 
