@@ -1,26 +1,18 @@
+default current_map = "map-north"
+
 screen direction_menu():
     textbutton "Go Straight":
-        xalign 0.5
-        yalign 0.15
-        text_size 60
-        # hover_background "gui/button/choice_hover_background.png"
-        # idle_background "gui/button/choice_idle_background.png"
-        action Return("straight")
+        xalign 0.5 yalign 0.15 text_size 60
+        action [SetVariable("current_map", "map-north"), Return("straight")]
 
     textbutton "Go Left":
-        xalign 0.1
-        yalign 0.5
-        text_size 60
-        action Return("left")
+        xalign 0.1 yalign 0.5 text_size 60
+        action [SetVariable("current_map", "map-west"), Return("left")]
 
     textbutton "Go Right":
-        xalign 0.9
-        yalign 0.5
-        text_size 60
-        action Return("right")
+        xalign 0.9 yalign 0.5 text_size 60
+        action [SetVariable("current_map", "map-east"), Return("right")]
 
     textbutton "Go Back":
-        xalign 0.5
-        yalign 0.85
-        text_size 60
-        action Return("back")
+        xalign 0.5 yalign 0.85 text_size 60
+        action [SetVariable("current_map", "map-south"), Return("back")]

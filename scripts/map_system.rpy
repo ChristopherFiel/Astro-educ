@@ -31,10 +31,12 @@ label call_mapUI:
     
     scene black with eyeclose
     
-    show map as map_bg at mouse_parallax(-0.05):
+    show expression current_map as map_bg at mouse_parallax(-0.05):
         zoom 1.05
         anchor (0.5, 0.5) pos (0.5, 0.5)    
     with eyeopen
+    
+    call screen MapUI
     
     call screen MapUI
     

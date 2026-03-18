@@ -141,7 +141,6 @@ label lost_in_forest_2:
     
     show screen gameUI
     "The game UI is apprearing."
-    "test2"
 
     show Dawn pout
     d "Lets go"
@@ -155,26 +154,52 @@ label lost_in_forest_2:
     $ choice = renpy.call_screen("direction_menu")
 
     if choice == "straight":
-        d "Ok"
-        return
+        d "Lets gooo!!!"
+        scene black with eyeclose
+        jump forest_north
 
     elif choice == "left":
-        d "aight"
+        d "Lets gooo!!!"
         scene black with eyeclose
-        jump lost_in_forest_3
+        jump forest_west
 
     elif choice == "right":
-        d "Ok"
-        return
+        d "Lets gooo!!!"
+        scene black with eyeclose
+        jump forest_east
 
     elif choice == "back":
-        d "aight"
+        d "Lets gooo!!!"
         scene black with eyeclose
-        jump lost_in_forest_3
+        jump forest_south
 
 
-label lost_in_forest_3:
-    d "Go back to menu"
+label forest_north:
+    scene black with eyeclose
+    show star_sky with eyeopen
+
+    d "lets use the map"
+    return
+
+label forest_south:
+    scene black with eyeclose
+    show star_sky with eyeopen
+
+    d "Lets use the map"
+    return
+
+label forest_east:
+    scene black with eyeclose
+    show star_sky with eyeopen
+
+    d "lets use the map"
+    return
+
+label forest_west:
+    scene black with eyeclose
+    show star_sky with eyeopen
+
+    d "Lets use the map"
     return
 
 ### Chapter 2: ###
