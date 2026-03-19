@@ -1,4 +1,4 @@
-default current_map = "map-north"
+default current_map = "map"
 
 screen direction_menu():
     textbutton "Go Straight":
