@@ -68,9 +68,3 @@ screen direction_menu_no_map():
         text_size 60
 
         action Return("right")
-
-    textbutton "Go Back":
-        xalign 0.5
-        yalign 0.85
-        text_size 60
-        action Return("back") 

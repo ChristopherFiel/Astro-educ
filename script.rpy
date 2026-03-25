@@ -13,6 +13,7 @@
 # The game starts here.
 
 
+### Prologue ###
 label start:
     $ quick_menu = False
     window hide
@@ -44,9 +45,10 @@ label start:
     window hide
 
     show text "{font=HowdyLemon.otf}{size=80}You can do this{/size}{/font}" with Dissolve(1.0)
-    pause
+    pause (3.0)
 
     jump mountain_basecamp
+
 
 label mountain_basecamp:
     scene bg mountain basecamp with dissolve
@@ -54,8 +56,9 @@ label mountain_basecamp:
     $ quick_menu = True
     window show
 
-    "The journey of a thousand miles begin wit a single step"
-    "It seems like I'll be the only one climbing up this mountain today"
+    "The weather's today perfect but"
+    "..."
+    "Why am the only one climbing up this mountain today"
     "I hope I won't get lost"
     # A worn out poster of a missing girl suddenly get swept by the wind to you
     "Hmm... what's this?"
@@ -63,7 +66,7 @@ label mountain_basecamp:
     "A missing poster..."
     "It's barely holding on but some text are still readable"
     "Age 17, wearing uniform, name: Da..."
-    "Da- whattt?"
+    "Da- whattt???"
     "Whatever her name was, I hope she's already found"
     "It's almost time, I need to leave soon"
     "Otherwise, I'll get down the mountain after sunset"
@@ -71,8 +74,7 @@ label mountain_basecamp:
     menu start_trail:
         "What to do?"
         "Start trail":
-            "Everything's now ready"
-            "It's time to go"
+            "My feet's ready to go, it's time to move"
             jump mountain_climb_rainforest
         "Stay for a while":
             "I still have time, no need to rush"
@@ -87,72 +89,230 @@ label mountain_basecamp:
 
 label mountain_climb_rainforest:
     scene bg mountain climb rainforest with dissolve
-    ""
-
-label mountain_climb_rockyside:
-    scene bg mountain climb rockyside with dissolve
-
-label mountain_climb_grassyside:
-    scene bg mountain climb grassyside with dissolve
-
-label mountain_summit:
-    scene bg mountain summit with dissolve
-
-
-
-### Chapter 1: Dawn at Sunset ###
-label lost_in_forest:
-    $ time_of_day = 'DAY'
-    scene black with eyeclose
-    scene bg mountain top with eyeopen
-
-    # Write dialogue that shows that the player is lost in the forest for hours
-    # Indicate that the player don't bring that much of a supply
-    # Indicate that the player seems to be going in circles
-    # Indicate that the player notice something strange in the forest
-    "Idk what to write here as well"
-    "I'm lost"
-
-    # Dawn appears mysteriously 
-    show Dawn normal 
-    "???" "Are you lost?"
-    "???" "Oppss, sorry didn't mean to startle you hehe"
-    "???" "By the way my name is Dawn"
-    d "How about you what's your name?"
-
-    $ player_name = renpy.input("Type your name")
-    $ player_name = player_name.strip()
-
-    if player_name == "":
-        $ player_name="Clementine"
-    # $ renpy.block_rollback()
-
-    d "Nice to meet you %(player_name)s"
-    d "Don't worry I am a hiker too"
-    d "Eh?? so I guess you're indeed lost"
-    d "Don't worry I know a way to navigate the forest without a compass or map"
-    d "Just... Look Up"
-
-    hide Dawn
-
-    # Cinema, magnum opus, imdb 10/10, rotten tomato 100%, cannes film festival film of the year
+    "This forest feels so tranquil, and serene"
+    "I feel like I could just lay here forever"
+    "Going on an adventure alone is bizzarre but quite a freeing experience"
+    "I wonder why this mountain is not so polular"
+    "Its time to move, which path should I take?"
 
     $ quick_menu = False
-    window hide
+    window hide dissolve
+    $ choice = renpy.call_screen("direction_menu_horizontal")
+    
+    if choice == "left":
+        "I think this way is easier"
+        scene black with eyeclose
+        jump mountain_climb_grassyside_left
 
-    scene black with dissolve
-    with Pause(1)
+    elif choice == "right":
+        "My gut feel says this"
+        scene black with eyeclose
+        jump mountain_climb_grassyside_right
 
-    show text "{font=HowdyLemon.otf}{size=60}Chapter 1: Dawn at Sunset{/size}{/font}" with dissolve
-    pause 
 
-    hide text with dissolve
-    with Pause(1)
-
+label mountain_climb_grassyside_left:
+    scene bg mountain climb grassyside-left with dissolve
     $ quick_menu = True
     window show
 
-    jump star_map
+    "Just a little..."
+    "*huff...*"
+    "more..."
+    "*huff...*"
+    "That climb was harder than expected"
+    "*huff...*"
+    "I can already see the summit from here"
+    "*huff...*"
+
+    default rest_count = 0
+
+    label rest_before_the_summit:
+        menu:
+            "What should I do?"
+            "Reached for the summit":
+                if rest_count >= 2:
+                    "Its time to go. The summit is waiting for me!"
+                    jump mountain_summit
+                else:
+                    $ rand = renpy.random.randint(1, 3)
+                    if rand == 1:
+                        "I could really use a break right now *huff...*"
+                    elif rand == 2:
+                        "Just five more minutes please! *huff...*"
+                    elif rand == 3:
+                        "Can I please get my well deserved break *huff...*"
+                    jump rest_before_the_summit
+            "Take a break":
+                $ rest_count += 1
+                if rest_count == 1:
+                    "Yeah, that feels better..."
+                    "This view is amazing, I should rest here a bit more"
+                else:
+                    "Alright I feel better now I should keep going!"
+                jump rest_before_the_summit
+
+
+label mountain_climb_grassyside_right:
+    scene bg mountain climb grassyside-right with dissolve
+    $ quick_menu = True
+    window show
+
+    "The hike from here is easier than expected"
+    "It feels just like a light walk"
+    "I should've taken the other way for more challenge"
+    "The summit is near I should keep going"
+    menu to_the_summit:
+        "What to do?"
+        "Reched for the summit":
+            "I should not keep the mountain summit waiting"
+            "It's time to go"
+            jump mountain_summit
+        "Admire the view for a while":
+            "Resting is never a bad idea"
+            "This view is stunning"
+            $ quick_menu = False
+            window hide
+            pause
+            $ quick_menu = True
+            window show
+            jump to_the_summit
+        
+
+label mountain_summit:
+    scene bg mountain summit with dissolve
+    "*huff..*"
+    "Finally, I've reached the summit!!!"
+    "I thought it would be bad if I reached the summit at sunset"
+    "But seeing it like this, makes me feel that all that sweat I've poured on this hike was worth it"
+    menu watch_the_sunset:
+        "Look around"
+        "Watch the sunset":
+            "This is nothing but beautiful"
+            "I'm glad to be able to see this"
+            $ quick_menu = False
+            window hide
+            pause
+            $ quick_menu = True
+            window show
+    "This was a beautiful sight to see"
+    "I'm glad I did all this even I was alone"
+    menu go_back_trail:
+        "Where shall we go now?"
+        "Go back down":
+            "It was beautiful but it's time to go now"
+            "I need to get to the basecamp before it gets dark. I gotta hurry"
+            jump to_basecamp_forest
+        "Watch the sunset again":
+            "This view only comes once in a lifetime"
+            "I'll stay here a bit more"
+            $ quick_menu = False
+            window hide
+            pause
+            $ quick_menu = True
+            window show
+            jump go_back_trail
+
+
+label to_basecamp_forest:
+    scene bg to basecamp forest
+    "Climbing down is a lot easier than going up"
+    "Now which way is the path to camp again?"
+
+    $ quick_menu = False
+    window hide dissolve
+    $ choice = renpy.call_screen("direction_menu_no_map")
+
+    if choice == "straight":
+        "This has to be it"
+        scene black with eyeclose
+        jump lost_path_straight
+    
+    elif choice == "left":
+        "I think it's this way"
+        scene black with eyeclose
+        jump lost_path_left
+
+    elif choice == "right":
+        "Based from what I remember it's this way"
+        scene black with eyeclose
+        jump lost_path_right
+    
+
+label lost_path_straight:
+    scene bg lost forest straight with dissolve
+    "A"
+
+    $ quick_menu = False
+    window hide dissolve
+    $ choice = renpy.call_screen("direction_menu_no_map")
+
+    if choice == "straight":
+        "This has to be it"
+        scene black with eyeclose
+        jump to_basecamp_forest
+    
+    elif choice == "left":
+        "I think it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+    elif choice == "right":
+        "Based from what I remember it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+
+label lost_path_left:
+    scene bg lost forest left
+    "B"
+
+    $ quick_menu = False
+    window hide dissolve
+    $ choice = renpy.call_screen("direction_menu_no_map")
+
+    if choice == "straight":
+        "This has to be it"
+        scene black with eyeclose
+        jump to_basecamp_forest
+    
+    elif choice == "left":
+        "I think it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+    elif choice == "right":
+        "Based from what I remember it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+
+label lost_path_right:
+    scene bg lost forest right
+    "C"
+
+    $ quick_menu = False
+    window hide dissolve
+    $ choice = renpy.call_screen("direction_menu_no_map")
+
+    if choice == "straight":
+        "This has to be it"
+        scene black with eyeclose
+        jump to_basecamp_forest
+    
+    elif choice == "left":
+        "I think it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+    elif choice == "right":
+        "Based from what I remember it's this way"
+        scene black with eyeclose
+        jump to_basecamp_forest
+
+
+### Chapter 1
+label dawn_first_meeting:
+    scene to basecamp forest
 
 
 label star_map:
