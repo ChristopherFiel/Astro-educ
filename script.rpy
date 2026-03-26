@@ -348,42 +348,52 @@ label lost_path_right:
 ### Chapter 1 ###
 label dawn_first_meeting:
     scene bg forest starry sky
+
+    $ quick_menu = True
+    window show
+
     "This should be a good place to rest"
     "The stars are so bright, it's beautiful"
     ""
 
+    d "Just Look UP"
+
+    jump star_map
 
 label star_map:
     # Dawn will teach the player how to read the map
-    
     scene black with eyeclose
-    show star_sky with eyeopen
+
+    $ quick_menu = False
+    window hide
+    show map at zoom_to(0.1, 0.4, 1.8) with eyeopen
 
     d "Let me show you"
 
-    scene black with eyeclose
-    show big_dipper_tutorial with eyeopen
-
+    show map at pan_to(0.5, 0.0, 1.8, 0.4)
+    pause 1.0
     d "This is how you navigate using big dipper"
+    d "Look at the Big Dipper up here"
 
-    scene black with eyeclose
-    show orion_tutorial with eyeopen
-
+    show map at pan_to(1.0, 0.5, 1.8, 0.4)
+    pause 1.0
     d "This is how you navigate using orion"
 
-    scene black with eyeclose
-    show map with eyeopen
-
-    d "This is how you navigate using crux"
+    show map at pan_to(0.5, 1.0, 1.8, 0.4)
+    pause 1.0
+    d_top "This is how you navigate using crux"
+    d_top "And that's everything you need to know."
 
     jump lost_in_forest_2
 
 
 label lost_in_forest_2:
     $ time_of_day = "NIGHT"
-
     scene black with eyeclose
     scene bg park at resizer with eyeopen
+
+    $ quick_menu = True
+    window show
     
     show screen gameUI
     "The game UI is apprearing."
