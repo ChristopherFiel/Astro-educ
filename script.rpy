@@ -215,104 +215,142 @@ label mountain_summit:
 
 label to_basecamp_forest:
     scene bg to basecamp forest
-    "Climbing down is a lot easier than going up"
-    "Now which way is the path to camp again?"
+
+    default lost_count = 0
+
+    if lost_count == 0:
+        "Climbing down is a lot easier than going up"
+        "Now which way is the path to camp again?"
+    
+    elif lost_count == 1:
+        "Huh...?"
+        "I've been this way before"
+        "Whats happening?"
+        "Wha-what do I do?"
+
+    elif lost_count == 2:
+        "Am I lost?"
+        "Bu-but I just went here before"
+        "Of course, I am in a forest everything looks the same"
+        "The basecamp must be near now"
+
+    elif lost_count == 3:
+        "What the hell is wrong with this forest!"
+        "Can you please just let me out!"
+        "I am not going in cirles, Am I?"
+
+    elif lost_count == 4:
+        "*huff...*"
+        "*gulp*"
+        "Please let me out"
+        "I swear I'll join tree planting activity monthly, and never litter any paper again"
+        "This must be a dream"
+    
+    elif lost_count == 5:
+        "There's no way out is there"
+        "The sun already set"
+        "It's so dark, I can barely see anything"
+        "I am tired"
+    
+    elif lost_count == 6:
+        "I am really going in circles"
+        "I am really really tired"
+        "*huff...*"
+        "I should get some rest"
+        jump dawn_first_meeting
 
     $ quick_menu = False
     window hide dissolve
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        "This has to be it"
+        if lost_count == 0:
+            "This has to be it"
+        $ lost_count += 1
         scene black with eyeclose
         jump lost_path_straight
     
     elif choice == "left":
-        "I think it's this way"
+        if lost_count == 0:
+            "I think it's this way"
+        $ lost_count += 1
         scene black with eyeclose
         jump lost_path_left
 
     elif choice == "right":
-        "Based from what I remember it's this way"
+        if lost_count == 0:
+            "It should be this way"
+        $ lost_count += 1
         scene black with eyeclose
         jump lost_path_right
     
 
 label lost_path_straight:
     scene bg lost forest straight with dissolve
-    "A"
 
     $ quick_menu = False
     window hide dissolve
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        "This has to be it"
         scene black with eyeclose
         jump to_basecamp_forest
     
     elif choice == "left":
-        "I think it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
     elif choice == "right":
-        "Based from what I remember it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
 
 label lost_path_left:
     scene bg lost forest left
-    "B"
 
     $ quick_menu = False
     window hide dissolve
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        "This has to be it"
         scene black with eyeclose
         jump to_basecamp_forest
     
     elif choice == "left":
-        "I think it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
     elif choice == "right":
-        "Based from what I remember it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
 
 label lost_path_right:
     scene bg lost forest right
-    "C"
 
     $ quick_menu = False
     window hide dissolve
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        "This has to be it"
         scene black with eyeclose
         jump to_basecamp_forest
     
     elif choice == "left":
-        "I think it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
     elif choice == "right":
-        "Based from what I remember it's this way"
         scene black with eyeclose
         jump to_basecamp_forest
 
 
-### Chapter 1
+### Chapter 1 ###
 label dawn_first_meeting:
-    scene to basecamp forest
+    scene bg forest starry sky
+    "This should be a good place to rest"
+    "The stars are so bright, it's beautiful"
+    ""
 
 
 label star_map:
