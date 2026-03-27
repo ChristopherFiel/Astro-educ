@@ -16,7 +16,7 @@
 ### Prologue ###
 label start:
     $ quick_menu = False
-    window hide
+    window auto
 
     scene black with dissolve
     show screen disclaimer_screen with dissolve
@@ -32,10 +32,8 @@ label start:
 
     hide text with dissolve
 
-    $ quick_menu = True
-    window show
-
     scene bg mountain background with dissolve
+    $ quick_menu = True
     "Mt. Mayumi, it's so beautiful"
     "This will be my first time climbing a mountain"
     "It looks bigger than the pictures"
@@ -52,9 +50,8 @@ label start:
 
 label mountain_basecamp:
     scene bg mountain basecamp with dissolve
-    $ renpy.notify("Mt. Mayumi Basecamp")
     $ quick_menu = True
-    window show
+    window auto
 
     "The weather's today perfect but"
     "..."
@@ -75,6 +72,7 @@ label mountain_basecamp:
         "What to do?"
         "Start trail":
             "My feet's ready to go, it's time to move"
+            $ quick_menu = False
             jump mountain_climb_rainforest
         "Stay for a while":
             "I still have time, no need to rush"
@@ -89,6 +87,7 @@ label mountain_basecamp:
 
 label mountain_climb_rainforest:
     scene bg mountain climb rainforest with dissolve
+    $ quick_menu = True
     "This forest feels so tranquil, and serene"
     "I feel like I could just lay here forever"
     "Going on an adventure alone is bizzarre but quite a freeing experience"
@@ -96,7 +95,6 @@ label mountain_climb_rainforest:
     "Its time to move, which path should I take?"
 
     $ quick_menu = False
-    window hide dissolve
     $ choice = renpy.call_screen("direction_menu_horizontal")
     
     if choice == "left":
@@ -113,7 +111,6 @@ label mountain_climb_rainforest:
 label mountain_climb_grassyside_left:
     scene bg mountain climb grassyside-left with dissolve
     $ quick_menu = True
-    window show
 
     "Just a little..."
     "*huff...*"
@@ -155,7 +152,7 @@ label mountain_climb_grassyside_left:
 label mountain_climb_grassyside_right:
     scene bg mountain climb grassyside-right with dissolve
     $ quick_menu = True
-    window show
+    window auto
 
     "The hike from here is easier than expected"
     "It feels just like a light walk"
@@ -174,12 +171,14 @@ label mountain_climb_grassyside_right:
             window hide
             pause
             $ quick_menu = True
-            window show
             jump to_the_summit
         
 
 label mountain_summit:
     scene bg mountain summit with dissolve
+    $ quick_menu = True
+    window auto
+
     "*huff..*"
     "Finally, I've reached the summit!!!"
     "I thought it would be bad if I reached the summit at sunset"
@@ -193,7 +192,7 @@ label mountain_summit:
             window hide
             pause
             $ quick_menu = True
-            window show
+            window auto
     "This was a beautiful sight to see"
     "I'm glad I did all this even I was alone"
     menu go_back_trail:
@@ -209,7 +208,6 @@ label mountain_summit:
             window hide
             pause
             $ quick_menu = True
-            window show
             jump go_back_trail
 
 
@@ -219,43 +217,54 @@ label to_basecamp_forest:
     default lost_count = 0
 
     if lost_count == 0:
+        $ quick_menu = True
+        window auto
         "Climbing down is a lot easier than going up"
-        "Now which way is the path to camp again?"
+        "Now which is the way to the camp again?"
     
     elif lost_count == 1:
+        $ quick_menu = True
+        window auto
         "Huh...?"
-        "I've been this way before"
-        "Whats happening?"
-        "Wha-what do I do?"
-
-    elif lost_count == 2:
         "Am I lost?"
-        "Bu-but I just went here before"
-        "Of course, I am in a forest everything looks the same"
+        "But I just went here before"
+        "O-o-of course, I am in a forest everything looks the same"
         "The basecamp must be near now"
 
-    elif lost_count == 3:
-        "What the hell is wrong with this forest!"
-        "Can you please just let me out!"
+    elif lost_count == 2:
+        $ quick_menu = True
+        window auto
+        "Wha-what's happening?"
+        "I've been this way before"
         "I am not going in cirles, Am I?"
+        "Is this prank or something. you can stop now cuz it's not FUNNY!!"
+        "What the hell is wrong with this forest!"
 
-    elif lost_count == 4:
+    elif lost_count == 3:
+        $ quick_menu = True
+        window auto
         "*huff...*"
         "*gulp*"
-        "Please let me out"
+        "Can you please just let me out!"
         "I swear I'll join tree planting activity monthly, and never litter any paper again"
-        "This must be a dream"
+        "I promise I'll save energy, save water, go vegan, just please..."
     
-    elif lost_count == 5:
+    elif lost_count == 4:
+        $ quick_menu = True
+        window auto
         "There's no way out is there"
         "The sun already set"
         "It's so dark, I can barely see anything"
         "I am tired"
+        "Wha-what do I do?"
     
-    elif lost_count == 6:
+    elif lost_count == 5:
+        $ quick_menu = True
+        window auto
         "I am really going in circles"
         "I am really really tired"
         "*huff...*"
+        "Is there even a way out?"
         "I should get some rest"
         jump dawn_first_meeting
 
@@ -289,7 +298,9 @@ label lost_path_straight:
     scene bg lost forest straight with dissolve
 
     $ quick_menu = False
-    window hide dissolve
+    window hide
+    pause 1.0
+
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
@@ -309,7 +320,9 @@ label lost_path_left:
     scene bg lost forest left
 
     $ quick_menu = False
-    window hide dissolve
+    window hide
+    pause 1.0
+
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
@@ -329,7 +342,9 @@ label lost_path_right:
     scene bg lost forest right
 
     $ quick_menu = False
-    window hide dissolve
+    window hide
+    pause 1.0
+
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
@@ -350,7 +365,7 @@ label dawn_first_meeting:
     scene bg forest starry sky
 
     $ quick_menu = True
-    window show
+    window auto
 
     "This should be a good place to rest"
     "The stars are so bright, it's beautiful"
