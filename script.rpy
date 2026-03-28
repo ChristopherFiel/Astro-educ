@@ -252,11 +252,11 @@ label to_basecamp_forest:
     elif lost_count == 4:
         $ quick_menu = True
         window auto
+        "Is there even a way out?"
         "There's no way out is there"
-        "The sun already set"
-        "It's so dark, I can barely see anything"
-        "I am tired"
-        "Wha-what do I do?"
+        "What do I even do?"
+        "It's getting dark, and I'm tired"
+        "What do I do? What do I do? What do I do?"
     
     elif lost_count == 5:
         $ quick_menu = True
@@ -264,7 +264,6 @@ label to_basecamp_forest:
         "I am really going in circles"
         "I am really really tired"
         "*huff...*"
-        "Is there even a way out?"
         "I should get some rest"
         jump dawn_first_meeting
 
@@ -368,10 +367,45 @@ label dawn_first_meeting:
     window auto
 
     "This should be a good place to rest"
-    "The stars are so bright, it's beautiful"
-    ""
+    "The sun already set"
+    "The stars are so bright"
+    "I hope when I close my eyes I wake up from this nightmare"
 
-    d "Just Look UP"
+    scene black with eyeclose
+    pause 3.0
+    d_unknown "psst... hey"
+    d_unknown "Yohoooo, can you hear me? I'm talking to you"
+    d_unknown "Are you still alive"
+    d_unknown "Come on don't give up now, open your eyes"
+    scene bg forest starry sky with eyeopen
+
+    show Dawn surprised
+    d_unknown "Woooow! You're alive"
+    d_unknown "I'm sorry I didn't mean to wake you up"
+    d_unknown "But I get scared when you lay down I thought you were dying"
+    show Dawn normal2
+    d_unknown "Oppsss... I talked to much. I forget to tell you my name"
+    show Dawn normal
+    d_unknown "My name is Dawn"
+    d "How about you, can you tell me your name?"
+
+    $ player_name = renpy.input("{size=40}Enter your name{/size}")
+    $ player_name = player_name.strip()
+    if player_name == "":
+        $ player_name="Clementine"
+    
+    show Dawn smile
+    d "%(player_name)s wow what a beautiful name"
+    show Dawn normal
+    d "Don't worry, I am not your enemy or something. You can trust me"
+    d "I noticed you are kinda getting lost around the forest, and running around in circles"
+    show Dawn normal2
+    d "It might not look like it, but I'll tell you anyway that I am an seasoned mountaineer with years of experince"
+    show Dawn normal
+    d "You are not good at navigating directions aren't you?"
+    d "Don't worry I know a way to navigate this forest without a compass"
+    show Dawn normal2
+    d "{size=60}Just...{/size}"
 
     jump star_map
 
@@ -383,6 +417,16 @@ label star_map:
     window hide
     show map at zoom_to(0.1, 0.4, 1.8) with eyeopen
 
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
+    pause (3.0)
+    hide text
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 1: \n Dawn at Sunset{/size}{/font}"
+    pause (3.0)
+    hide text 
+
+    d "The stars are pretty aren't they?"
+    d "Too bad they lose quality when you looked too close"
+    d "But they are not only pretty, we can use them to get out of this forest"
     d "Let me show you"
 
     show map at pan_to(0.5, 0.0, 1.8, 0.4)

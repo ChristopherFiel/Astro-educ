@@ -1,5 +1,6 @@
 # Declare characters used by this game. The color argument colorizes the
 define d = Character("Dawn", image="sprites/Dawn", color="#e6cc90")
+define d_unknown = Character("???", image="sprites/Dawn", color="#e6cc90")
 define d_top = Character("Dawn", window_yalign=0.05)
 
 # Transforms/transitions for expressions/blinks
