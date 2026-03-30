@@ -449,22 +449,31 @@ label star_map:
 label lost_in_forest_2:
     $ time_of_day = "NIGHT"
     scene black with eyeclose
-    scene bg park at resizer with eyeopen
+    scene bg to_basecamp_forest with eyeopen
 
     $ quick_menu = True
-    window show
-    
+    window auto
     show screen gameUI
-    "The game UI is apprearing."
 
-    show Dawn pout
-    d "Lets go"
-    d "test"
-
-    d "Where shall we go"
+    show Dawn normal with dissolve
+    d "I hope you learned something after all that"
+    show Dawn normal2
+    d "Now, I know a mountaineer camp near us"
+    d "Let's head over there now I think it's about..."
+    d "{size=60}North East{/size} from here"
+    show Dawn smile
+    d "Well, I'll be heading first"
+    d "See Yah!"
     hide Dawn with dissolve
+
+    "Dawn disappeared like a dust in the wind"
+    player_name "???"
+    player_name "How can she disappear like that?"
+    player_name "Well, She seems trustworthy. I should follow her"
+    player_name "The place should be nearby"
+    
     $ quick_menu = False
-    window hide dissolve
+    window hide
 
     $ choice = renpy.call_screen("direction_menu")
 
@@ -516,6 +525,9 @@ label forest_west:
 
     d "Lets use the map"
     return
+
+label forest_camp:
+    
 
 ### Chapter 2: ###
 
