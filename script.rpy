@@ -415,7 +415,7 @@ label star_map:
 
     $ quick_menu = False
     window hide
-    show map at zoom_to(0.1, 0.4, 1.8) with eyeopen
+    show map at zoom_to(0.5, 0.4, 1.8) with eyeopen
 
     show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
     pause (3.0)
@@ -429,7 +429,7 @@ label star_map:
     d "But they are not only pretty, we can use them to get out of this forest"
     d "Let me show you"
 
-    show map at pan_to(0.5, 0.0, 1.8, 0.4)
+    show map at pan_to(0.5, 0.0, 1.8, 0.2)
     pause 1.0
     d "This is how you navigate using big dipper"
     d "Look at the Big Dipper up here"
@@ -443,34 +443,34 @@ label star_map:
     d_top "This is how you navigate using crux"
     d_top "And that's everything you need to know."
 
-    jump lost_in_forest_2
+    jump to_basecamp_forest_with_dawn
 
 
-label lost_in_forest_2:
+label to_basecamp_forest_with_dawn:
     $ time_of_day = "NIGHT"
     scene black with eyeclose
     scene bg to_basecamp_forest with eyeopen
 
-    $ quick_menu = True
-    window auto
-    show screen gameUI
-
-    show Dawn normal with dissolve
-    d "I hope you learned something after all that"
-    show Dawn normal2
-    d "Now, I know a mountaineer camp near us"
-    d "Let's head over there now I think it's about..."
-    d "{size=60}North East{/size} from here"
-    show Dawn smile
-    d "Well, I'll be heading first"
-    d "See Yah!"
-    hide Dawn with dissolve
-
-    "Dawn disappeared like a dust in the wind"
-    player_name "???"
-    player_name "How can she disappear like that?"
-    player_name "Well, She seems trustworthy. I should follow her"
-    player_name "The place should be nearby"
+    if not forest_intro_seen:
+        $ quick_menu = True
+        window auto
+        show screen gameUI
+        show Dawn normal with dissolve
+        d "I hope you learned something new"
+        show Dawn normal2
+        d "Now, I know a mountaineer camp near us"
+        d "Let's head over there now I think it's about..."
+        d "{size=60}North East{/size} from here"
+        show Dawn normal
+        d "Well, I'll be heading first"
+        d "See Yah!"
+        hide Dawn with dissolve
+        "Dawn disappeared like a dust in the wind"
+        player_name "Well, She seems trustworthy. I should follow her"
+        $ forest_intro_seen = True
+    else:
+        $ forest_mistakes += 1
+        call forest_wrong_dialogue
     
     $ quick_menu = False
     window hide
@@ -478,56 +478,123 @@ label lost_in_forest_2:
     $ choice = renpy.call_screen("direction_menu")
 
     if choice == "straight":
-        d "Lets gooo!!!"
         scene black with eyeclose
         jump forest_north
 
     elif choice == "left":
-        d "Lets gooo!!!"
         scene black with eyeclose
         jump forest_west
 
     elif choice == "right":
-        d "Lets gooo!!!"
         scene black with eyeclose
         jump forest_east
 
     elif choice == "back":
-        d "Lets gooo!!!"
         scene black with eyeclose
         jump forest_south
 
 
 label forest_north:
-    scene black with eyeclose
-    show star_sky with eyeopen
+    scene bg forest north with dissolve
+    show screen gameUI
 
-    d "lets use the map"
-    return
+    $ choice = renpy.call_screen("direction_menu")
+
+    if choice == "straight":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "left":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "right":
+        scene black with eyeclose
+        jump forest_camp
+
+    elif choice == "back":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
 
 label forest_south:
-    scene black with eyeclose
-    show star_sky with eyeopen
+    scene bg forest south with dissolve
+    show screen gameUI
 
-    d "Lets use the map"
-    return
+    $ choice = renpy.call_screen("direction_menu")
+
+    if choice == "straight":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "left":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "right":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "back":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
 
 label forest_east:
-    scene black with eyeclose
-    show star_sky with eyeopen
+    scene bg forest east with dissolve
+    show screen gameUI
 
-    d "lets use the map"
-    return
+    $ choice = renpy.call_screen("direction_menu")
+
+    if choice == "straight":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "left":
+        scene black with eyeclose
+        jump forest_camp
+
+    elif choice == "right":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "back":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
 
 label forest_west:
-    scene black with eyeclose
-    show star_sky with eyeopen
+    scene bg forest west with dissolve
+    show screen gameUI
 
-    d "Lets use the map"
-    return
+    $ choice = renpy.call_screen("direction_menu")
+
+    if choice == "straight":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "left":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "right":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+
+    elif choice == "back":
+        scene black with eyeclose
+        jump to_basecamp_forest_with_dawn
+    
 
 label forest_camp:
-    
+    scene bg forest camp with dissolve
+
+    $ quick_menu = True
+    window auto
+    show screen gameUI
+
+    d "Waowww"
+
 
 ### Chapter 2: ###
 
