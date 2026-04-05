@@ -480,6 +480,7 @@ label to_basecamp_forest_with_dawn:
     if choice == "straight":
         scene black with eyeclose
         jump forest_north
+        player_name ""
 
     elif choice == "left":
         scene black with eyeclose
