@@ -45,6 +45,7 @@ label start:
     show text "{font=HowdyLemon.otf}{size=80}You can do this{/size}{/font}" with Dissolve(1.0)
     pause (3.0)
 
+    scene black with fade
     jump mountain_basecamp
 
 
@@ -53,9 +54,8 @@ label mountain_basecamp:
     $ quick_menu = True
     window auto
 
-    "The weather's today perfect but"
-    "..."
-    "Why am the only one climbing up this mountain today"
+    "The weather's today perfect but..."
+    "Why is there no one climbing up this mountain today??"
     "I hope I won't get lost"
     # A worn out poster of a missing girl suddenly get swept by the wind to you
     "Hmm... what's this?"
@@ -73,20 +73,24 @@ label mountain_basecamp:
         "Start trail":
             "My feet's ready to go, it's time to move"
             $ quick_menu = False
+            scene black with arrow_wipe_down_slow
             jump mountain_climb_rainforest
         "Stay for a while":
             "I still have time, no need to rush"
             "I'll rest for a while"
             $ quick_menu = False
             window hide
+            pause 1.0
+            show screen press_to_continue with dissolve
             pause
             $ quick_menu = True
             window show
+            hide screen press_to_continue
             jump start_trail
 
 
 label mountain_climb_rainforest:
-    scene bg mountain climb rainforest with dissolve
+    scene bg mountain climb rainforest with arrow_wipe_down_slow
     $ quick_menu = True
     "This forest feels so tranquil, and serene"
     "I feel like I could just lay here forever"
@@ -95,21 +99,24 @@ label mountain_climb_rainforest:
     "Its time to move, which path should I take?"
 
     $ quick_menu = False
+    window hide
     $ choice = renpy.call_screen("direction_menu_horizontal")
     
     if choice == "left":
+        $ quick_menu = True
         "I think this way is easier"
-        scene black with eyeclose
+        scene black with arrow_wipe_right
         jump mountain_climb_grassyside_left
 
     elif choice == "right":
+        $ quick_menu = True
         "My gut feel says this"
-        scene black with eyeclose
+        scene black with arrow_wipe_left
         jump mountain_climb_grassyside_right
 
 
 label mountain_climb_grassyside_left:
-    scene bg mountain climb grassyside-left with dissolve
+    scene bg mountain climb grassyside-left with arrow_wipe_right
     $ quick_menu = True
 
     "Just a little..."
@@ -129,6 +136,7 @@ label mountain_climb_grassyside_left:
             "Reached for the summit":
                 if rest_count >= 2:
                     "Its time to go. The summit is waiting for me!"
+                    scene black with arrow_wipe_down
                     jump mountain_summit
                 else:
                     $ rand = renpy.random.randint(1, 3)
@@ -150,7 +158,7 @@ label mountain_climb_grassyside_left:
 
 
 label mountain_climb_grassyside_right:
-    scene bg mountain climb grassyside-right with dissolve
+    scene bg mountain climb grassyside-right with arrow_wipe_left
     $ quick_menu = True
     window auto
 
@@ -163,6 +171,7 @@ label mountain_climb_grassyside_right:
         "Reched for the summit":
             "I should not keep the mountain summit waiting"
             "It's time to go"
+            scene black with arrow_wipe_down
             jump mountain_summit
         "Admire the view for a while":
             "Resting is never a bad idea"
@@ -175,7 +184,7 @@ label mountain_climb_grassyside_right:
         
 
 label mountain_summit:
-    scene bg mountain summit with dissolve
+    scene bg mountain summit with arrow_wipe_down
     $ quick_menu = True
     window auto
 
@@ -190,7 +199,10 @@ label mountain_summit:
             "I'm glad to be able to see this"
             $ quick_menu = False
             window hide
+            pause 1.0
+            show screen press_to_continue with dissolve
             pause
+            hide screen press_to_continue
             $ quick_menu = True
             window auto
     "This was a beautiful sight to see"
@@ -200,19 +212,23 @@ label mountain_summit:
         "Go back down":
             "It was beautiful but it's time to go now"
             "I need to get to the basecamp before it gets dark. I gotta hurry"
+            scene black with arrow_wipe_up
             jump to_basecamp_forest
         "Watch the sunset again":
             "This view only comes once in a lifetime"
             "I'll stay here a bit more"
             $ quick_menu = False
             window hide
+            pause 1.0
+            show screen press_to_continue with dissolve
             pause
+            hide screen press_to_continue
             $ quick_menu = True
             jump go_back_trail
 
 
 label to_basecamp_forest:
-    scene bg to basecamp forest
+    scene bg to basecamp forest with arrow_wipe_up
 
     default lost_count = 0
 
@@ -265,6 +281,7 @@ label to_basecamp_forest:
         "I am really really tired"
         "*huff...*"
         "I should get some rest"
+        scene black with fade
         jump dawn_first_meeting
 
     $ quick_menu = False
@@ -361,7 +378,7 @@ label lost_path_right:
 
 ### Chapter 1 ###
 label dawn_first_meeting:
-    scene bg forest starry sky
+    scene bg forest starry sky with dissolve
 
     $ quick_menu = True
     window auto
@@ -372,7 +389,7 @@ label dawn_first_meeting:
     "I hope when I close my eyes I wake up from this nightmare"
 
     scene black with eyeclose
-    pause 3.0
+    pause 2.0
     d_unknown "psst... hey"
     d_unknown "Yohoooo, can you hear me? I'm talking to you"
     d_unknown "Are you still alive"
@@ -380,7 +397,7 @@ label dawn_first_meeting:
     scene bg forest starry sky with eyeopen
 
     show Dawn surprised
-    d_unknown "Woooow! You're alive"
+    d_unknown "Woah! You're alive"
     d_unknown "I'm sorry I didn't mean to wake you up"
     d_unknown "But I get scared when you lay down I thought you were dying"
     show Dawn normal2
@@ -397,25 +414,33 @@ label dawn_first_meeting:
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
     show Dawn normal
-    d "Don't worry, I am not your enemy or something. You can trust me"
-    d "I noticed you are kinda getting lost around the forest, and running around in circles"
+    d "Don't worry, I am not a monster. I'm not gonna eat you or something"
+    show Dawn surprised
+    d "I was just passing by and noticed you are running around in circles in the forest"
+    d "Perhaps you are lost are you?"
+    menu optional_name:
+        "Yeah":
+            pass
+        "...":
+            pass
     show Dawn normal2
-    d "It might not look like it, but I'll tell you anyway that I am an seasoned mountaineer with years of experince"
+    d "I see..."
+    d "Well you are lucky! It might not look like it, but I'll tell you anyway"
+    d "I am an seasoned mountaineer with years of experince"
     show Dawn normal
     d "You are not good at navigating directions aren't you?"
     d "Don't worry I know a way to navigate this forest without a compass"
-    show Dawn normal2
+    show Dawn smile
     d "{size=60}Just...{/size}"
 
+    scene black with fade
     jump star_map
 
 label star_map:
-    # Dawn will teach the player how to read the map
-    scene black with eyeclose
-
     $ quick_menu = False
     window hide
-    show map at zoom_to(0.5, 0.4, 1.8) with eyeopen
+    show map at zoom_to(0.5, 0.4, 1.8)
+    pause 1.0
 
     show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
     pause (3.0)
@@ -425,7 +450,6 @@ label star_map:
     hide text 
 
     d "The stars are pretty aren't they?"
-    d "Too bad they lose quality when you looked too close"
     d "But they are not only pretty, we can use them to get out of this forest"
     d "Let me show you"
 
