@@ -228,16 +228,14 @@ label mountain_summit:
 
 
 label to_basecamp_forest:
-    scene bg to basecamp forest with arrow_wipe_up
+    scene bg to basecamp forest with arrow_wipe_up_slow
 
     default lost_count = 0
-
     if lost_count == 0:
         $ quick_menu = True
         window auto
         "Climbing down is a lot easier than going up"
         "Now which is the way to the camp again?"
-    
     elif lost_count == 1:
         $ quick_menu = True
         window auto
@@ -246,16 +244,14 @@ label to_basecamp_forest:
         "But I just went here before"
         "O-o-of course, I am in a forest everything looks the same"
         "The basecamp must be near now"
-
     elif lost_count == 2:
         $ quick_menu = True
         window auto
         "Wha-what's happening?"
         "I've been this way before"
-        "I am not going in cirles, Am I?"
-        "Is this prank or something. you can stop now cuz it's not FUNNY!!"
+        "I am not going in circles, Am I?"
+        "Is this a prank or something. You can stop now cuz it's not FUNNY!!"
         "What the hell is wrong with this forest!"
-
     elif lost_count == 3:
         $ quick_menu = True
         window auto
@@ -264,7 +260,6 @@ label to_basecamp_forest:
         "Can you please just let me out!"
         "I swear I'll join tree planting activity monthly, and never litter any paper again"
         "I promise I'll save energy, save water, go vegan, just please..."
-    
     elif lost_count == 4:
         $ quick_menu = True
         window auto
@@ -273,7 +268,6 @@ label to_basecamp_forest:
         "What do I even do?"
         "It's getting dark, and I'm tired"
         "What do I do? What do I do? What do I do?"
-    
     elif lost_count == 5:
         $ quick_menu = True
         window auto
@@ -285,34 +279,33 @@ label to_basecamp_forest:
         jump dawn_first_meeting
 
     $ quick_menu = False
-    window hide dissolve
+    window hide
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
         if lost_count == 0:
             "This has to be it"
         $ lost_count += 1
-        scene black with eyeclose
+        scene black with arrow_wipe_up
         jump lost_path_straight
-    
+
     elif choice == "left":
         if lost_count == 0:
             "I think it's this way"
         $ lost_count += 1
-        scene black with eyeclose
+        scene black with arrow_wipe_right
         jump lost_path_left
 
     elif choice == "right":
         if lost_count == 0:
             "It should be this way"
         $ lost_count += 1
-        scene black with eyeclose
+        scene black with arrow_wipe_left
         jump lost_path_right
-    
+
 
 label lost_path_straight:
-    scene bg lost forest straight with dissolve
-
+    scene bg lost forest straight with arrow_wipe_up
     $ quick_menu = False
     window hide
     pause 1.0
@@ -320,21 +313,17 @@ label lost_path_straight:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with eyeclose
-        jump to_basecamp_forest
-    
+        scene black with arrow_wipe_up
     elif choice == "left":
-        scene black with eyeclose
-        jump to_basecamp_forest
-
+        scene black with arrow_wipe_right
     elif choice == "right":
-        scene black with eyeclose
-        jump to_basecamp_forest
+        scene black with arrow_wipe_left
+
+    jump to_basecamp_forest
 
 
 label lost_path_left:
-    scene bg lost forest left
-
+    scene bg lost forest left with arrow_wipe_right
     $ quick_menu = False
     window hide
     pause 1.0
@@ -342,21 +331,17 @@ label lost_path_left:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with eyeclose
-        jump to_basecamp_forest
-    
+        scene black with arrow_wipe_up
     elif choice == "left":
-        scene black with eyeclose
-        jump to_basecamp_forest
-
+        scene black with arrow_wipe_right
     elif choice == "right":
-        scene black with eyeclose
-        jump to_basecamp_forest
+        scene black with arrow_wipe_left
+
+    jump to_basecamp_forest
 
 
 label lost_path_right:
-    scene bg lost forest right
-
+    scene bg lost forest right with arrow_wipe_left
     $ quick_menu = False
     window hide
     pause 1.0
@@ -364,16 +349,13 @@ label lost_path_right:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with eyeclose
-        jump to_basecamp_forest
-    
+        scene black with arrow_wipe_up
     elif choice == "left":
-        scene black with eyeclose
-        jump to_basecamp_forest
-
+        scene black with arrow_wipe_right
     elif choice == "right":
-        scene black with eyeclose
-        jump to_basecamp_forest
+        scene black with arrow_wipe_left
+
+    jump to_basecamp_forest
 
 
 ### Chapter 1 ###
