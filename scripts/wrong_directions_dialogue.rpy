@@ -4,8 +4,6 @@ default forest_mistakes = 0
 
 label forest_wrong_dialogue:
     python:
-        import random
-
         if forest_mistakes <= 2:
             lines = [
                 "I should try looking up again",
@@ -27,7 +25,7 @@ label forest_wrong_dialogue:
                 "If I end up sleeping in a tree tonight, it's her fault for leaving me."
             ]
         
-        selected_line = random.choice(lines)
+        selected_line = renpy.random.choice(lines)
     
     player_name "[selected_line]"
     return
