@@ -12,7 +12,6 @@
 
 # The game starts here.
 
-
 ### Prologue ###
 label start:
     $ quick_menu = False
@@ -51,15 +50,15 @@ label start:
 
 label mountain_basecamp:
     scene bg mountain basecamp with dissolve
+    show screen show_poster
+    $ poster_examined = False
     $ quick_menu = True
-    window auto
-
+    window hide
+    
     "The weather's today perfect but..."
     "Why is there no one climbing up this mountain today??"
     "I hope I won't get lost"
-    # A worn out poster of a missing girl suddenly get swept by the wind to you
     "Hmm... what's this?"
-    # Add a menu as well to pick it and read it
     "A missing poster..."
     "It's barely holding on but some text are still readable"
     "Age 17, wearing uniform, name: Da..."
@@ -72,8 +71,8 @@ label mountain_basecamp:
         "What to do?"
         "Start trail":
             "My feet's ready to go, it's time to move"
+            hide screen show_poster with dissolve
             $ quick_menu = False
-            scene black with arrow_wipe_down_slow
             jump mountain_climb_rainforest
         "Stay for a while":
             "I still have time, no need to rush"
@@ -90,6 +89,7 @@ label mountain_basecamp:
 
 
 label mountain_climb_rainforest:
+    scene black with arrow_wipe_down_slow
     scene bg mountain climb rainforest with arrow_wipe_down_slow
     $ quick_menu = True
     "This forest feels so tranquil, and serene"
@@ -105,18 +105,17 @@ label mountain_climb_rainforest:
     if choice == "left":
         $ quick_menu = True
         "I think this way is easier"
-        scene black with arrow_wipe_right
         jump mountain_climb_grassyside_left
 
     elif choice == "right":
         $ quick_menu = True
         "My gut feel says this"
-        scene black with arrow_wipe_left
         jump mountain_climb_grassyside_right
 
 
 label mountain_climb_grassyside_left:
-    scene bg mountain climb grassyside-left with arrow_wipe_right
+    scene black with arrow_wipe_right_slow
+    scene bg mountain climb grassyside-left with arrow_wipe_right_slow
     $ quick_menu = True
 
     "Just a little..."
@@ -136,7 +135,6 @@ label mountain_climb_grassyside_left:
             "Reached for the summit":
                 if rest_count >= 2:
                     "Its time to go. The summit is waiting for me!"
-                    scene black with arrow_wipe_down
                     jump mountain_summit
                 else:
                     $ rand = renpy.random.randint(1, 3)
@@ -158,7 +156,8 @@ label mountain_climb_grassyside_left:
 
 
 label mountain_climb_grassyside_right:
-    scene bg mountain climb grassyside-right with arrow_wipe_left
+    scene black with arrow_wipe_left_slow
+    scene bg mountain climb grassyside-right with arrow_wipe_left_slow
     $ quick_menu = True
     window auto
 
@@ -171,7 +170,6 @@ label mountain_climb_grassyside_right:
         "Reched for the summit":
             "I should not keep the mountain summit waiting"
             "It's time to go"
-            scene black with arrow_wipe_down
             jump mountain_summit
         "Admire the view for a while":
             "Resting is never a bad idea"
@@ -184,7 +182,8 @@ label mountain_climb_grassyside_right:
         
 
 label mountain_summit:
-    scene bg mountain summit with arrow_wipe_down
+    scene black with arrow_wipe_down_slow
+    scene bg mountain summit with arrow_wipe_down_slow
     $ quick_menu = True
     window auto
 
@@ -212,7 +211,6 @@ label mountain_summit:
         "Go back down":
             "It was beautiful but it's time to go now"
             "I need to get to the basecamp before it gets dark. I gotta hurry"
-            scene black with arrow_wipe_up
             jump to_basecamp_forest
         "Watch the sunset again":
             "This view only comes once in a lifetime"
@@ -228,6 +226,7 @@ label mountain_summit:
 
 
 label to_basecamp_forest:
+    scene black with arrow_wipe_up_slow
     scene bg to basecamp forest with arrow_wipe_up_slow
 
     default lost_count = 0
