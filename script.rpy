@@ -640,6 +640,5 @@ label forest_camp:
 
 ### Chapter 2: ###
 
-# Chapter 3: Star trail, and Shooting Stars
 
 ### Chapter 4: At Dawn ###
