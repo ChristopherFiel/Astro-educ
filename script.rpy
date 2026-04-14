@@ -430,23 +430,79 @@ label star_map:
     pause (3.0)
     hide text 
 
-    d "The stars are pretty aren't they?"
-    d "But they are not only pretty, we can use them to get out of this forest"
-    d "Let me show you"
+    label forest_stargazing:
 
+
+    scene bg forest starry sky with eyeopen
+    pause 1.0
+
+
+    show Dawn normal
+    d "The stars are pretty, aren't they?"
+    d "But they are not only pretty, we can use them to get out of this forest."
+    d "Let me show you."
+
+
+    player_name "But honestly, how can stars help you navigate? How does it serve as a map?"
+
+
+    show Dawn smile
+    d "Oh, I'll explain it to you. Stars kasi form images in the night sky, and that is what we call constellations."
+    d "Common, let's look up. Did you see that star? That star is the North Star."
+ 
+    show Dawn normal
+    d "Wait, let me get my laser."
+
+
+    player_name "Woah, a laser??"
+
+
+    d "I use it to point things at the night sky and also this has a flashlight, so it's dual purpose. Very handy for night treks like this."
+
+
+    player_name "Why do you need it though?"
+
+
+    show Dawn smile  
+    d "I always go here and I use this to point to stars accurately. Like for example..."
+
+
+    # BIG DIPPER / NORTH SECTION
     show map at pan_to(0.5, 0.0, 1.8, 0.2)
     pause 1.0
-    d "This is how you navigate using big dipper"
-    d "Look at the Big Dipper up here"
 
+
+    d "Do you see this star here? This star is Polaris. It's a circumpolar star, which means it’s always visible and it points to this contellation."
+    d "This is how you navigate using the Big Dipper. Look at the Dipper up here, those two stars at the edge? They point straight to Polaris."
+    d "That constellation points and is located in the North part of the sky."
+
+
+    # ORION / WEST SECTION
     show map at pan_to(1.0, 0.5, 1.8, 0.4)
     pause 1.0
-    d "This is how you navigate using orion"
 
+
+    d "Now look over here. This is how you navigate using Orion."
+    d "Orion is easy to spot because of his belt. It’s a great marker because Orion generally located in the East. If you need to head East, follow him."
+
+
+    # CRUX / SOUTH SECTION
     show map at pan_to(0.5, 1.0, 1.8, 0.4)
     pause 1.0
-    d_top "This is how you navigate using crux"
-    d_top "And that's everything you need to know."
+
+
+    d_top "And way down here, we have the Crux—or the Southern Cross."
+    d_top "This constellation is what you look for to find South."
+
+
+    # This line zooms the map out to show the full sky/map again
+    show map at pan_to(0.5, 0.5, 1.0, 0.5)
+    pause 0.5
+
+
+    d "Back when there were no maps or any navigating apps, our ancestors just used these. They looked at the same sky we're looking at now."
+    d "And that's everything you need to know. Keep your eyes up, and you won't get lost."
+
 
     jump to_basecamp_forest_with_dawn
 
