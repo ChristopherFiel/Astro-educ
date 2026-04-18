@@ -274,7 +274,6 @@ label to_basecamp_forest:
         "I am really really tired"
         "*huff...*"
         "I should get some rest"
-        scene black with fade
         jump dawn_first_meeting
 
     $ quick_menu = False
@@ -359,6 +358,7 @@ label lost_path_right:
 
 ### Chapter 1 ###
 label dawn_first_meeting:
+    scene black with fade
     scene bg forest starry sky with dissolve
 
     $ quick_menu = True
@@ -395,7 +395,7 @@ label dawn_first_meeting:
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
     show Dawn normal
-    d "Don't worry, I am not a monster. I'm not gonna eat you or something"
+    d "Don't worry, I am not a monster. I'm not gonna eat you"
     show Dawn surprised
     d "I was just passing by and noticed you are running around in circles in the forest"
     d "Perhaps you are lost are you?"
