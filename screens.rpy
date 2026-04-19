@@ -88,6 +88,22 @@ style frame:
     background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
 
 
+### Game global sfx, and bgms
+
+# Set to 0.5 for 50% volume, 0.2 for 20%, etc.
+define audio.hover_sfx  = "audio/ui_sfx/hover.ogg"
+define audio.click_sfx  = "audio/ui_sfx/click.ogg"
+define audio.close_sfx  = "audio/ui_sfx/close.ogg"
+
+## ── Assign them to button styles globally ────────────────────────────────────
+
+init python:
+    style.button.hover_sound         = audio.hover_sfx
+    style.button.activate_sound      = audio.click_sfx
+    style.image_button.hover_sound    = audio.hover_sfx
+    style.image_button.activate_sound = audio.click_sfx
+    style.text_button.hover_sound     = audio.hover_sfx
+    style.text_button.activate_sound  = audio.click_sfx
 
 ################################################################################
 ## In-game screens
@@ -243,6 +259,8 @@ style choice_vbox:
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
+    hover_sound "audio/ui_sfx/hover.ogg"
+    activate_sound "audio/ui_sfx/click.ogg"
 
 style choice_button_text is default:
     properties gui.text_properties("choice_button")

@@ -14,6 +14,7 @@
 
 ### Prologue ###
 label start:
+    $ renpy.music.stop(channel="music", fadeout=1.0)
     $ quick_menu = False
     window auto
 
@@ -256,9 +257,11 @@ label to_basecamp_forest:
         window auto
         "*huff...*"
         "*gulp*"
-        "Can you please just let me out!"
-        "I swear I'll join tree planting activity monthly, and never litter any paper again"
-        "I promise I'll save energy, save water, go vegan, just please..."
+        "Get me out of this FOREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+        "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST"
+        "please"
     elif lost_count == 4:
         $ quick_menu = True
         window auto
@@ -373,7 +376,7 @@ label dawn_first_meeting:
     pause 2.0
     d_unknown "psst... hey"
     d_unknown "Yohoooo, can you hear me? I'm talking to you"
-    d_unknown "Are you still alive"
+    d_unknown "Are you still alive?"
     d_unknown "Come on don't give up now, open your eyes"
     scene bg forest starry sky with eyeopen
 
@@ -390,7 +393,7 @@ label dawn_first_meeting:
     $ player_name = renpy.input("{size=40}Enter your name{/size}")
     $ player_name = player_name.strip()
     if player_name == "":
-        $ player_name="Clementine"
+        $ player_name="Renee"
     
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
@@ -433,10 +436,11 @@ label star_map:
     jump forest_stargazing
 
 label forest_stargazing:
-    scene bg forest starry sky with eyeopen
+    scene black with fade
+    scene bg forest starry sky with dissolve
     pause 1.0
 
-    show Dawn normal
+    show Dawn normal with dissolve
     d "The stars are pretty, aren't they?"
     d "But they are not only pretty, we can use them to get out of this forest."
     d "Let me show you."
@@ -456,7 +460,8 @@ label forest_stargazing:
     show Dawn smile  
     d "I always go here and I use this to point to stars accurately. Like for example..."
     # BIG DIPPER / NORTH SECTION
-    show map at pan_to(0.5, 0.0, 1.8, 0.2)
+    scene black with eyeclose
+    show map at pan_to(0.5, 0.0, 1.8, 0.8) with eyeopen
     
     pause 1.0
     d "Do you see this star here? This star is Polaris. It's a circumpolar star, which means it’s always visible and it points to this contellation."
@@ -482,7 +487,7 @@ label forest_stargazing:
     pause 0.5
 
     d "Back when there were no maps or any navigating apps, our ancestors just used these. They looked at the same sky we're looking at now."
-    d "And that's everything you need to know. Keep your eyes up, and you won't get lost."
+    d "And that's everything you need to know. Keep your eyes up the stars, and you won't get lost."
 
     jump to_basecamp_forest_with_dawn
 
