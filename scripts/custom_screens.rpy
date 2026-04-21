@@ -15,6 +15,13 @@ screen press_to_continue():
         xalign 0.5
         yalign 0.90
         text_align 0.5
+
+
+screen click_objects():
+    text "{font=cmunorm.ttf}{size=40}Hover the mouse around, and click objects{/font}":
+        xalign 0.5
+        yalign 0.90
+        text_align 0.5
     
 
 default poster_examined = False

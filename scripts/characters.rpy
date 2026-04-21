@@ -6,13 +6,13 @@ init python:
         if event == "show":
             renpy.sound.play("audio/dialogue_sfx/me.mp3", channel="dialogue_sfx", loop=True)
         elif event == "slow_done" or event == "end":
-            renpy.sound.stop(channel="dialogue_sfx")
+            renpy.sound.stop(channel="dialogue_sfx", fadeout=0.1)
 
     def default_callback(event, **kwargs):
         if event == "show":
             renpy.sound.play("audio/dialogue_sfx/Honk.mp3", channel="dialogue_sfx", loop=True)
         elif event == "slow_done" or event == "end":
-            renpy.sound.stop(channel="dialogue_sfx")
+            renpy.sound.stop(channel="dialogue_sfx", fadeout=0.1)
     
     config.character_callback = default_callback
 
@@ -21,6 +21,7 @@ init python:
 define d = Character("Dawn", image="sprites/Dawn", color="#e6cc90", callback=dawn_callback)
 define d_unknown = Character("???",  image="sprites/Dawn", color="#e6cc90", callback=dawn_callback)
 define d_top = Character("Dawn", window_yalign=0.05, callback=dawn_callback)
+define p = Character("Player", color="#f0f8ff", callback=default_callback)
 
 
 # Dialogue sfx transition

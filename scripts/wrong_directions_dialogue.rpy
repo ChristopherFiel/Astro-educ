@@ -3,6 +3,7 @@ default forest_mistakes = 0
 
 
 label forest_wrong_dialogue:
+    $ quick_menu = True
     python:
         if forest_mistakes <= 2:
             lines = [
@@ -13,13 +14,11 @@ label forest_wrong_dialogue:
         elif forest_mistakes <= 5:
             lines = [
                 "I should give up acting like a compass there's literally a free one at the sky",
-                "Am I walking in circles? I should Look up Now!.",
+                "Am I walking in circles? ok calm down, all I have to do is go North then East or East then North",
                 "Dawn's going to think I'm an idiot if I don't find that camp soon."
             ]
         else:
             lines = [
-                "Oh come on, Dawn taught me to LOOK UP, please!!!",
-                "Looking up is free, it gives me direction to not be lost.",
                 "I am definitely, 100 percent, lost.",
                 "Okay, breathe. Think. North... East... where is that again?",
                 "If I end up sleeping in a tree tonight, it's her fault for leaving me."
