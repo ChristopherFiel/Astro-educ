@@ -270,7 +270,7 @@ label to_basecamp_forest:
         "What do I even do?"
         "It's getting dark, and I'm tired"
         "What do I do? What do I do? What do I do?"
-    elif lost_count == 5:
+    else:
         $ quick_menu = True
         window auto
         "I am really going in circles"
@@ -393,7 +393,7 @@ label dawn_first_meeting:
     $ player_name = renpy.input("{size=40}Enter your name{/size}")
     $ player_name = player_name.strip()
     if player_name == "":
-        $ player_name="Renee"
+        $ player_name="Podziemski is garbage"
     
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
@@ -439,6 +439,7 @@ label forest_stargazing:
     scene black with fade
     scene bg forest starry sky with dissolve
     pause 1.0
+    $ quick_menu = True
 
     show Dawn normal with dissolve
     d "The stars are pretty, aren't they?"
@@ -507,6 +508,7 @@ label to_basecamp_forest_with_dawn:
         d "Now, I know a mountaineer camp near us"
         d "Let's head over there now I think it's about..."
         d "{size=60}North East{/size} from here"
+        d "If you get lost just remember to look up"
         show Dawn normal
         d "Well, I'll be heading first"
         d "See Yah!"

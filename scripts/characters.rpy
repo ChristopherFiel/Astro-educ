@@ -1,11 +1,33 @@
-# Declare characters used by this game. The color argument colorizes the
-define d = Character("Dawn", image="sprites/Dawn", color="#e6cc90")
-define d_unknown = Character("???", image="sprites/Dawn", color="#e6cc90")
-define d_top = Character("Dawn", window_yalign=0.05)
+# Character dialogue sfx system
+init python:
+    renpy.music.register_channel("dialogue_sfx", mixer="sfx")
 
-# Transforms/transitions for expressions/blinks
+    def dawn_callback(event, **kwargs):
+        if event == "show":
+            renpy.sound.play("audio/dialogue_sfx/me.mp3", channel="dialogue_sfx", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.sound.stop(channel="dialogue_sfx")
+
+    def default_callback(event, **kwargs):
+        if event == "show":
+            renpy.sound.play("audio/dialogue_sfx/Honk.mp3", channel="dialogue_sfx", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.sound.stop(channel="dialogue_sfx")
+    
+    config.character_callback = default_callback
+
+
+# Character Definitions
+define d = Character("Dawn", image="sprites/Dawn", color="#e6cc90", callback=dawn_callback)
+define d_unknown = Character("???",  image="sprites/Dawn", color="#e6cc90", callback=dawn_callback)
+define d_top = Character("Dawn", window_yalign=0.05, callback=dawn_callback)
+
+
+# Dialogue sfx transition
 define config.say_attribute_transition = Dissolve(0.1)
-# Randomize blinking time
+
+
+# Character blink transforms
 transform blinkwait:
     choice:
         4.0
@@ -16,7 +38,6 @@ transform blinkwait:
     choice:
         1.0
 
-#Blinking Character Images
 image Dawn normal:
     zoom 1.5
     "sprites/Dawn/Dawn_normal.png"
