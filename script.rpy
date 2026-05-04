@@ -920,17 +920,15 @@ label to_treasure_step4:
                 call to_treasure_groove
 
 
+### Chapter 2: Dawn at Midnight###
 label treasure_groove:
     window show
     $ quick_menu = True
 
     scene bg treasure groove
     show Dawn normal
+    d "It's already midnight"
     d "So this is where the treasure is"
-
-
-
-### Chapter 2: Dawn at Midnight###
 
 
 ### Chapter 3: At Dawn ###
