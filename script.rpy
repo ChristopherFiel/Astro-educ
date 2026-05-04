@@ -51,7 +51,7 @@ label start:
 
 label mountain_basecamp:
     scene bg mountain basecamp with dissolve
-    show screen show_poster
+    # show screen show_poster
     $ poster_examined = False
     $ quick_menu = True
     window hide
@@ -59,12 +59,12 @@ label mountain_basecamp:
     p "The weather's today perfect but..."
     p "Why is there no one climbing up this mountain today??"
     p "I hope I won't get lost"
-    p "Hmm... what's this?"
-    p "A missing poster..."
-    p "It's barely holding on but some text are still readable"
-    p "Age 17, wearing uniform, name: Da..."
-    p "Da- whattt???"
-    p "Whatever her name was, I hope she's already found"
+    # p "Hmm... what's this?"
+    # p "A missing poster..."
+    # p "It's barely holding on but some text are still readable"
+    # p "Age 17, wearing uniform, name: Da..."
+    # p "Da- whattt???"
+    # p "Whatever her name was, I hope she's already found"
     p "It's almost time, I need to leave soon"
     p "Otherwise, I'll get down the mountain after sunset"
 
@@ -530,7 +530,6 @@ label to_basecamp_forest_with_dawn:
     if choice == "straight":
         scene black with eyeclose
         jump forest_north
-        player_name ""
 
     elif choice == "left":
         scene black with eyeclose
@@ -637,37 +636,301 @@ label forest_west:
         jump to_basecamp_forest_with_dawn
     
 
+default forest_camp_visited = False
+default no_count = 0
+
 label forest_camp:
     scene bg forest camp with dissolve
-
     $ quick_menu = True
     window auto
     show screen gameUI
 
-    show Dawn normal2 with dissolve
-    d "Waooow!"
-    d "You've actually got it"
-    show Dawn smile
-    d "Congrats! I'm very proud of you for that"
-    d "You're now a certified celestial navigator"
-    player_name "What does that even mean?"
-    show Dawn normal
-    d "Well, anyway I think we should rest and look around for now before get going"
-    d "Tell me if you find anything interesting"
-    hide Dawn with dissolve
-    player_name "Is there even something interesting in a place like this?"
-    $ quick_menu = False
-    window hide
-    pause 1.0
-    show screen click_objects with dissolve
-    pause
-    hide screen click_objects
+    if not forest_camp_visited:
+        $ forest_camp_visited = True
+
+        show Dawn surprised with dissolve
+        d "Waooow!"
+        d "You've actually got it"
+        show Dawn smile
+        d "Congrats! I'm very proud of you"
+        d "You're now a certified celestial navigator"
+        player_name "What does that even mean?"
+        show Dawn normal
+        d "Well, anyway I think we should rest and look around for now before get going"
+        d "Tell me if you find anything interesting"
+        hide Dawn with dissolve
+        player_name "Is there even something interesting in a place like this?"
+
+        $ quick_menu = False
+        window hide
+        pause 1.0
+        show screen click_objects with dissolve
+        pause
+        hide screen click_objects
+        $ quick_menu = True
+        window auto
+
+        show Dawn surprised with dissolve
+        d "Look over here, I found a treasure map!"
+        window hide
+        $ quick_menu = False
+        show screen show_treasure_map
+        pause
+        window show
+        $ quick_menu = True
+
+        show Dawn normal
+        d "It looks ancient, but its still pretty much readable"
+        d "Let's see where does this leads"
+        d "East, South, North, West. Oh what's this?"
+        d "Juano Piece?"
+        show Dawn surprised
+        d "!!!"
+        d "So, it's real"
+        d "The Juano Piece is real?!!"
+        show Dawn lookaway
+        d "I know you need to get back ASAP but please %(player_name)s we need to see where this goes"
+        player_name "Huh? What's Juano Piece anyways?"
+        player_name "Can we just leave this forest, and go home already"
+        show Dawn normal
+        d "No way, you dont know Juano Piece?"
+        d "It's a treasure piece left by Don Juano"
+        d "Legend says that asided from botomless gold, and jewels it has. It also has all the answers to question humanity have"
+        d "It says that Don Juano got lost in this Mountain while trying to hide his treasure, and was never found again along with his treasure"
+        d "I know it could be fake, but lets go anyways"
+        d "It's not that everyday we get a chance to go to an adventure like this"
+
+        menu start_adventure:
+            "Should we follow the map?"
+            "Yes":
+                show Dawn smile
+                player_name "Alright it's not like I would miss the chance to get rich"
+                player_name "Plus I want to use my new navigation skills"
+                d "Yay, let's hurry"
+                d "Lead the way, I trust you we won't get lost"
+                d "But first, let's take a final look at the map before going"
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map
+
+            "No":
+                $ no_count += 1
+                if no_count == 1:
+                    player_name "The map looks so fake, it's a waste of time, and energy"
+                    player_name "Let's hurry up, and leave this forest"
+                    show Dawn lookaway
+                    d "But what if its real? we could've missed the chance to become billionaires"
+                    d "Let's go Please"
+                    jump start_adventure
+                else:
+                    $ please_text = " ".join(["Please"] * (2 ** (no_count - 1)))
+                    show Dawn pout
+                    d "[please_text]"
+                    jump start_adventure
+
+    else:
+        show Dawn surprised with dissolve
+        d "I think we've been here before"
+        d "Did we get lost?"
+        show Dawn normal
+        d "Anyways, do you want to take another look at the map before heading out?"
+
+        menu:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map
+    
+
+label to_treasure_step1:
+    window show
     $ quick_menu = True
-    window auto
+
+    scene bg treasure path 1
+    show Dawn surprised with dissolve
+    d "I've been on this mountain for quite some time, but this place looks unfamilliar"
+    d "I think this is the point one on the map"
+    show Dawn normal
+    d "Well hey, do you have a dream?"
+    d "Like what do you want to be when you grow up?"
+    menu dream:
+        "Do you have a dream"
+        "Yes":
+            player_name "Of course, I have one in minde"
+            player_name "But I'm keeping it a secret so that no one can jinx it"
+            show Dawn smile
+            d "Oh, I hope your dreams come true"
+            d "I'll be rooting for you"
+            d "Well for me I want to become an Astrobiologist"
+            d "I want to become the one that would make life in other planets possible"
+            d "Or maybe even discover life in other planets as well"
+        "Not yet":
+            player_name "I'm still figuring it out"
+            player_name "There's a ton of things to do out there I find it hard to decide"
+            show Dawn smile
+            d "I think you can be whatever you want to be"
+            d "I believe in you"
+            d "If one day you'll be able to decide please tell me immediately"
+            d "I'll be rooting for you"
+            d "Well for me I want to become an Astrobiologist"
+            d "I want to become the one that would make life in other planets possible"
+            d "Or maybe even discover life in other planets as well"
+    show Dawn normal
+    d "Do you believe in Aliens"
+    menu aliens:
+        "Do you believe in Aliens"
+        "Yes":
+            player_name "I have never seen one but I believe they exist"
+            show Dawn surprised
+            d "Oh really, I guess we're the same"
+            show Dawn smile
+            d "I think they exist"
+            d "The Universe is so big, and mysterious yet nothing outside of our imagination
+            seems impossible on it"
+            d "And did you know the Drake equation by Frank Drake estimates that there
+            are thousands of civilizations in the Universe"
+            d "So whether I have seen them or not, I will keep believing they exist"
+            d "Plus I think that it would be lonely if we're alone in this Universe"  
+        "No":
+            player_name "No, I haven't seen one so I don't think they exist"
+            show Dawn surprised
+            d "Oh really, I guess we're not the same"
+            show Dawn smile
+            d "I think they exist"
+            d "The Universe is so big, and mysterious yet nothing outside of our imagination
+            seems impossible on it"
+            d "And did you know the Drake equation by Frank Drake estimates that there
+            are thousands of civilizations in the Universe"
+            d "So whether I have seen them or not, I will keep believing they exist"
+            d "Plus I think that it would be lonely if we're alone in this Universe"
+    show Dawn normal
+    d "I think that's enough chatting"
+    d "Let's keep moving"
+    d "Do you want to look at the map before going?"
+    menu map_review_1:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step2
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step2
+
+
+label to_treasure_step2:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 2
+    show Dawn normal
+    d "I think this is the point two on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_2:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step3
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step3
+
+
+label to_treasure_step3:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 3
+    show Dawn normal
+    d "I think this is the point three on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_3:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step4
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step4
+
+
+label to_treasure_step4:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 4
+    show Dawn normal
+    d "I think this is the point four on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_4:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call to_treasure_groove
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call to_treasure_groove
+
+
+label treasure_groove:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure groove
+    show Dawn normal
+    d "So this is where the treasure is"
 
 
 
 ### Chapter 2: Dawn at Midnight###
 
 
-### Chapter 4: At Dawn ###
+### Chapter 3: At Dawn ###

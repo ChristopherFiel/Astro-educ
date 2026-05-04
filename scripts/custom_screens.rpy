@@ -53,5 +53,37 @@ screen poster_close_up():
     button:
         xfill True
         yfill True
-        ## Reset poster_examined when closing so the back reappears
         action [SetVariable("poster_examined", False), Hide("poster_close_up")]
+
+
+screen show_treasure_map():
+    frame:
+        xalign     0.5
+        yalign     0.5
+        xsize      int(config.screen_width)
+        ysize      int(config.screen_height)
+        background "#c8a96e"
+        padding    (0, 0)
+
+        add "images/objects/treasure_map.png":
+            align (0.5, 0.5)
+            zoom   1.2
+            at transform:
+                alpha  0.0
+                linear 0.4 alpha 1.0
+
+        add Transform("images/wipes/vignette.png",
+                    xysize=(int(config.screen_width), int(config.screen_height)),
+                    fit="fill"):
+            align (0.5, 0.5)
+
+    text "{font=cmunorm.ttf}{size=40}Press any button or click anywhere to continue{/font}":
+        xalign     0.5
+        yalign     0.90
+        text_align 0.5
+
+    button:
+        xfill  True
+        yfill  True
+        action Hide("show_treasure_map", transition=Dissolve(0.4))
+    
