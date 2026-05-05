@@ -34,11 +34,11 @@ label start:
 
     scene bg mountain background with dissolve
     $ quick_menu = True
-    "Mt. Mayumi, it's so beautiful"
-    "This will be my first time climbing a mountain"
-    "It looks bigger than the pictures"
-    "Take a deep breathe"
-    "This is going to be hard but..."
+    p "Mt. Mayumi, it's so beautiful"
+    p "This will be my first time climbing a mountain"
+    p "It looks bigger than the pictures"
+    p "Take a deep breathe"
+    p "This is going to be hard..."
     $ quick_menu = False
     window hide
 
@@ -51,33 +51,33 @@ label start:
 
 label mountain_basecamp:
     scene bg mountain basecamp with dissolve
-    show screen show_poster
+    # show screen show_poster
     $ poster_examined = False
     $ quick_menu = True
     window hide
     
-    "The weather's today perfect but..."
-    "Why is there no one climbing up this mountain today??"
-    "I hope I won't get lost"
-    "Hmm... what's this?"
-    "A missing poster..."
-    "It's barely holding on but some text are still readable"
-    "Age 17, wearing uniform, name: Da..."
-    "Da- whattt???"
-    "Whatever her name was, I hope she's already found"
-    "It's almost time, I need to leave soon"
-    "Otherwise, I'll get down the mountain after sunset"
+    p "The weather's today perfect but..."
+    p "Why is there no one climbing up this mountain today??"
+    p "I hope I won't get lost"
+    # p "Hmm... what's this?"
+    # p "A missing poster..."
+    # p "It's barely holding on but some text are still readable"
+    # p "Age 17, wearing uniform, name: Da..."
+    # p "Da- whattt???"
+    # p "Whatever her name was, I hope she's already found"
+    p "It's almost time, I need to leave soon"
+    p "Otherwise, I'll get down the mountain after sunset"
 
     menu start_trail:
-        "What to do?"
+        p "What to do?"
         "Start trail":
-            "My feet's ready to go, it's time to move"
+            p "My feet's ready to go, it's time to move"
             hide screen show_poster with dissolve
             $ quick_menu = False
             jump mountain_climb_rainforest
         "Stay for a while":
-            "I still have time, no need to rush"
-            "I'll rest for a while"
+            p "I still have time, no need to rush"
+            p "I'll rest for a while"
             $ quick_menu = False
             window hide
             pause 1.0
@@ -93,11 +93,11 @@ label mountain_climb_rainforest:
     scene black with arrow_wipe_down_slow
     scene bg mountain climb rainforest with arrow_wipe_down_slow
     $ quick_menu = True
-    "This forest feels so tranquil, and serene"
-    "I feel like I could just lay here forever"
-    "Going on an adventure alone is bizzarre but quite a freeing experience"
-    "I wonder why this mountain is not so polular"
-    "Its time to move, which path should I take?"
+    p "This forest feels so tranquil, and serene"
+    p "I feel like I could just lay here forever"
+    p "Going on an adventure alone is bizzarre but quite a freeing experience"
+    p "I wonder why this mountain is not so polular"
+    p "Its time to move, which path should I take?"
 
     $ quick_menu = False
     window hide
@@ -105,12 +105,12 @@ label mountain_climb_rainforest:
     
     if choice == "left":
         $ quick_menu = True
-        "I think this way is easier"
+        p "I think this way is easier"
         jump mountain_climb_grassyside_left
 
     elif choice == "right":
         $ quick_menu = True
-        "My gut feel says this"
+        p "My gut feel says this"
         jump mountain_climb_grassyside_right
 
 
@@ -119,40 +119,40 @@ label mountain_climb_grassyside_left:
     scene bg mountain climb grassyside-left with arrow_wipe_right_slow
     $ quick_menu = True
 
-    "Just a little..."
-    "*huff...*"
-    "more..."
-    "*huff...*"
-    "That climb was harder than expected"
-    "*huff...*"
-    "I can already see the summit from here"
-    "*huff...*"
+    p "Just a little..."
+    p "*huff...*"
+    p "more..."
+    p "*huff...*"
+    p "That climb was harder than expected"
+    p "*huff...*"
+    p "I can already see the summit from here"
+    p "*huff...*"
 
     default rest_count = 0
 
     label rest_before_the_summit:
         menu:
-            "What should I do?"
+            p "What should I do?"
             "Reached for the summit":
                 if rest_count >= 2:
-                    "Its time to go. The summit is waiting for me!"
+                    p "Its time to go. The summit is waiting for me!"
                     jump mountain_summit
                 else:
                     $ rand = renpy.random.randint(1, 3)
                     if rand == 1:
-                        "I could really use a break right now *huff...*"
+                        p "I could really use a break right now *huff...*"
                     elif rand == 2:
-                        "Just five more minutes please! *huff...*"
+                        p "Just five more minutes please! *huff...*"
                     elif rand == 3:
-                        "Can I please get my well deserved break *huff...*"
+                        p "Can I please get my well deserved break *huff...*"
                     jump rest_before_the_summit
             "Take a break":
                 $ rest_count += 1
                 if rest_count == 1:
-                    "Yeah, that feels better..."
-                    "This view is amazing, I should rest here a bit more"
+                    p "Yeah, that feels better..."
+                    p "This view is amazing, I should rest here a bit more"
                 else:
-                    "Alright I feel better now I should keep going!"
+                    p "Alright I feel better now I should keep going!"
                 jump rest_before_the_summit
 
 
@@ -162,19 +162,18 @@ label mountain_climb_grassyside_right:
     $ quick_menu = True
     window auto
 
-    "The hike from here is easier than expected"
-    "It feels just like a light walk"
-    "I should've taken the other way for more challenge"
-    "The summit is near I should keep going"
+    p "The hike from here is easier than expected"
+    p "It feels just like a light walk"
+    p "I should've taken the other way for more challenge"
+    p "The summit must be near now"
     menu to_the_summit:
-        "What to do?"
+        p "What to do?"
         "Reched for the summit":
-            "I should not keep the mountain summit waiting"
-            "It's time to go"
+            p "I should not keep the mountain summit waiting for me"
+            p "It's time to go"
             jump mountain_summit
-        "Admire the view for a while":
-            "Resting is never a bad idea"
-            "This view is stunning"
+        "Take a rest":
+            p "Maybe I could rest here for a while"
             $ quick_menu = False
             window hide
             pause
@@ -188,34 +187,30 @@ label mountain_summit:
     $ quick_menu = True
     window auto
 
-    "*huff..*"
-    "Finally, I've reached the summit!!!"
-    "I thought it would be bad if I reached the summit at sunset"
-    "But seeing it like this, makes me feel that all that sweat I've poured on this hike was worth it"
-    menu watch_the_sunset:
-        "Look around"
-        "Watch the sunset":
-            "This is nothing but beautiful"
-            "I'm glad to be able to see this"
-            $ quick_menu = False
-            window hide
-            pause 1.0
-            show screen press_to_continue with dissolve
-            pause
-            hide screen press_to_continue
-            $ quick_menu = True
-            window auto
-    "This was a beautiful sight to see"
-    "I'm glad I did all this even I was alone"
+    p "*huff..*"
+    p "Finally, I've reached the summit!!!"
+    p "WAOOOOOOOOOOOWWW!!!"
+    p "I did not now that it would be this beautiful"
+    p "All that sweat I've poured on this hike was so worth it!"
+    p "This sunset is just beautiful..."
+    $ quick_menu = False
+    window hide
+    pause 1.0
+    show screen press_to_continue with dissolve
+    pause
+    hide screen press_to_continue
+    $ quick_menu = True
+    window auto
+    p "This was a wonderful sight to see, but I should keep going now"
     menu go_back_trail:
         "Where shall we go now?"
         "Go back down":
-            "It was beautiful but it's time to go now"
-            "I need to get to the basecamp before it gets dark. I gotta hurry"
+            p "I'll head down now. I need to get to the basecamp before it gets dark"
+            p "I gotta hurry"
             jump to_basecamp_forest
         "Watch the sunset again":
-            "This view only comes once in a lifetime"
-            "I'll stay here a bit more"
+            p "Hmm... maybe I got more time"
+            p "I'll stay here a bit more, and enjoy the view"
             $ quick_menu = False
             window hide
             pause 1.0
@@ -234,49 +229,53 @@ label to_basecamp_forest:
     if lost_count == 0:
         $ quick_menu = True
         window auto
-        "Climbing down is a lot easier than going up"
-        "Now which is the way to the camp again?"
+        p "Climbing down is a lot easier than going up"
+        p "Now which is the way to the camp again?"
     elif lost_count == 1:
         $ quick_menu = True
         window auto
-        "Huh...?"
-        "Am I lost?"
-        "But I just went here before"
-        "O-o-of course, I am in a forest everything looks the same"
-        "The basecamp must be near now"
+        p "Huh...?"
+        p "Am I lost?"
+        p "But I just went here before"
+        p "O-o-of course, I am in a forest everything looks the same"
+        p "The basecamp must be near now"
     elif lost_count == 2:
         $ quick_menu = True
         window auto
-        "Wha-what's happening?"
-        "I've been this way before"
-        "I am not going in circles, Am I?"
-        "Is this a prank or something. You can stop now cuz it's not FUNNY!!"
-        "What the hell is wrong with this forest!"
+        p "Wha-what's happening?"
+        p "I've been this way before"
+        p "I am not going in circles, Am I?"
+        p "Is this a prank or something. You can stop now cuz it's not FUNNY!!"
+        p "What the hell is wrong with this forest!"
     elif lost_count == 3:
         $ quick_menu = True
         window auto
-        "*huff...*"
-        "*gulp*"
-        "Get me out of this FOREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n
+        p "*huff...*"
+        p "*gulp*"
+        p "*puff...*"
+        p "Get me out of this FOREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n
         EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-        "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST"
-        "please"
+        p "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+        p"EEEEEEEEEEST!!!"
+        p "please"
     elif lost_count == 4:
         $ quick_menu = True
         window auto
-        "Is there even a way out?"
-        "There's no way out is there"
-        "What do I even do?"
-        "It's getting dark, and I'm tired"
-        "What do I do? What do I do? What do I do?"
-    elif lost_count == 5:
+        p "Is there even a way out?"
+        p "There's no way out is there"
+        p "What do I even do?"
+        p "It's getting dark, and I'm tired"
+        p "What do I do? What do I do? What do I do?"
+    else:
         $ quick_menu = True
         window auto
-        "I am really going in circles"
-        "I am really really tired"
-        "*huff...*"
-        "I should get some rest"
+        p "I am really going in circles"
+        p "I am really really tired"
+        p "*huff...*"
+        p "I should get some rest"
         jump dawn_first_meeting
 
     $ quick_menu = False
@@ -285,21 +284,21 @@ label to_basecamp_forest:
 
     if choice == "straight":
         if lost_count == 0:
-            "This has to be it"
+            p "This has to be it"
         $ lost_count += 1
         scene black with arrow_wipe_up
         jump lost_path_straight
 
     elif choice == "left":
         if lost_count == 0:
-            "I think it's this way"
+            p "I think it's this way"
         $ lost_count += 1
         scene black with arrow_wipe_right
         jump lost_path_left
 
     elif choice == "right":
         if lost_count == 0:
-            "It should be this way"
+            p "It should be this way"
         $ lost_count += 1
         scene black with arrow_wipe_left
         jump lost_path_right
@@ -367,10 +366,10 @@ label dawn_first_meeting:
     $ quick_menu = True
     window auto
 
-    "This should be a good place to rest"
-    "The sun already set"
-    "The stars are so bright"
-    "I hope when I close my eyes I wake up from this nightmare"
+    p "This should be a good place to rest"
+    p "The sun's already out"
+    p "The stars are so bright"
+    p "I hope when I close my eyes I wake up from this nightmare"
 
     scene black with eyeclose
     pause 2.0
@@ -389,11 +388,12 @@ label dawn_first_meeting:
     show Dawn normal
     d_unknown "My name is Dawn"
     d "How about you, can you tell me your name?"
+    p "Oh yeah, my name is..."
 
     $ player_name = renpy.input("{size=40}Enter your name{/size}")
     $ player_name = player_name.strip()
     if player_name == "":
-        $ player_name="Renee"
+        $ player_name="Podziemski is garbage"
     
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
@@ -439,6 +439,7 @@ label forest_stargazing:
     scene black with fade
     scene bg forest starry sky with dissolve
     pause 1.0
+    $ quick_menu = True
 
     show Dawn normal with dissolve
     d "The stars are pretty, aren't they?"
@@ -476,6 +477,7 @@ label forest_stargazing:
     d "Orion is easy to spot because of his belt. It’s a great marker because Orion generally located in the East. If you need to head East, follow him."
 
     # CRUX / SOUTH SECTION
+    $ quick_menu = False
     show map at pan_to(0.5, 1.0, 1.8, 0.4)
     pause 1.0
 
@@ -485,6 +487,7 @@ label forest_stargazing:
     # This line zooms the map out to show the full sky/map again
     show map at pan_to(0.5, 0.5, 1.0, 0.5)
     pause 0.5
+    $ quick_menu = True
 
     d "Back when there were no maps or any navigating apps, our ancestors just used these. They looked at the same sky we're looking at now."
     d "And that's everything you need to know. Keep your eyes up the stars, and you won't get lost."
@@ -507,6 +510,7 @@ label to_basecamp_forest_with_dawn:
         d "Now, I know a mountaineer camp near us"
         d "Let's head over there now I think it's about..."
         d "{size=60}North East{/size} from here"
+        d "If you get lost just remember to look up"
         show Dawn normal
         d "Well, I'll be heading first"
         d "See Yah!"
@@ -526,7 +530,6 @@ label to_basecamp_forest_with_dawn:
     if choice == "straight":
         scene black with eyeclose
         jump forest_north
-        player_name ""
 
     elif choice == "left":
         scene black with eyeclose
@@ -633,17 +636,299 @@ label forest_west:
         jump to_basecamp_forest_with_dawn
     
 
+default forest_camp_visited = False
+default no_count = 0
+
 label forest_camp:
     scene bg forest camp with dissolve
-
     $ quick_menu = True
     window auto
     show screen gameUI
 
-    d "Waowww"
+    if not forest_camp_visited:
+        $ forest_camp_visited = True
+
+        show Dawn surprised with dissolve
+        d "Waooow!"
+        d "You've actually got it"
+        show Dawn smile
+        d "Congrats! I'm very proud of you"
+        d "You're now a certified celestial navigator"
+        player_name "What does that even mean?"
+        show Dawn normal
+        d "Well, anyway I think we should rest and look around for now before get going"
+        d "Tell me if you find anything interesting"
+        hide Dawn with dissolve
+        player_name "Is there even something interesting in a place like this?"
+
+        $ quick_menu = False
+        window hide
+        pause 1.0
+        show screen click_objects with dissolve
+        pause
+        hide screen click_objects
+        $ quick_menu = True
+        window auto
+
+        show Dawn surprised with dissolve
+        d "Look over here, I found a treasure map!"
+        window hide
+        $ quick_menu = False
+        show screen show_treasure_map
+        pause
+        window show
+        $ quick_menu = True
+
+        show Dawn normal
+        d "It looks ancient, but its still pretty much readable"
+        d "Let's see where does this leads"
+        d "East, South, North, West. Oh what's this?"
+        d "Juano Piece?"
+        show Dawn surprised
+        d "!!!"
+        d "So, it's real"
+        d "The Juano Piece is real?!!"
+        show Dawn lookaway
+        d "I know you need to get back ASAP but please %(player_name)s we need to see where this goes"
+        player_name "Huh? What's Juano Piece anyways?"
+        player_name "Can we just leave this forest, and go home already"
+        show Dawn normal
+        d "No way, you dont know Juano Piece?"
+        d "It's a treasure piece left by Don Juano"
+        d "Legend says that asided from botomless gold, and jewels it has. It also has all the answers to question humanity have"
+        d "It says that Don Juano got lost in this Mountain while trying to hide his treasure, and was never found again along with his treasure"
+        d "I know it could be fake, but lets go anyways"
+        d "It's not that everyday we get a chance to go to an adventure like this"
+
+        menu start_adventure:
+            "Should we follow the map?"
+            "Yes":
+                show Dawn smile
+                player_name "Alright it's not like I would miss the chance to get rich"
+                player_name "Plus I want to use my new navigation skills"
+                d "Yay, let's hurry"
+                d "Lead the way, I trust you we won't get lost"
+                d "But first, let's take a final look at the map before going"
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map
+
+            "No":
+                $ no_count += 1
+                if no_count == 1:
+                    player_name "The map looks so fake, it's a waste of time, and energy"
+                    player_name "Let's hurry up, and leave this forest"
+                    show Dawn lookaway
+                    d "But what if its real? we could've missed the chance to become billionaires"
+                    d "Let's go Please"
+                    jump start_adventure
+                else:
+                    $ please_text = " ".join(["Please"] * (2 ** (no_count - 1)))
+                    show Dawn pout
+                    d "[please_text]"
+                    jump start_adventure
+
+    else:
+        show Dawn surprised with dissolve
+        d "I think we've been here before"
+        d "Did we get lost?"
+        show Dawn normal
+        d "Anyways, do you want to take another look at the map before heading out?"
+
+        menu:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map
+    
+
+label to_treasure_step1:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 1
+    show Dawn surprised with dissolve
+    d "I've been on this mountain for quite some time, but this place looks unfamilliar"
+    d "I think this is the point one on the map"
+    show Dawn normal
+    d "Well hey, do you have a dream?"
+    d "Like what do you want to be when you grow up?"
+    menu dream:
+        "Do you have a dream"
+        "Yes":
+            player_name "Of course, I have one in minde"
+            player_name "But I'm keeping it a secret so that no one can jinx it"
+            show Dawn smile
+            d "Oh, I hope your dreams come true"
+            d "I'll be rooting for you"
+            d "Well for me I want to become an Astrobiologist"
+            d "I want to become the one that would make life in other planets possible"
+            d "Or maybe even discover life in other planets as well"
+        "Not yet":
+            player_name "I'm still figuring it out"
+            player_name "There's a ton of things to do out there I find it hard to decide"
+            show Dawn smile
+            d "I think you can be whatever you want to be"
+            d "I believe in you"
+            d "If one day you'll be able to decide please tell me immediately"
+            d "I'll be rooting for you"
+            d "Well for me I want to become an Astrobiologist"
+            d "I want to become the one that would make life in other planets possible"
+            d "Or maybe even discover life in other planets as well"
+    show Dawn normal
+    d "Do you believe in Aliens"
+    menu aliens:
+        "Do you believe in Aliens"
+        "Yes":
+            player_name "I have never seen one but I believe they exist"
+            show Dawn surprised
+            d "Oh really, I guess we're the same"
+            show Dawn smile
+            d "I think they exist"
+            d "The Universe is so big, and mysterious yet nothing outside of our imagination
+            seems impossible on it"
+            d "And did you know the Drake equation by Frank Drake estimates that there
+            are thousands of civilizations in the Universe"
+            d "So whether I have seen them or not, I will keep believing they exist"
+            d "Plus I think that it would be lonely if we're alone in this Universe"  
+        "No":
+            player_name "No, I haven't seen one so I don't think they exist"
+            show Dawn surprised
+            d "Oh really, I guess we're not the same"
+            show Dawn smile
+            d "I think they exist"
+            d "The Universe is so big, and mysterious yet nothing outside of our imagination
+            seems impossible on it"
+            d "And did you know the Drake equation by Frank Drake estimates that there
+            are thousands of civilizations in the Universe"
+            d "So whether I have seen them or not, I will keep believing they exist"
+            d "Plus I think that it would be lonely if we're alone in this Universe"
+    show Dawn normal
+    d "I think that's enough chatting"
+    d "Let's keep moving"
+    d "Do you want to look at the map before going?"
+    menu map_review_1:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step2
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step2
 
 
-### Chapter 2: ###
+label to_treasure_step2:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 2
+    show Dawn normal
+    d "I think this is the point two on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_2:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step3
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step3
 
 
-### Chapter 4: At Dawn ###
+label to_treasure_step3:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 3
+    show Dawn normal
+    d "I think this is the point three on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_3:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call navigate_from_map_to_step4
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call navigate_from_map_to_step4
+
+
+label to_treasure_step4:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure path 4
+    show Dawn normal
+    d "I think this is the point four on the map"
+
+    d "Do you want to look at the map before going?"
+    menu map_review_4:
+            "View the map again?"
+            "Yes":
+                show screen show_treasure_map
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                pause
+                call to_treasure_groove
+
+            "No, let's just go":
+                player_name "I remember the way, let's move."
+                hide Dawn with dissolve
+                $ quick_menu = False
+                window hide
+                call to_treasure_groove
+
+
+### Chapter 2: Dawn at Midnight###
+label treasure_groove:
+    window show
+    $ quick_menu = True
+
+    scene bg treasure groove
+    show Dawn normal
+    d "It's already midnight"
+    d "So this is where the treasure is"
+
+
+### Chapter 3: At Dawn ###
