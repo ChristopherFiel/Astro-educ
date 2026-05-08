@@ -846,8 +846,10 @@ label to_treasure_step2:
     scene bg treasure path 2
     show Dawn normal
     d "I think this is the point two on the map"
+    # Put dialogue here
 
     d "Do you want to look at the map before going?"
+    d "We're currently at point 2"
     menu map_review_2:
             "View the map again?"
             "Yes":
@@ -873,8 +875,9 @@ label to_treasure_step3:
     scene bg treasure path 3
     show Dawn normal
     d "I think this is the point three on the map"
-
+    d "Let's hurry I think it is just a bit further now"
     d "Do you want to look at the map before going?"
+    d "We're at point 3 on the map"
     menu map_review_3:
             "View the map again?"
             "Yes":
@@ -899,9 +902,12 @@ label to_treasure_step4:
 
     scene bg treasure path 4
     show Dawn normal
-    d "I think this is the point four on the map"
+    d "I think we are at the point four on the map"
+    d "We're almost there just one more step"
+    # Rest of the dialogue
 
     d "Do you want to look at the map before going?"
+    d "We're at the point four on the map"
     menu map_review_4:
             "View the map again?"
             "Yes":
@@ -920,7 +926,7 @@ label to_treasure_step4:
                 call to_treasure_groove
 
 
-### Chapter 2: At Dawn###
+### Chapter 2: Sunrise at Dawn###
 label treasure_groove:
     window show
     $ quick_menu = True
@@ -928,7 +934,7 @@ label treasure_groove:
     scene bg treasure groove
     show Dawn surprised
     d "Hmmm... Is this really the right place I'm pretty sure we've follow the map correctly"
-    d "But I still haven't seen something like X mark on the ground, Troll Guardian, hermit riddler..."
+    d "But I still haven't seen something like X mark on the ground, Troll Guardian, A hermit riddler..."
     show Dawn lookaway
     d "Well I guess, the map is fake all along hehehe..."
     show Dawn smile
@@ -948,7 +954,7 @@ label treasure_groove:
     window hide
     scene white with dissolve
     pause 1.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 2: \nAt Dawn{/size}{/font}"
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 2: \nSunrise at Dawn{/size}{/font}"
     pause (3.0)
     hide text
     jump forest_camp_2
@@ -1037,13 +1043,71 @@ label to_lyrid_point_1:
 label to_lyrid_point_2:
     $ quick_menu = True
     window hide
-    scene bg lyrid path 1
+    scene bg lyrid path 2
     show Dawn smile
     d "You found me, well done"
     player_name "Yeah"
     show Dawn normal
     d "It's just a bit further here now"
-    d "First let's head down East"
+    d "First let's head down further west"
+    jump to_lyrid_point_3
 
 
-### Chapter 3: At Dawn ###
+label to_lyrid_point_3:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 3
+    scene bg lyrid path 2
+    show Dawn normal
+    d "Hey, have you watched meteor shower before?"
+    # Rest of the dialogue
+    d "I know perfect spot just Nortwest from here"
+
+
+label to_meteor_shower:
+    $ quick_menu = True
+    window hide
+    scene bg meteor shower path
+
+
+label lyrid_meteor_shower:
+    $ quick_menu = True
+    window hide
+    # Manonood na sila ng Lyrid Meteor shower
+    d "It's so beautiful"
+    d "Let's head back down now and get out of this forest"
+    d "It's actually easy, the way out of this forest from this place is just straight south"
+
+
+label to_road_point_1:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 1
+
+
+label dawn_goodbye:
+    $ quick_menu = True
+    window hide
+    scene bg Goodbye Dawn
+    # Dawn will say goodbye to player
+
+
+label to_road_point_2:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 2
+
+
+label to_road_point_2:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 3
+
+
+label roadside:
+    $ quick_menu = True
+    window hide
+    scene bg roadside
+
+
+### END ###
