@@ -732,6 +732,7 @@ label forest_camp:
                     jump start_adventure
 
     else:
+        scene bg forest camp with dissolve
         show Dawn surprised with dissolve
         d "I think we've been here before"
         d "Did we get lost?"
@@ -741,11 +742,10 @@ label forest_camp:
         menu:
             "View the map again?"
             "Yes":
-                show screen show_treasure_map
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                pause
+                call screen show_treasure_map
                 call navigate_from_map
 
             "No, let's just go":
@@ -920,15 +920,130 @@ label to_treasure_step4:
                 call to_treasure_groove
 
 
-### Chapter 2: Dawn at Midnight###
+### Chapter 2: At Dawn###
 label treasure_groove:
     window show
     $ quick_menu = True
 
     scene bg treasure groove
+    show Dawn surprised
+    d "Hmmm... Is this really the right place I'm pretty sure we've follow the map correctly"
+    d "But I still haven't seen something like X mark on the ground, Troll Guardian, hermit riddler..."
+    show Dawn lookaway
+    d "Well I guess, the map is fake all along hehehe..."
+    show Dawn smile
+    d "But anyways, I enjoyed talking with you and sharing all my random astronomical facts"
+    d "Even if it might be overwhelming for you. Astronomy, the space, and the universe is
+    such a captivating topic. I hoped you learned something new"
+    d "..."
+    d "I don't really think our journey here is all in vain"
+    d "Maybe, the real treasure is the--"
+    player_name "Wait did you hear that"
+    show Dawn surprised
+    d "Hear what?"
+    d "Anyway It's already midnight"
+    d "Let's now get out of this fore--"
+    # SFX of meteorite
+    $ quick_menu = False
+    window hide
+    scene white with dissolve
+    pause 1.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 2: \nAt Dawn{/size}{/font}"
+    pause (3.0)
+    hide text
+    jump forest_camp_2
+
+    
+label forest_camp_2:
+    $ quick_menu = True
+    window auto
+    hide screen gameUI
+    scene black with fade
+    d "Hello can you hear me?"
+    d "Are you still there?"
+    d "Can you wake UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\n
+    UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+    UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+    d "p"
+    d "*sigh*"
+    d "What do I even do with a dead body"
+    d "Maybe I should just leave you here"
+    scene bg forest camp 2 with eyeopen
+    show Dawn lookaway with dissolve
+    show screen gameUI
+    player_name "hey..."
+    player_name "I'm still here. I'm just resting my eyes"
+    player_name "What does even happened"
+    show Dawn surprised
+    d "Oh your'e still alive"
+    d "A meteor fell near us, and cause an explosion"
+    show Dawn smile
+    d "Luckily we're just caught by it's shockwave, and didn't get vaporized"
+    d "I've taken some fragment hehe.here take a look"
     show Dawn normal
-    d "It's already midnight"
-    d "So this is where the treasure is"
+    d "Did you know it's called Meteoroid when it's floating in space"
+    d "Meteor when it's burning on our athmosphere"
+    d "And Meteorite when it falls on the ground"
+    player_name "Oh really? thanks but that did not really help our situation"
+    player_name "I'm ready to go now, let's get out of here"
+    show Dawn normal2
+    d "I've just remembered today is the peak of the Lyrid Meteor Shower"
+    d "I know just a place in this forest where we can perfectly watch it"
+    d "It's almost dawn. The best time to see it let's hurry"
+    d "And btw since it's almost Dawn Orion now points at west"
+    hide Dawn with dissolve
+    player_name "*sigh* Here we go again"
+    menu follow_dawn:
+        "What will you do"
+        "Follow Dawn":
+            player_name "What is she up to again?"
+            player_name "By the looks of it I think she went South then West"
+            player_name "I've got to hurry"
+            $ quick_menu = False
+            window hide
+            call navigate_to_lyrid_1
+        "Get out of the forest":
+            player_name "How do I even get out of this forest"
+            player_name "Even if I know now how to navigate directions I still don't know which
+            direction is the way out"
+            player_name "I don't think I have a choice but to follow her"
+            jump follow_dawn
+        "Stay still":
+            player_name "I'll just rest some more here"
+            player_name "I don't think she'll go anywhere far"
+            player_name "Do I even have a choice but to follow her"
+            $ quick_menu = False
+            window hide
+            pause 1.0
+            show screen press_to_continue with dissolve
+            pause
+            $ quick_menu = True
+            window show
+            hide screen press_to_continue
+            jump follow_dawn
+
+
+label to_lyrid_point_1:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 1
+    player_name "She should be nearby now"
+    player_name "Right she went west from here"
+    $ quick_menu = False
+    window hide
+    call navigate_to_lyrid_2
+    
+
+label to_lyrid_point_2:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 1
+    show Dawn smile
+    d "You found me, well done"
+    player_name "Yeah"
+    show Dawn normal
+    d "It's just a bit further here now"
+    d "First let's head down East"
 
 
 ### Chapter 3: At Dawn ###
