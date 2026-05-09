@@ -1,4 +1,14 @@
-﻿# label splashscreen:
+﻿default forest_intro_seen = False
+default forest_mistakes = 0
+
+default forest_camp_visited = False
+default no_count = 0
+
+default visited_step1_map = False
+default visited_step2_map = False
+
+
+# label splashscreen:
 #     scene black
 #     with Pause(1)
 
@@ -636,9 +646,6 @@ label forest_west:
         jump to_basecamp_forest_with_dawn
     
 
-default forest_camp_visited = False
-default no_count = 0
-
 label forest_camp:
     scene bg forest camp with dissolve
     $ quick_menu = True
@@ -817,11 +824,23 @@ label to_treasure_step1:
             are thousands of civilizations in the Universe"
             d "So whether I have seen them or not, I will keep believing they exist"
             d "Plus I think that it would be lonely if we're alone in this Universe"
+    # show Dawn normal2
+    # d "The criteria for habitability for life of a planet is quite simple anyways"
+    # d "First, it needs to orbit at the perfect distance know as the "Goldilocks Zone" so its
+    # not too hot or too cold for liquid water to sit on the surface."
+    # d "Second It also needs a solid atmosphere and a magnetic field to keep that
+    # air in place and block out nasty space radiation."
+    # d "In the end it all boils down to presence of water."
+    # d "For some it is a miracle that there is life on Earth, but for me with the vastness of the
+    # universe it would be truly a miracle if there's only life on Earth."
     show Dawn normal
     d "I think that's enough chatting"
-    d "Let's keep moving"
-    d "Do you want to look at the map before going?"
-    menu map_review_1:
+
+    if not visited_step1_map:
+        d "Let's keep moving"
+        d "Do you want to look at the map before going?"
+        $ visited_step1_map = True
+        menu map_review_1:
             "View the map again?"
             "Yes":
                 show screen show_treasure_map
@@ -830,13 +849,17 @@ label to_treasure_step1:
                 window hide
                 pause
                 call navigate_from_map_to_step2
-
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
                 call navigate_from_map_to_step2
+    else:
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_from_map_to_step2
 
 
 label to_treasure_step2:
@@ -845,12 +868,73 @@ label to_treasure_step2:
 
     scene bg treasure path 2
     show Dawn normal
-    d "I think this is the point two on the map"
-    # Put dialogue here
+    d "Hmm... by the looks of it we are at the second point on the map"
+    player_name "Yeah, we've walked quite a lot in this dark forest"
+    player_name "I wonder why it's so dark today, without the stars it's impossible to navigate
+    around this forest"
+    show Dawn lookaway
+    d "Oh, it's because it's new moon today there's no light coming off from the moon"
+    show Dawn normal
+    d "The Moon is between Earth and the Sun, so the side facing us is dark.
+    Its essentially invisible in the night sky."
+    d "But don't worry it's not like Gru stole it again, the moon just goes to different phases"
+    menu moonsplaining:
+        "The moon phases"
+        "Who's Gru":
+            show Dawn lookaway
+            d "Some sort of supervillain commanding a massive army"
+            d "But he had a change of hearts recently so we are lucky"
+            d "Well, anyways the moon, undergoes eight phases that causes it to grow brighter
+            or darker"
+        "The moon phases?":
+            d "Yeah the moon, undergoes eight phases that causes it to grow brighter or darker"
+    show Dawn normal2
+    d "This process is called the Lunation and takes about 29.5 days"
+    d "and by the way our moon's name is Luna, but if you want to still call it moon,
+    make sure you capitalize the M, because it is not only our moon, it is THE Moon"
+    show Dawn smile
+    d "hehe"
+    show Dawn normal2
+    d "Anyways the phases in order are, New Moon, Waxing Crescent, First Quarter,
+    Waxing Gibbous, Full Moon, Waning Gibbous, Third Quarter, Waning Crescent"
+    d "The brightest phase is the Full Moon in where we can see the Moon at it's full form, 
+    and the darkest phase is the New Moon in where the Moon is not visible to us all"
+    d "before it reaches Full Moon it goes through waxing which means 'growing',
+    on the other hand before it reached New moon it goes through waning
+    which means 'shrinking'"
+    d "And the Moon does not actually shine but only reflects light from the Sun"
+    show Dawn normal
+    d "You can actually tell by just looking at the moon whether it's waxing or waning"
+    d "When the moon looks like a capital D it's waxing, while if it looks like capital C
+    it's waning"
+    player_name "I didn't really consider that when planning my hike"
+    player_name "The Moon is certainly interesting"
+    d "Anyways which one do you prefer New Moon, or Full Moon?"
+    menu selenophile:
+        "I prefer"
+        "Full Moon":
+            player_name "I love seeing the Moon at it's fullest form, it's beautiful, and mesmerizing"
+            show Dawn smile
+            d "I see you are a selenophile"
+            player_name "Selenophile"
+            d "Someone who loves the Moon"
+        "New Moon":
+            player_name "I love dark nights where I can appreciate the dark skies"
+            show Dawn surprised
+            d "I see, we're the same then"
+    show Dawn smile
+    d "Personally I love seeing the dark skiest"
+    d "The darker the night the brighter the stars"
+    d "It reminds me that there's always something to look forward to no matter how the dark
+    times becomes"
+    player_name "Your'e right the Moon might be absent but the stars are literally here
+    to guide us"
 
-    d "Do you want to look at the map before going?"
-    d "We're currently at point 2"
-    menu map_review_2:
+    if not visited_step2_map:
+        d "Let's head out now. I still have the map by the way if you want to take another look"
+        d "We're currently at point 2"
+        $ visited_step2_map = True
+        menu map_review_2:
             "View the map again?"
             "Yes":
                 show screen show_treasure_map
@@ -859,13 +943,17 @@ label to_treasure_step2:
                 window hide
                 pause
                 call navigate_from_map_to_step3
-
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
                 call navigate_from_map_to_step3
+    else:
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_from_map_to_step3
 
 
 label to_treasure_step3:
@@ -873,11 +961,11 @@ label to_treasure_step3:
     $ quick_menu = True
 
     scene bg treasure path 3
-    show Dawn normal
-    d "I think this is the point three on the map"
-    d "Let's hurry I think it is just a bit further now"
+    show Dawn surprised
+    d "*huff...* We're at... the... point three... on the map *huff...*"
+    d "Yay! we're finally halfway there"
+    d "Let's move quick it is just a bit further now"
     d "Do you want to look at the map before going?"
-    d "We're at point 3 on the map"
     menu map_review_3:
             "View the map again?"
             "Yes":
