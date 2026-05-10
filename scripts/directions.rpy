@@ -45,18 +45,12 @@ screen direction_menu_horizontal():
         action Return("right") 
 
 
-screen direction_menu_vertical():
-    textbutton "Go Straight":
+screen direction_menu_forward():
+    textbutton "Go Forward":
         xalign 0.5
         yalign 0.15
         text_style "navigation_button_text"
         action Return("straight") 
-
-    textbutton "Go Backward":
-        xalign 0.5
-        yalign 0.85
-        text_style "navigation_button_text"
-        action Return("back") 
 
 
 screen direction_menu_no_map():
@@ -428,3 +422,246 @@ label navigate_to_lyrid_2:
             pause 3.0
             hide screen got_lost with dissolve
             jump forest_camp_2
+
+
+label navigate_to_lyrid_3:
+    $ prev_map = current_map
+    $ choice   = renpy.call_screen("direction_menu")
+
+    if prev_map == "map-east":
+        if choice == "straight":
+            scene black with eyeclose
+            jump to_lyrid_point_3
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_2
+
+    elif prev_map == "map-west":
+        if choice == "back":
+            scene black with eyeclose
+            jump to_lyrid_point_3
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_2
+
+    elif prev_map == "map-south":
+        if choice == "left":
+            scene black with eyeclose
+            jump to_lyrid_point_3
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_2
+
+    elif prev_map == "map-north":
+        if choice == "right":
+            scene black with eyeclose
+            jump to_lyrid_point_3
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_2
+
+
+label navigate_to_lyrid_path:
+    $ prev_map = current_map
+    $ choice   = renpy.call_screen("direction_menu")
+
+    if prev_map == "map-east":
+        if choice == "left":
+            scene black with eyeclose
+            jump to_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-west":
+        if choice == "right":
+            scene black with eyeclose
+            jump to_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-south":
+        if choice == "back":
+            scene black with eyeclose
+            jump to_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-north":
+        if choice == "straight":
+            scene black with eyeclose
+            jump to_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    else:
+        show screen got_lost with dissolve
+        pause 3.0
+        hide screen got_lost with dissolve
+        jump to_lyrid_point_3
+
+
+label navigate_to_lyrid_meteor_shower:
+    $ prev_map = current_map
+    $ choice   = renpy.call_screen("direction_menu")
+
+    if prev_map == "map-east":
+        if choice == "back":
+            scene black with eyeclose
+            jump lyrid_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-west":
+        if choice == "straight":
+            scene black with eyeclose
+            jump lyrid_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-south":
+        if choice == "right":
+            scene black with eyeclose
+            jump lyrid_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+    elif prev_map == "map-north":
+        if choice == "left":
+            scene black with eyeclose
+            jump lyrid_meteor_shower
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump to_lyrid_point_3
+
+
+label navigate_to_road_1:
+    $ prev_map = current_map
+    $ choice   = renpy.call_screen("direction_menu")
+
+    if prev_map == "map-east":
+        if choice == "right":
+            scene black with eyeclose
+            jump to_road_point_1
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-west":
+        if choice == "left":
+            scene black with eyeclose
+            jump to_road_point_1
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-south":
+        if choice == "straight":
+            scene black with eyeclose
+            jump to_road_point_1
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-north":
+        if choice == "back":
+            scene black with eyeclose
+            jump to_road_point_1
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    else:
+        show screen got_lost with dissolve
+        pause 3.0
+        hide screen got_lost with dissolve
+        jump lyrid_meteor_shower
+
+
+label navigate_to_dawn_goodbye:
+    $ prev_map = current_map
+    $ choice   = renpy.call_screen("direction_menu")
+
+    if prev_map == "map-east":
+        if choice == "right":
+            scene black with eyeclose
+            jump dawn_goodbye
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-west":
+        if choice == "left":
+            scene black with eyeclose
+            jump dawn_goodbye
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-south":
+        if choice == "straight":
+            scene black with eyeclose
+            jump dawn_goodbye
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    elif prev_map == "map-north":
+        if choice == "back":
+            scene black with eyeclose
+            jump dawn_goodbye
+        else:
+            show screen got_lost with dissolve
+            pause 3.0
+            hide screen got_lost with dissolve
+            jump lyrid_meteor_shower
+
+    else:
+        show screen got_lost with dissolve
+        pause 3.0
+        hide screen got_lost with dissolve
+        jump lyrid_meteor_shower
