@@ -56,7 +56,37 @@ screen poster_close_up():
         action [SetVariable("poster_examined", False), Hide("poster_close_up")]
 
 
+screen got_lost():
+    modal True
+    
+    timer 3.0 action Return()
+
+    add Solid("#000000"):
+        at transform:
+            alpha 0.0
+            linear 0.5 alpha 1.0
+
+    text "{font=cmunorm.ttf}{size=55}You got lost in the dark forest...{/size}{/font}":
+        xalign 0.5 yalign 0.4
+        at transform:
+            alpha 0.0
+            linear 0.5 alpha 1.0
+
+    text "{font=cmunorm.ttf}{size=35}Exploring the unknown path{/size}{/font}":
+        xalign 0.5 yalign 0.52
+        at transform:
+            alpha 0.0
+            linear 0.5 alpha 1.0
+
+    button:
+        xfill True
+        yfill True
+        action Return()
+
+
 screen show_treasure_map():
+    modal True
+
     frame:
         xalign     0.5
         yalign     0.5
@@ -85,5 +115,4 @@ screen show_treasure_map():
     button:
         xfill  True
         yfill  True
-        action Hide("show_treasure_map", transition=Dissolve(0.4))
-    
+        action [Hide("show_treasure_map", transition=dissolve), Return()]

@@ -1,4 +1,20 @@
-﻿# label splashscreen:
+﻿default forest_intro_seen = False
+default forest_mistakes = 0
+
+default forest_camp_visited = False
+default no_count = 0
+
+default visited_step1_map = False
+default visited_step2_map = False
+default visited_step3_map = False
+
+default visited_forest_camp_2 = False
+default visited_lyrid_point_2 = False
+default visited_lyrid_point_3 = False
+default visited_lyrid_meteor_shower = False
+default visited_road_point_1 = False
+
+# label splashscreen:
 #     scene black
 #     with Pause(1)
 
@@ -27,7 +43,7 @@ label start:
     hide screen press_to_continue
     with dissolve
 
-    show text "{font=cmunorm.ttf}{size=60}April 21, 2022\nMt. Mayumi Philippines{/size}{/font}" with dissolve
+    show text "{font=cmunorm.ttf}{size=60}April 21\nMt. Mayumi Philippines{/size}{/font}" with dissolve
     pause (3.0)
 
     hide text with dissolve
@@ -134,7 +150,7 @@ label mountain_climb_grassyside_left:
         menu:
             p "What should I do?"
             "Reached for the summit":
-                if rest_count >= 2:
+                if rest_count >= 1:
                     p "Its time to go. The summit is waiting for me!"
                     jump mountain_summit
                 else:
@@ -469,7 +485,7 @@ label forest_stargazing:
     d "This is how you navigate using the Big Dipper. Look at the Dipper up here, those two stars at the edge? They point straight to Polaris."
     d "That constellation points and is located in the North part of the sky."
 
-    # ORION / WEST SECTION
+    # ORION / EAST SECTION
     show map at pan_to(1.0, 0.5, 1.8, 0.4)
     pause 1.0
 
@@ -636,9 +652,6 @@ label forest_west:
         jump to_basecamp_forest_with_dawn
     
 
-default forest_camp_visited = False
-default no_count = 0
-
 label forest_camp:
     scene bg forest camp with dissolve
     $ quick_menu = True
@@ -732,6 +745,7 @@ label forest_camp:
                     jump start_adventure
 
     else:
+        scene bg forest camp with dissolve
         show Dawn surprised with dissolve
         d "I think we've been here before"
         d "Did we get lost?"
@@ -741,11 +755,10 @@ label forest_camp:
         menu:
             "View the map again?"
             "Yes":
-                show screen show_treasure_map
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                pause
+                call screen show_treasure_map
                 call navigate_from_map
 
             "No, let's just go":
@@ -817,11 +830,23 @@ label to_treasure_step1:
             are thousands of civilizations in the Universe"
             d "So whether I have seen them or not, I will keep believing they exist"
             d "Plus I think that it would be lonely if we're alone in this Universe"
+    # show Dawn normal2
+    # d "The criteria for habitability for life of a planet is quite simple anyways"
+    # d "First, it needs to orbit at the perfect distance know as the "Goldilocks Zone" so its
+    # not too hot or too cold for liquid water to sit on the surface."
+    # d "Second It also needs a solid atmosphere and a magnetic field to keep that
+    # air in place and block out nasty space radiation."
+    # d "In the end it all boils down to presence of water."
+    # d "For some it is a miracle that there is life on Earth, but for me with the vastness of the
+    # universe it would be truly a miracle if there's only life on Earth."
     show Dawn normal
     d "I think that's enough chatting"
-    d "Let's keep moving"
-    d "Do you want to look at the map before going?"
-    menu map_review_1:
+
+    if not visited_step1_map:
+        d "Let's keep moving"
+        d "Do you want to look at the map before going?"
+        $ visited_step1_map = True
+        menu map_review_1:
             "View the map again?"
             "Yes":
                 show screen show_treasure_map
@@ -830,13 +855,17 @@ label to_treasure_step1:
                 window hide
                 pause
                 call navigate_from_map_to_step2
-
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
                 call navigate_from_map_to_step2
+    else:
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_from_map_to_step2
 
 
 label to_treasure_step2:
@@ -845,10 +874,74 @@ label to_treasure_step2:
 
     scene bg treasure path 2
     show Dawn normal
-    d "I think this is the point two on the map"
+    d "Hmm... by the looks of it we are at the second point on the map"
+    player_name "Yeah, we've walked quite a lot in this dark forest"
+    player_name "I wonder why it's so dark today, without the stars it's impossible to navigate
+    around this forest"
+    show Dawn lookaway
+    d "Oh, it's because it's new moon today there's no light coming off from the moon"
+    show Dawn normal
+    d "The Moon is between Earth and the Sun, so the side facing us is dark.
+    Its essentially invisible in the night sky."
+    d "But don't worry it's not like Gru stole it again, the moon just goes to different phases"
+    menu moonsplaining:
+        "The moon phases"
+        "Who's Gru":
+            show Dawn lookaway
+            d "Some sort of supervillain commanding a massive army"
+            d "But he had a change of hearts recently so we are lucky"
+            d "Well, anyways the moon, undergoes eight phases that causes it to grow brighter
+            or darker"
+        "The moon phases?":
+            d "Yeah the moon, undergoes eight phases that causes it to grow brighter or darker"
+    show Dawn normal2
+    d "This process is called the Lunation and takes about 29.5 days"
+    d "and by the way our moon's name is Luna, but if you want to still call it moon,
+    make sure you capitalize the M, because it is not only our moon, it is THE Moon"
+    show Dawn smile
+    d "hehe"
+    show Dawn normal2
+    d "Anyways the phases in order are, New Moon, Waxing Crescent, First Quarter,
+    Waxing Gibbous, Full Moon, Waning Gibbous, Third Quarter, Waning Crescent"
+    d "The brightest phase is the Full Moon in where we can see the Moon at it's full form, 
+    and the darkest phase is the New Moon in where the Moon is not visible to us all"
+    show Dawn smile
+    d "before it reaches Full Moon it goes through waxing which means 'growing',
+    on the other hand before it reached New moon it goes through waning
+    which means 'shrinking'"
+    d "And the Moon does not actually shine but only reflects light from the Sun"
+    show Dawn normal
+    d "You can actually tell by just looking at the moon whether it's waxing or waning"
+    d "When the moon looks like a capital D it's waxing, while if it looks like capital C
+    it's waning"
+    player_name "I didn't really consider that when planning my hike"
+    player_name "The Moon is certainly interesting"
+    d "Anyways which one do you prefer New Moon, or Full Moon?"
+    menu selenophile:
+        "I prefer"
+        "Full Moon":
+            player_name "I love seeing the Moon at it's fullest form, it's beautiful, and mesmerizing"
+            show Dawn smile
+            d "I see you are a selenophile"
+            player_name "Selenophile"
+            d "Someone who loves the Moon"
+        "New Moon":
+            player_name "I love dark nights where I can appreciate the dark skies"
+            show Dawn surprised
+            d "I see, we're the same then"
+    show Dawn smile
+    d "Personally I love seeing the dark skiest"
+    d "The darker the night the brighter the stars"
+    d "It reminds me that there's always something to look forward to no matter how the dark
+    times becomes"
+    player_name "Your'e right the Moon might be absent but the stars are literally here
+    to guide us"
 
-    d "Do you want to look at the map before going?"
-    menu map_review_2:
+    if not visited_step2_map:
+        d "Let's head out now. I still have the map by the way if you want to take another look"
+        d "We're currently at point 2"
+        $ visited_step2_map = True
+        menu map_review_2:
             "View the map again?"
             "Yes":
                 show screen show_treasure_map
@@ -857,13 +950,17 @@ label to_treasure_step2:
                 window hide
                 pause
                 call navigate_from_map_to_step3
-
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
                 call navigate_from_map_to_step3
+    else:
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_from_map_to_step3
 
 
 label to_treasure_step3:
@@ -871,11 +968,20 @@ label to_treasure_step3:
     $ quick_menu = True
 
     scene bg treasure path 3
-    show Dawn normal
-    d "I think this is the point three on the map"
+    show Dawn surprised
+    d "*huff...* We're at... the... point three... on the map *huff...*"
+    d "*huff...*"
+    d "This is tiring me"
+    d "At the very least"
+    show Dawn smile
+    d "We're finally halfway there"
+    d "Let's move quick it is just a bit further now"
 
-    d "Do you want to look at the map before going?"
-    menu map_review_3:
+    if not visited_step3_map:
+        d "We're at point three"
+        d "Do you want to look at the map before going?"
+        $ visited_step3_map = True
+        menu map_review_3:
             "View the map again?"
             "Yes":
                 show screen show_treasure_map
@@ -884,24 +990,29 @@ label to_treasure_step3:
                 window hide
                 pause
                 call navigate_from_map_to_step4
-
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
                 call navigate_from_map_to_step4
+    else:
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_from_map_to_step4
 
 
 label to_treasure_step4:
     window show
     $ quick_menu = True
-
     scene bg treasure path 4
+    
     show Dawn normal
-    d "I think this is the point four on the map"
+    d "We're at the point four on the map, we're almost there"
 
     d "Do you want to look at the map before going?"
+    d "We're at the point four on the map"
     menu map_review_4:
             "View the map again?"
             "Yes":
@@ -920,15 +1031,493 @@ label to_treasure_step4:
                 call to_treasure_groove
 
 
-### Chapter 2: Dawn at Midnight###
+### Chapter 2: Sunrise at Dawn###
 label treasure_groove:
     window show
     $ quick_menu = True
 
     scene bg treasure groove
-    show Dawn normal
-    d "It's already midnight"
-    d "So this is where the treasure is"
+    show Dawn surprised:
+        left
+        linear 1.0 right
+        linear 1.0 left
+        repeat
+
+    pause
+    stop Dawn
+    d "Hmmm... Is this really the right place I'm pretty sure we've follow the map correctly"
+
+    show Dawn surprised:
+        left
+        linear 1.0 right
+        linear 1.0 left
+        repeat
+
+    pause
+    d "But I still haven't seen something like X mark on the ground, Troll Guardian, A hermit riddler..."
+    show Dawn lookaway
+    d "Well I guess, the map is fake all along hehehe..."
+    show Dawn smile
+    d "But anyways, I enjoyed talking with you and sharing all my random astronomical facts"
+    d "Even if it might be overwhelming for you. Astronomy, the space, and the universe is
+    such a captivating topic. I hoped you learned something new"
+    player_name "..."
+    player_name "I don't really think our journey here is all in vain"
+    player_name "Maybe, the real treasure is the--"
+    show Dawn surprised
+    d "Wait did you hear that"
+    show Dawn surprised
+    player_name "Hear what?"
+    player_name "Anyway It's already midnight"
+    player_name "Let's now get out of this fore--"
+    # SFX of meteorite
+    $ quick_menu = False
+    window hide
+    scene white with dissolve
+    pause 1.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 2: \nSunrise at Dawn{/size}{/font}"
+    pause (3.0)
+    hide text
+    jump forest_camp_2
+
+    
+label forest_camp_2:
+    $ quick_menu = True
+    window auto
+
+    if not visited_forest_camp_2:
+        hide screen gameUI
+        scene black with fade
+        $ visited_forest_camp_2 = True
+        d "Hello can you hear me?"
+        d "Are you still there?"
+        d "Can you wake UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\n
+            UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+            UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+        d "p"
+        d "*sigh*"
+        d "What do I even do"
+        d "Maybe I should just leave you here"
+        scene bg forest camp 2 with eyeopen
+        show Dawn lookaway with dissolve
+        show screen gameUI
+        player_name "hey..."
+        player_name "I'm still here. I'm just resting my eyes"
+        player_name "What does even happened"
+        show Dawn surprised
+        d "Oh your'e still alive"
+        d "A meteor fell near us, and cause an explosion"
+        show Dawn smile
+        d "Luckily we're just caught by it's shockwave, and didn't get vaporized"
+        d "I've taken some fragment hehe. here take a look"
+        show Dawn normal
+        d "Did you know it's called Meteoroid when it's floating in space"
+        d "Meteor when it's burning on our athmosphere"
+        d "And Meteorite when it falls on the ground"
+        player_name "Oh really? thanks but that did not really help our situation"
+        player_name "I'm ready to go now, let's get out of here"
+        show Dawn normal2
+        d "I just remembered today is the peak of the Lyrid Meteor Shower"
+        d "I know just a place in this forest where we can perfectly watch it"
+        d "It's almost just about, the best time to see it let's hurry"
+        d "And by the way since it's already past midnight Orion now points at west"
+        hide Dawn with dissolve
+        player_name "*sigh* Here we go again"
+    else:
+        scene bg forest camp 2 with dissolve
+        show screen gameUI
+        player_name "I'm certain that I've been here before"
+        player_name "What does Dawn said again?"
+        player_name "Right. Orion now points at West"
+
+    menu follow_dawn:
+        "What should I do?"
+        "Follow Dawn":
+            player_name "What is she up to again?"
+            player_name "By the looks of it I think she went South then West"
+            player_name "I've got to hurry"
+            $ quick_menu = False
+            window hide
+            call navigate_to_lyrid_1
+        "Get out of the forest":
+            player_name "How do I even get out of this forest"
+            player_name "Even if I know now how to navigate directions I still don't know which
+                        direction is the way out"
+            player_name "I don't think I have a choice but to follow her"
+            jump follow_dawn
+        "Stay still":
+            player_name "I'll just rest some more here"
+            player_name "I don't think she'll go anywhere far"
+            player_name "Do I even have a choice but to follow her"
+            $ quick_menu = False
+            window hide
+            pause 1.0
+            show screen press_to_continue with dissolve
+            pause
+            $ quick_menu = True
+            window show
+            hide screen press_to_continue
+            jump follow_dawn
 
 
-### Chapter 3: At Dawn ###
+label to_lyrid_point_1:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 1
+    player_name "She should be nearby now"
+    player_name "Right... she went west from here"
+    $ quick_menu = False
+    window hide
+    call navigate_to_lyrid_2
+    
+
+label to_lyrid_point_2:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 2
+
+    if not visited_lyrid_point_2:
+        $ visited_lyrid_point_2 = True
+        show Dawn surprised with dissolve
+        d "Oh wow you found me, quite fast"
+        d "I'm surprised you did not get confused with the position of Orion"
+        show Dawn pout
+        d "It might be already too late since you alread learned it on you own"
+        d "But let me explain anyways"
+        show Dawn normal2
+        d "In the Northern Hemisphere, stars appear to rotate counter-clockwise around a point
+            called the North Celestial Pole, which is marked almost exactly by the North Star, Polaris."
+        d "But actually the stars do not move, it's just the Earth Spinning on it's axis"
+        show Dawn smile
+        d "Our favourite constellation Orion is an is an equatorial constellation,
+            meaning it sits right above the Earth's equator."
+        d "And because of that it takes a follows a wide arc across the sky, much like the Sun"
+        show Dawn normal2
+        d "It rises in the east and sets in the west, so by after midnight, its already heading going
+            down the western horizon."
+        d "On the other hand, Big Dipper is circumpolar its circle of rotation is very small.
+            Instead of rising and setting, it simply circles Polaris like a hand on a clock."
+        show Dawn normal
+        d "And lastly Crux, can be called as the Big Dipper of the South."
+        show Dawn normal2
+        d "If you're near the tropics like us, it just barely peeks over the southern horizon and
+            hugs that spot because it's circling the South Pole, which is hidden below your view."
+        show Dawn smile
+        d "Now with that let's head further down West"
+        d "The place I knew to watch the Lyrid Meteor shower is near now"
+        hide Dawn with dissolve
+        player_name "She disappeared like a wind again"
+        player_name "There's something myterious about her"
+        player_name "We've been running on some sidequest I literally dont know where I am at"
+        player_name "Whatever, when I finally know how to get out of this forest I'll drag her out"
+        player_name "First I just need to head down West"
+        $ quick_menu = False
+        window hide
+        call navigate_to_lyrid_3
+    else:
+        player_name "Did I get lost?"
+        player_name "again?"
+        player_name "Oh... right it's ok I just need to head down West"
+        $ quick_menu = False
+        window hide
+        call navigate_to_lyrid_3
+
+
+label to_lyrid_point_3:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid path 3 with dissolve
+
+    if not visited_lyrid_point_3:
+        $ visited_lyrid_point_3 = True
+        show Dawn normal with dissolve
+        d "Hey, have you watched meteor shower before?"
+        menu meteor_shower_experience:
+            "Have you watched meteor shower before?"
+            "I have":
+                player_name "Yes, I've watched a meteor shower before, in my garden"
+                show Dawn surprised
+                d "Waow, it's beautiful isn't it"
+            "Not yet":
+                player_name "No, this would be my first time"
+                player_name "Isn't that the one where a bunch of ganster get into some drama
+                            because their leader fell inlove with an ordinary college girl."
+                show Dawn pout
+                d "What are you talking about"
+                player_name "Nothing"
+        show Dawn normal2
+        d "Well, a meteor shower is essentially Earth passing through a cloud of space debris
+            left behind by a comet or an asteroid."
+        d "When a comet nears the sun, it sheds a trail of dust and rock fragments in its wake."
+        d "As Earth orbits through this debris, the particles slam into our atmosphere and burn up,
+            creating the bright streaks we see as meteor showers."
+        show Dawn normal
+        d "And tonight is the peak of the Lyrid Meteor shower, one of the oldest known meteor showers"
+        d "These meteors appear to come from the constellation Lyra,
+            specifically near the bright star Vega."
+        show Dawn smile
+        d "I know perfect spot to watch it just go North, then West from here"
+        d "Let's go"
+        hide Dawn
+        $ quick_menu = False
+        window hide
+        call navigate_to_lyrid_path
+    else:
+        player_name "Hmmm... I'm back here"
+        player_name "Did I get my directions wrong?"
+        player_name "It's ok I just need to go North and then West"
+        $ quick_menu = False
+        window hide
+        call navigate_to_lyrid_path
+
+
+label to_meteor_shower:
+    $ quick_menu = True
+    window hide
+    scene bg meteor shower path with dissolve
+    player_name "It's west now from here"
+
+    $ quick_menu = False
+    window hide
+    call navigate_to_lyrid_meteor_shower
+
+
+label lyrid_meteor_shower:
+    $ quick_menu = True
+    window hide
+    scene bg lyrid meteor shower
+
+    if not visited_lyrid_meteor_shower:
+        $ visited_lyrid_meteor_shower = True
+        show Dawn smile
+        d "We're here"
+        d "This place sits at the right elevation, with an onobstructed view of the night sky"
+        d "The perfect place to watch the Lyrid Meteor shower"
+        d "And we've just arrive at the perfect time where the meteor shower it's at it's peak"
+        d "Yayy!"
+        show Dawn lookaway
+        d "This is actually my secret spot, so I'm trusting you to keep this place a secret"
+        show Dawn pout
+        d "You know your'e so lucky"
+        d "When I watched the Lyrid Meteor shower before all of a sudden it always gets cloudy"
+        d "And I barely see any shooting stars"
+        d "But tonight the sky is clear as day"
+        d "It's unfair"
+        player_name "..."
+        player_name "I'm sorry, I guess?"
+        show Dawn lookaway
+        d "Nevermind, anyways let's sit somewhere and watch the Lyrid Meteor shower"
+        show Dawn smile
+        d "Here should fine, are you ready?"
+        menu watch_meteor_shower:
+            "Are you ready?"
+            "Watch the Meteor shower":
+                scene black with fade
+                # $ renpy.movie_cutscene("movies/meteor_shower.webm", skippable=False)
+                scene bg lyrid meteor shower with dissolve
+                show Dawn smile
+                d "The shooting stars are always so beautiful I think I've seen 23"
+                d "They never failed to impress me even though I've seen them countless of times"
+                d "Have you make your wish?"
+                menu wishes:
+                    "Have you make your wish?"
+                    "Yes":
+                        player_name "Yes' I've wish to pas--"
+                        show Dawn surprised
+                        d "SHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!"
+                        d "Your'e supposed to not say your wish otherwise it won't come true"
+                    "No":
+                        player_name "No, I think I've doze off but I dont really believe in wishing on a star"
+                        show Dawn pout
+                        d "Oh really? I think there's nothing wrong on putting your faith onto something"
+                        d ""
+                show Dawn normal
+                d "Don't worry I've wished for both of us in all the shooting stars I've seen"
+                show Dawn lookaway
+                d "Anyways dont worry I didn't forgot I'll get you out of here from this forest"
+                d "It's actually really easy now we're at this place"
+                show Dawn normal2
+                d "All you gotta do from here is head down South"
+                d "And you'll see a road there with a convenience store beside"
+                player_name "Oh finally it's about time"
+                player_name "I'm tired from all this, I actually wished to have the ability to float"
+                show Dawn smile
+                d "Hahahahahaha. I guess you could say that it's impossible to come true anyways"
+                player_name "Alright, let's goooooooooo!!!"
+                hide Dawn
+                $ quick_menu = False
+                window hide
+                call navigate_to_road_1
+    else:
+        show Dawn normal with dissolve
+        player_name "Wait, this place again?"
+        show Dawn surprised
+        d "How did you end up back here?"
+        player_name "I have no idea"
+        show Dawn smile
+        d "Head South from here, you'll hit the road"
+        hide Dawn
+        $ quick_menu = False
+        window hide
+        call navigate_to_road_1
+
+
+label to_road_point_1:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 1 with dissolve
+
+    if not visited_road_point_1:
+        $ visited_road_point_1 = True
+        show Dawn pout with dissolve
+        d "This will be the last time we'll be able to look at the stars for direction"
+        d "but don't worry after our next stop it'll be a straight path now"
+        d "Let's head south again now"
+        player_name "Is there something wrong?"
+        show Dawn lookaway
+        d "Nothing, let's go"
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_to_dawn_goodbye
+    else:
+        show Dawn surprised with dissolve
+        d "You went the wrong way again?"
+        player_name "Don't ask"
+        show Dawn smile
+        d "Just keep heading South"
+        hide Dawn with dissolve
+        $ quick_menu = False
+        window hide
+        call navigate_to_dawn_goodbye
+
+
+label dawn_goodbye:
+    $ quick_menu = True
+    window hide
+    hide screen gameUI
+    scene bg Goodbye Dawn with dissolve
+    
+    show Dawn lookaway with dissolve
+    d "It's almost sunrise"
+    d "You can go straight forward from here"
+    player_name "Yeah, lets go"
+    show Dawn pout
+    d "I'm sorry but I can't come with you"
+    show Dawn lookaway
+    d "I'll be staying here at this forest for some more time"
+    player_name "Are you serious?"
+    player_name "We've been through this journey together"
+    player_name "Let's finish it together"
+    show Dawn surprised
+    d "I'm sorry but I have something more do"
+    show Dawn lookaway
+    player_name "Come on"
+    menu goodbye_dawn:
+        "What should I do?"
+        "Give up":
+            player_name "Alright, I guess I really can't convince you"
+            player_name "I hope you stay safe, drink a lot of water"
+            player_name "I am so grateful that I've met you"
+            player_name "You literally saved my life"
+            player_name "I promise when we meet again I'll pay it all back"
+            show Dawn smile
+            d "I'm so happy to hear that but dont worry"
+            d "I am sure we'll meet again somewhere"
+            player_name "Really? Where?"
+            d "Yeah, Just Look Up"
+            hide Dawn with dissolve
+            scene black with eyeclose
+            scene sunrise_scene with eyeopen
+            d "Along the sky"
+            d "Goodbye"
+            scene black with eyeclose
+            scene bg Goodbye Dawn with eyeopen
+            player_name "Where did she we--??"
+            player_name "Well I guess that's it then I have to keep moving"
+            $ quick_menu = False
+            window hide
+            call screen direction_menu_forward
+            jump to_road_point_2
+        "Convince":
+            player_name "I won't leave here without you"
+            player_name "What is it that why you can't leave this place"
+            player_name "It's not that you can never come here again"
+            show Dawn pout
+            d "I'm sorry I can't tell you but I must stay here for now"
+            jump goodbye_dawn
+        
+
+label to_road_point_2:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 2 with dissolve
+    player_name "It's been a long journey too bad I'll finish it alone"
+    $ quick_menu = False
+    window hide
+    call screen direction_menu_forward
+    jump to_road_point_3
+
+
+label to_road_point_3:
+    $ quick_menu = True
+    window hide
+    scene bg to road path 3 with dissolve
+    player_name "I wonder what she's really up to"
+    player_name "...."
+    $ quick_menu = False
+    window hide
+    call screen direction_menu_forward
+    jump roadside
+
+
+label roadside:
+    $ quick_menu = True
+    window hide
+    scene bg roadside with dissolve
+    player_name "*huff...* *huff...* *huff...*"
+    player_name "Finally the road it's over"
+    player_name "I can finally go home"
+    player_name "I'll rest for an eternity after this"
+    # SFX Blowing wind
+    player_name "What's this a poster?"
+    player_name "Missing Dawn Last seen May 12, 2003"
+    player_name "This is exactly her in this poster"
+    player_name "Wait this is more than two decades ago?"
+    player_name "But???"
+    player_name "What about???"
+    player_name "Hmmmm.... so Dawn the one I met is"
+    player_name "Dea--"
+    # SFX chilling touch wind
+    player_name "WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
+    # SFX Running
+    $ quick_menu = False
+    window hide
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Directed by \n Christopher Fiel Jr.{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Written by \n  Christopher Fiel Jr.{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Backgrounds by \n Marie Elyze Sarmiento{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Gameplay by \n Marie Elyze Sarmiento{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Programmed by \n Christopher Fiel Jr.{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Maps by \n Marie Elyze Sarmiento{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Audios by \n Christopher Fiel Jr.{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Character sprites by \n Koto \n https://kotocoffee.itch.io/{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}UI by \n Chiara \n https://tenshi-yoru.itch.io/{/size}{/font}"
+    pause 3.0
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Thank you for Playing :3{/size}{/font}"
+    pause 5.0
+    $ renpy.full_restart()
+
+
+### END ###

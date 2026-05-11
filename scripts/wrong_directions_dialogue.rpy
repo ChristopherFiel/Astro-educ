@@ -1,7 +1,3 @@
-default forest_intro_seen = False
-default forest_mistakes = 0
-
-
 label forest_wrong_dialogue:
     $ quick_menu = True
     python:
