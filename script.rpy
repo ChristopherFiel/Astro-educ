@@ -1597,7 +1597,7 @@ label roadside:
     # SFX Running
     $ quick_menu = False
     window hide
-    pause 3.0
+    pause 1.0
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Directed by \n Christopher Fiel Jr.{/size}{/font}"
     pause 3.0
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Written by \n  Christopher Fiel Jr.{/size}{/font}"
