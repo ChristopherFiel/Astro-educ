@@ -51,6 +51,7 @@ label start:
     hide text with dissolve
 
     scene bg mountain background with dissolve
+    play music "audio/ambience/bgm mountain background.mp3" fadein 1.0
     $ quick_menu = True
     p "Mt. Mayumi, it's so beautiful"
     p "This will be my first time climbing a mountain"
@@ -68,8 +69,10 @@ label start:
 
 
 label mountain_basecamp:
+    stop music fadeout 2.0
     $ time_of_day = 'DAY'
     scene bg mountain basecamp with dissolve
+    play music "audio/ambience/bgm mountain camp.mp3" fadein 1.0
     # show screen show_poster
     $ poster_examined = False
     $ quick_menu = True
@@ -134,8 +137,11 @@ label mountain_climb_rainforest:
         p "My gut feel says this"
         jump mountain_climb_grassyside_right
 
+    stop music fadeout 2.0
+
 
 label mountain_climb_grassyside_left:
+    play music "audio/ambience/bgm left-right.mp3" fadein 1.0
     $ time_of_day = 'DAY'
     scene black with arrow_wipe_right_slow
     scene bg mountain climb grassyside-left with arrow_wipe_right_slow
@@ -179,6 +185,7 @@ label mountain_climb_grassyside_left:
 
 
 label mountain_climb_grassyside_right:
+    play music "audio/ambience/bgm left-right.mp3" fadein 1.0
     $ time_of_day = 'DAY'
     scene black with arrow_wipe_left_slow
     scene bg mountain climb grassyside-right with arrow_wipe_left_slow
@@ -205,8 +212,10 @@ label mountain_climb_grassyside_right:
         
 
 label mountain_summit:
-    $ time_of_day = "DUSK"
+    stop music fadeout 2.0
+    play music "audio/ambience/bgm sunset.mp3" fadein 1.0
     scene black with arrow_wipe_down_slow
+    $ time_of_day = "DUSK"
     scene bg mountain summit with arrow_wipe_down_slow
     $ quick_menu = True
     window auto
@@ -243,9 +252,12 @@ label mountain_summit:
             hide screen press_to_continue
             $ quick_menu = True
             jump go_back_trail
+    
+    stop music fadeout 2.0
 
 
 label to_basecamp_forest:
+    play music "audio/ambience/bgm night-1.mp3" if_changed fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with arrow_wipe_up_slow
     scene bg to basecamp forest with arrow_wipe_up_slow
@@ -388,6 +400,8 @@ label lost_path_right:
 
 ### Chapter 1 ###
 label dawn_first_meeting:
+    stop music fadeout 2.0
+    play music "audio/ambience/bgm evening.mp3" fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with fade
     scene bg forest starry sky with dissolve
@@ -401,12 +415,14 @@ label dawn_first_meeting:
     p "I hope when I close my eyes I wake up from this nightmare"
 
     scene black with eyeclose
+    stop music fadeout 2.0
     pause 2.0
     d_unknown "psst... hey"
     d_unknown "Yohoooo, can you hear me? I'm talking to you"
     d_unknown "Are you still alive?"
     d_unknown "Come on don't give up now, open your eyes"
     scene bg forest starry sky with eyeopen
+    play music "audio/ambience/bgm evening.mp3"
 
     show Dawn surprised
     d_unknown "Woah! You're alive"
@@ -457,9 +473,11 @@ label star_map:
     show map at zoom_to(0.5, 0.4, 1.8) with dissolve
     pause 1.0
 
+    play sound "audio/sfx/clank.mp3"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
     pause (3.0)
     hide text
+    play sound "audio/sfx/clank.mp3"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 1: \n Dawn at Sunset{/size}{/font}"
     pause (3.0)
     hide text 
@@ -654,6 +672,8 @@ label forest_west:
     
 
 label forest_camp:
+    stop music fadeout 2.0
+    play music "audio/ambience/bgm night-camp.mp3" if_changed fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with dissolve
     scene bg forest camp with dissolve
@@ -1083,6 +1103,8 @@ label to_treasure_step4:
 
 ### Chapter 2: Sunrise at Dawn###
 label treasure_groove:
+    stop music fadeout 2.0
+    play music "audio/ambience/bgm treasure groove.mp3" fadein 1.0
     $ time_of_day = "NIGHT"
     scene bg treasure groove with dissolve
     window show
@@ -1114,19 +1136,22 @@ label treasure_groove:
     player_name "Hear what?"
     player_name "Anyway It's already midnight"
     player_name "Let's now get out of this fore--"
-    # SFX of meteorite
+    stop music
     $ quick_menu = False
     window hide
-    # play sound "audio/sfx/meteor_impact.ogg"
+    play sound "audio/sfx/meteor impact.mp3"
     show screen meteor_impact_fx
     camera at meteor_shake
     hide Dawn with dissolve
+    scene black with fade 
+    play sound "audio/sfx/bass drop.ogg"
     pause 0.85
     camera 
     pause 0.15 
     hide screen meteor_impact_fx
     scene white with fade
-    pause 1.0
+    pause 2.0
+    play sound "audio/sfx/clank.mp3"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}{color=#000000}Chapter 2: \nSunrise at Dawn{/color}{/size}{/font}"    
     pause (3.0)
     hide text
@@ -1139,6 +1164,7 @@ label forest_camp_2:
     window auto
 
     if not visited_forest_camp_2:
+        play music "audio/sfx/dragging.mp3"
         hide screen gameUI
         scene black with fade
         $ visited_forest_camp_2 = True
@@ -1152,6 +1178,8 @@ label forest_camp_2:
         d "What do I even do"
         d "Maybe I should just leave you here"
         scene bg forest camp 2 with eyeopen
+        stop music
+        play music "audio/ambience/bgm forest camp 2.mp3"
         show Dawn lookaway with dissolve
         show screen gameUI
         player_name "hey..."
@@ -1376,8 +1404,11 @@ label lyrid_meteor_shower:
                 $ quick_menu = False
                 hide screen gameUI
                 scene black with fade
+                stop music fadeout 2.0
+                play music "audio/ambience/bgm meteor shower.mp3"
                 show meteor_shower with dissolve
                 pause 30.0
+                stop music fadeout 2.0
                 hide meteor_shower with fade
                 scene bg lyrid meteor shower with dissolve
                 $ quick_menu = True
@@ -1430,6 +1461,8 @@ label lyrid_meteor_shower:
 
 
 label to_road_point_1:
+    stop music fadeout 2.0
+    play music "audio/ambience/bgm to road.mp3" if_changed
     $ time_of_day = "NIGHT"
     $ quick_menu = True
     window hide
@@ -1548,6 +1581,7 @@ label to_road_point_3:
 
 
 label roadside:
+    stop music fadeout 2.0
     scene black with arrow_wipe_down_slow
     scene black with fade
     $ time_of_day = "DAY"
@@ -1559,7 +1593,7 @@ label roadside:
     player_name "I can finally go home"
     player_name "I'll rest for an eternity after this"
 
-    # play sound "audio/wind.ogg" 
+    play sound "audio/sfx/paper crumple.mp3" 
     player_name "Wait what's this a poster?"
     window hide
     $ quick_menu = False
@@ -1579,8 +1613,8 @@ label roadside:
     hide missing_poster_front with dissolve
     window show
     $ quick_menu = True
-
-    # SFX Blowing wind
+    play sound "audio/sfx/paper crumple.mp3"
+    
     player_name "Missing Dawn Last seen April 16, 2003"
     player_name "This is exactly her in this poster"
     player_name "Wait this is more than two decades ago?"
@@ -1620,6 +1654,7 @@ label roadside:
     pause 3.0
     show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Thank you for Playing :3{/size}{/font}"
     pause 5.0
+    scene black with fade
     $ renpy.full_restart()
 
 
