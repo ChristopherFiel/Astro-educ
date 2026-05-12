@@ -56,7 +56,7 @@ label start:
     p "Mt. Mayumi, it's so beautiful"
     p "This will be my first time climbing a mountain"
     p "It looks bigger than the pictures"
-    p "Take a deep breathe"
+    p "Take a deep breath"
     p "This is going to be hard..."
     $ quick_menu = False
     window hide
@@ -429,7 +429,7 @@ label dawn_first_meeting:
     d_unknown "I'm sorry I didn't mean to wake you up"
     d_unknown "But I get scared when you lay down I thought you were dying"
     show Dawn normal2
-    d_unknown "Oppsss... I talked to much. I forget to tell you my name"
+    d_unknown "Oppsss... I talked to much. I forgot to tell you my name"
     show Dawn normal
     d_unknown "My name is Dawn"
     d "How about you, can you tell me your name?"
@@ -500,7 +500,7 @@ label forest_stargazing:
     player_name "But honestly, how can stars help you navigate? How does it serve as a map?"
 
     show Dawn smile
-    d "Oh, I'll explain it to you. Stars kasi form images in the night sky, and that is what we call constellations."
+    d "Oh, I'll explain it to you. Stars form images in the night sky, and that is what we call constellations."
     d "Common, let's look up. Did you see that star? That star is the North Star."
     
     show Dawn normal
@@ -718,7 +718,7 @@ label forest_camp:
         show Dawn normal
         d "It looks ancient, but its still pretty much readable"
         d "Let's see where does this leads"
-        d "East, South, North, West. Oh what's this?"
+        d "East, South, East, North, West. Oh what's this?"
         d "Juano Piece?"
         show Dawn surprised
         d "!!!"
@@ -1193,7 +1193,7 @@ label forest_camp_2:
         d "I've taken some fragment hehe. here take a look"
         show Dawn normal
         d "Did you know it's called Meteoroid when it's floating in space"
-        d "Meteor when it's burning on our athmosphere"
+        d "Meteor when it entered the atmosphere"
         d "And Meteorite when it falls on the ground"
         player_name "Oh really? thanks but that did not really help our situation"
         player_name "I'm ready to go now, let's get out of here"
@@ -1420,7 +1420,11 @@ label lyrid_meteor_shower:
                 menu wishes:
                     "Have you make your wish?"
                     "Yes":
-                        player_name "Yes' I've wish to pas--"
+                        player_name "Yes' I've wish to"
+                        $ player_wish = renpy.input("{size=40}What's your wish{/size}")
+                        if player_wish == "":
+                            $ player_wish ="Lebron to win another ring"
+                        player_name "Yes, I wished to %(player_wish)s"
                         show Dawn surprised
                         d "SHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!"
                         d "Your'e supposed to not say your wish otherwise it won't come true"
