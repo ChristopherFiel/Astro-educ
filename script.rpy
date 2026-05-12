@@ -1593,7 +1593,7 @@ label roadside:
     player_name "I can finally go home"
     player_name "I'll rest for an eternity after this"
 
-    # play sound "audio/wind.ogg" 
+    play sound "audio/sfx/paper crumple.mp3" 
     player_name "Wait what's this a poster?"
     window hide
     $ quick_menu = False
@@ -1613,8 +1613,8 @@ label roadside:
     hide missing_poster_front with dissolve
     window show
     $ quick_menu = True
-
-    # SFX Blowing wind
+    play sound "audio/sfx/paper crumple.mp3"
+    
     player_name "Missing Dawn Last seen April 16, 2003"
     player_name "This is exactly her in this poster"
     player_name "Wait this is more than two decades ago?"
