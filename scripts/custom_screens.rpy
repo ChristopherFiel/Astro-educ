@@ -95,9 +95,8 @@ screen show_treasure_map():
         background "#c8a96e"
         padding    (0, 0)
 
-        add "images/objects/treasure_map.png":
+        add "images/objects/treasure_map.webp":
             align (0.5, 0.5)
-            zoom   1.2
             at transform:
                 alpha  0.0
                 linear 0.4 alpha 1.0
@@ -116,3 +115,5 @@ screen show_treasure_map():
         xfill  True
         yfill  True
         action [Hide("show_treasure_map", transition=dissolve), Return()]
+
+

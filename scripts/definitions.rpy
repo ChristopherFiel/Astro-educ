@@ -2,9 +2,9 @@ init python:
     import re
 
     # 1. Define Tints
-    tint_dark = im.matrix.tint(0.44, 0.44, 0.75) * im.matrix.brightness(-0.02)
-    tint_sunset = im.matrix.tint(0.85, 0.60, 0.45) * im.matrix.brightness(0.10)
-    tint_dawn = im.matrix.tint(0.85, 0.82, 0.98) * im.matrix.brightness(0.02)
+    tint_dark = im.matrix.tint(0.42, 0.58, 0.82) * im.matrix.brightness(0.06)
+    tint_sunset = im.matrix.tint(1.0, 0.78, 0.18) * im.matrix.brightness(0.13)
+    tint_dawn = im.matrix.tint(0.75, 0.65, 1.0) * im.matrix.brightness(0.00)
     tint_dim = im.matrix.tint(0.90, 0.90, 1.0) * im.matrix.brightness(-0.1)
 
     # 2. Automate Image Loading
@@ -12,6 +12,8 @@ init python:
         
         # --- BACKGROUNDS (images/bg/) ---
         if file.startswith('images/bg/'):
+            if any(suffix in file for suffix in ["_day", "_dawn", "_dusk", "_night", "_sepia"]):
+                continue
             img_path = re.sub(r'images/', '', file)
             match = re.match(r'images/bg/(.+)\.(png|jpg|webp)', file)
             if match:
@@ -25,7 +27,7 @@ init python:
 
                 renpy.image(img_name, ConditionSwitch(
                     "time_of_day == 'DAY'", img_name + "_day",
-                    "time_of_day == 'DAWN'", img_name + "_dawn", # Added
+                    "time_of_day == 'DAWN'", img_name + "_dawn",
                     "time_of_day == 'DUSK'", img_name + "_dusk",
                     "time_of_day == 'NIGHT'", img_name + "_night",
                     "time_of_day == 'SEPIA'", img_name + "_sepia",
@@ -40,7 +42,7 @@ init python:
                 img_name = match.group(1)
 
                 renpy.image(img_name + "_day", img_path)
-                renpy.image(img_name + "_dawn", im.MatrixColor(img_path, tint_dawn)) # Added
+                renpy.image(img_name + "_dawn", im.MatrixColor(img_path, tint_dawn))
                 renpy.image(img_name + "_dusk", im.MatrixColor(img_path, tint_sunset))
                 renpy.image(img_name + "_night", im.MatrixColor(img_path, tint_dark))
                 renpy.image(img_name + "_dim", im.MatrixColor(img_path, tint_dim))
@@ -49,11 +51,11 @@ init python:
                 renpy.image(img_name, ConditionSwitch(
                     "sprite_effect == 'DIM'", img_name + "_dim",
                     "time_of_day == 'DAY'", img_name + "_day",
-                    "time_of_day == 'DAWN'", img_name + "_dawn", # Added
+                    "time_of_day == 'DAWN'", img_name + "_dawn",
                     "time_of_day == 'DUSK'", img_name + "_dusk",
                     "time_of_day == 'NIGHT'", img_name + "_night",
                     "time_of_day == 'SEPIA'", img_name + "_sepia",
-                    "True", img_name + "_day" 
+                    "True", img_name + "_day"
                 ))
 
 # 3. Global Variables
