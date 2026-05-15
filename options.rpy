@@ -50,6 +50,7 @@ define gui.about = _p("""
 ## or semicolons.
 
 define build.name = "Look_Up"
+define build.itch_project= "christopherfiel/look-up"
 
 
 ## Sounds and music ############################################################

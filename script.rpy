@@ -1729,7 +1729,7 @@ label roadside:
     pause 3.0
     show text "[_credit]Character sprites by\nKoto\nhttps://kotocoffee.itch.io/[_end]"
     pause 3.0
-    show text "[_credit]UI by\nChiara\nhttps://tenshi-yoru.itch.io/[_end]"
+    show text "[_credit]UI by\nChiara Colucci\nhttps://tenshi-yoru.itch.io/[_end]"
     pause 3.0
     show text "[_credit]Bgs from\nUnsplash & forest2sea[_end]"
     pause 3.0
