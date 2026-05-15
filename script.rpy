@@ -13,6 +13,7 @@ default visited_lyrid_point_2 = False
 default visited_lyrid_point_3 = False
 default visited_lyrid_meteor_shower = False
 default visited_road_point_1 = False
+default convince_count = 0
 
 
 label splashscreen:
@@ -566,20 +567,24 @@ label to_basecamp_forest_with_dawn:
     if not forest_intro_seen:
         $ quick_menu = True
         window auto
-        show screen gameUI
         show Dawn normal with dissolve
         d "I hope you learned something new"
+        d "You can try viewing the stars now"
+        show screen gameUI
+        $ highlight_game_ui(True)
+        d "and see how it points to the direction you need to go"       
         show Dawn normal2
+        $ highlight_game_ui(False)
         d "Now, I know a mountaineer camp near us"
         d "Let's head over there now I think it's about..."
+        show Dawn normal
         d "North East from here"
         d "If you get lost just remember to look up"
-        show screen wind_particles(xpos=0.5, ypos=0.45)
-        show Dawn normal
         d "Well, I'll be heading first"
-        show Dawn normal at crumble_dissolve
+        show screen wind_particles(xpos=0.5, ypos=0.45)        
+        show Dawn smile at crumble_dissolve
         play sound "audio/sfx/dawn-theme.ogg"
-        d "See you!"
+        d "Good luck!"
         hide Dawn with dissolve
         hide screen wind_particles
         "Dawn disappeared like with the wind"
@@ -1551,46 +1556,60 @@ label dawn_goodbye:
     d "I'm sorry but I have something more do"
     show Dawn lookaway
     player_name "Come on"
-    menu goodbye_dawn:
-        "What should I do?"
-        "Give up":
-            player_name "Alright, I guess I really can't convince you"
-            player_name "I hope you stay safe, drink a lot of water"
-            player_name "I am so grateful that I've met you"
-            player_name "You literally saved my life"
-            player_name "I promise when we meet again I'll pay it all back"
-            show Dawn smile
-            d "I'm so happy to hear that but dont worry"
-            d "I am sure we'll meet again somewhere"
-            player_name "Really? Where?"
-            d "Yeah, Just Look Up"
-            hide Dawn with dissolve
-            $ time_of_day = "DAWN"
-            scene black with eyeclose
-            scene sunrise_scene with eyeopen
-            player_name "Huh???"
-            player_name "At the sky?"
-            player_name "But how can we--?"
-            play sound "audio/sfx/dawn-theme.ogg"
-            d "Goodbye"
-            scene black with eyeclose
-            scene bg Goodbye Dawn with eyeopen
-            player_name "Wait, where did she--??"
-            player_name "What does she even wants to say?"
-            player_name "I dont get it"
-            player_name "...."
-            player_name "But I guess that's it then, I have to keep moving"
-            $ quick_menu = False
-            window hide
-            call screen direction_menu_forward
-            jump to_road_point_2
-        "Convince":
-            player_name "I won't leave here without you"
-            player_name "What is it that why you can't leave this place"
-            player_name "It's not that you can never come here again"
-            show Dawn pout
-            d "I'm sorry I can't tell you but I must stay here for now"
-            jump goodbye_dawn
+    label dawn_convince_loop:
+        menu goodbye_dawn:
+            "What should I do?"
+            "Give up":
+                player_name "Alright, I guess I really can't convince you"
+                player_name "I hope you stay safe, drink a lot of water"
+                player_name "I am so grateful that I've met you"
+                player_name "You literally saved my life"
+                player_name "I promise when we meet again I'll pay it all back"
+                show Dawn smile
+                d "I'm so happy to hear that but dont worry"
+                d "I am sure we'll meet again somewhere"
+                player_name "Really? Where?"
+                d "Yeah, Just Look Up"
+                hide Dawn with dissolve
+                $ time_of_day = "DAWN"
+                scene black with eyeclose
+                scene sunrise_scene with eyeopen
+                player_name "Huh???"
+                player_name "At the sky?"
+                player_name "But how can we--?"
+                play sound "audio/sfx/dawn-theme.ogg"
+                d "Goodbye"
+                scene black with eyeclose
+                scene bg Goodbye Dawn with eyeopen
+                player_name "Wait, where did she--??"
+                player_name "What does she even mean?"
+                player_name "I dont get it"
+                player_name "...."
+                player_name "I guess that's it then, I have to keep moving"
+                $ quick_menu = False
+                window hide
+                call screen direction_menu_forward
+                jump to_road_point_2
+            "Convince":
+                $ convince_count += 1
+                if convince_count == 1:
+                    player_name "I won't leave here without you"
+                    player_name "What is it that why you can't leave this place"
+                    player_name "It's not that you can never come here again"
+                    show Dawn pout
+                    d "I'm sorry I can't tell you but I must stay here for now"
+                    jump dawn_convince_loop
+                else:
+                    $ please_raw = "Please " * (2**convince_count)
+                    $ please_list = please_raw.split()
+                    $ please_spam = "\n".join([" ".join(please_list[i:i+9]) for i in range(0, len(please_list), 9)])
+
+                    $ o_raw = "o" * (convince_count * 8)
+                    $ o_spam = "\n".join([o_raw[i:i+50] for i in range(0, len(o_raw), 50)])
+                    
+                    player_name "[please_spam]!"
+                    d "N[o_spam]..."
+                    jump dawn_convince_loop
         
 
 label to_road_point_2:
@@ -1675,14 +1694,15 @@ label roadside:
     $ quick_menu = False
     window hide
     show screen infinite_scream
-    pause 10.0
+    pause 6.0
     show layer master
     show bg roadside onlayer master:
         easeout 4.0 zoom 1.0
         anchor (0.5, 0.5) pos (0.5, 0.5)
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=160}AH{/size}{/font}"
     stop music fadeout 2.0
     hide screen infinite_scream with dissolve
-    play sound "audio/ambience/ending theme.ogg" fadein 2.0
+    play sound "audio/ambience/ending theme.theme" fadein 2.0
     camera at shake_settle
     pause 3.0
 
@@ -1718,7 +1738,7 @@ label roadside:
 
     show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Thank you for Playing :3{/size}{/font}"
     pause 5.0
-    
+
     stop music fadeout 2.0
     scene black with fade
     $ renpy.full_restart()

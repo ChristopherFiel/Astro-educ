@@ -193,7 +193,7 @@ screen infinite_scream():
     timer 0.10 repeat True action SetScreenVariable("a_str", a_str + "A")
 
     python:
-        _full  = "WAA" + a_str + "H"
+        _full  = "WA" + a_str + "A"
         _cpl   = 16   # characters per line — increase if text wraps too early,
         _lines = [ _full[i : i + _cpl] for i in range(0, len(_full), _cpl) ]
         _wrapped = "\n".join(_lines)

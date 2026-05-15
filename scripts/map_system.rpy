@@ -1,4 +1,17 @@
-﻿init python:
+﻿default ui_highlighted = False
+
+init python:
+    def highlight_game_ui(status=True):
+        store.ui_highlighted = status
+        renpy.restart_interaction()
+
+transform ui_pulse:
+    pause 0.5
+    linear 0.5 matrixcolor BrightnessMatrix(0.5)
+    linear 0.5 matrixcolor BrightnessMatrix(0.0)
+    repeat
+
+init python:
     def _parallax_logic(trans, st, at, factor):
         m_x, m_y = renpy.get_mouse_pos()
         
@@ -13,13 +26,22 @@ transform mouse_parallax(factor=-0.05):
     subpixel True
     function renpy.curry(_parallax_logic)(factor=factor)
 
-screen gameUI:
+screen gameUI():
+    zorder 100 
+
+    if ui_highlighted:
+        add Solid("#0006") 
+
     imagebutton:
         xalign 1.0
         yalign 0.0
         xoffset -30
         yoffset 30
         auto "map_UI/lookup_%s.png" 
+        
+        if ui_highlighted:
+            at ui_pulse
+            
         action Function(renpy.call_in_new_context, "call_mapUI")
 
 label call_mapUI:
