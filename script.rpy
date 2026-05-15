@@ -15,17 +15,17 @@ default visited_lyrid_meteor_shower = False
 default visited_road_point_1 = False
 
 
-# label splashscreen:
-#     scene black
-#     with Pause(1)
+label splashscreen:
+    scene black
+    with Pause(1)
 
-#     show text "{size=60}A game by \n\nChristopher, & Elyze" with dissolve
-#     with Pause(2)
+    show text "{size=60}A game by \n\nChristopher & Elyze" with dissolve
+    with Pause(2)
 
-#     hide text with dissolve
-#     with Pause(1)
+    hide text with dissolve
+    with Pause(1)
 
-#     return
+    return
 
 # The game starts here.
 
@@ -37,6 +37,7 @@ label start:
     window auto
 
     scene black with dissolve
+    play sound "audio/sfx/typewriter.ogg"
     show screen disclaimer_screen with dissolve
     pause 5
     show screen press_to_continue with dissolve
@@ -45,13 +46,24 @@ label start:
     hide screen press_to_continue
     with dissolve
 
+    scene black with dissolve
+    show screen basic_controls with dissolve
+    pause 5
+    show screen press_to_continue with dissolve
+    pause
+    hide screen basic_controls
+    hide screen press_to_continue
+    with dissolve
+    stop sound fadeout 0.5
+
+    play sound "audio/sfx/writing.ogg"
     show text "{font=cmunorm.ttf}{size=60}April 21\nMt. Mayumi Philippines{/size}{/font}" with dissolve
     pause (3.0)
-
     hide text with dissolve
+    stop sound
 
     scene bg mountain background with dissolve
-    play music "audio/ambience/bgm mountain background.mp3" fadein 1.0
+    play music "audio/ambience/bgm mountain background.ogg" fadein 1.0
     $ quick_menu = True
     p "Mt. Mayumi, it's so beautiful"
     p "This will be my first time climbing a mountain"
@@ -72,7 +84,7 @@ label mountain_basecamp:
     stop music fadeout 2.0
     $ time_of_day = 'DAY'
     scene bg mountain basecamp with dissolve
-    play music "audio/ambience/bgm mountain camp.mp3" fadein 1.0
+    play music "audio/ambience/bgm mountain camp.ogg" fadein 1.0
     # show screen show_poster
     $ poster_examined = False
     $ quick_menu = True
@@ -141,7 +153,7 @@ label mountain_climb_rainforest:
 
 
 label mountain_climb_grassyside_left:
-    play music "audio/ambience/bgm left-right.mp3" fadein 1.0
+    play music "audio/ambience/bgm left-right.ogg" fadein 1.0
     $ time_of_day = 'DAY'
     scene black with arrow_wipe_right_slow
     scene bg mountain climb grassyside-left with arrow_wipe_right_slow
@@ -185,7 +197,7 @@ label mountain_climb_grassyside_left:
 
 
 label mountain_climb_grassyside_right:
-    play music "audio/ambience/bgm left-right.mp3" fadein 1.0
+    play music "audio/ambience/bgm left-right.ogg" fadein 1.0
     $ time_of_day = 'DAY'
     scene black with arrow_wipe_left_slow
     scene bg mountain climb grassyside-right with arrow_wipe_left_slow
@@ -213,7 +225,7 @@ label mountain_climb_grassyside_right:
 
 label mountain_summit:
     stop music fadeout 2.0
-    play music "audio/ambience/bgm sunset.mp3" fadein 1.0
+    play music "audio/ambience/bgm sunset.ogg" fadein 1.0
     scene black with arrow_wipe_down_slow
     $ time_of_day = "DUSK"
     scene bg mountain summit with arrow_wipe_down_slow
@@ -257,7 +269,7 @@ label mountain_summit:
 
 
 label to_basecamp_forest:
-    play music "audio/ambience/bgm night-1.mp3" if_changed fadein 1.0
+    play music "audio/ambience/bgm night-1.ogg" if_changed fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with arrow_wipe_up_slow
     scene bg to basecamp forest with arrow_wipe_up_slow
@@ -401,7 +413,7 @@ label lost_path_right:
 ### Chapter 1 ###
 label dawn_first_meeting:
     stop music fadeout 2.0
-    play music "audio/ambience/bgm evening.mp3" fadein 1.0
+    play music "audio/ambience/bgm evening.ogg" fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with fade
     scene bg forest starry sky with dissolve
@@ -422,7 +434,7 @@ label dawn_first_meeting:
     d_unknown "Are you still alive?"
     d_unknown "Come on don't give up now, open your eyes"
     scene bg forest starry sky with eyeopen
-    play music "audio/ambience/bgm evening.mp3"
+    play music "audio/ambience/bgm evening.ogg"
 
     show Dawn surprised
     d_unknown "Woah! You're alive"
@@ -473,11 +485,11 @@ label star_map:
     show map at zoom_to(0.5, 0.4, 1.8) with dissolve
     pause 1.0
 
-    play sound "audio/sfx/clank.mp3"
+    play sound "audio/sfx/clank.ogg"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
     pause (3.0)
     hide text
-    play sound "audio/sfx/clank.mp3"
+    play sound "audio/sfx/clank.ogg"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 1: \n Dawn at Sunset{/size}{/font}"
     pause (3.0)
     hide text 
@@ -562,11 +574,15 @@ label to_basecamp_forest_with_dawn:
         d "Let's head over there now I think it's about..."
         d "North East from here"
         d "If you get lost just remember to look up"
+        show screen wind_particles(xpos=0.5, ypos=0.45)
         show Dawn normal
         d "Well, I'll be heading first"
-        d "See Yah!"
+        show Dawn normal at crumble_dissolve
+        play sound "audio/sfx/dawn-theme.ogg"
+        d "See you!"
         hide Dawn with dissolve
-        "Dawn disappeared like dust in the wind"
+        hide screen wind_particles
+        "Dawn disappeared like with the wind"
         player_name "Well, she seems trustworthy. I should follow her."
         $ forest_intro_seen = True
     else:
@@ -673,7 +689,7 @@ label forest_west:
 
 label forest_camp:
     stop music fadeout 2.0
-    play music "audio/ambience/bgm night-camp.mp3" if_changed fadein 1.0
+    play music "audio/ambience/bgm night-camp.ogg" if_changed fadein 1.0
     $ time_of_day = "NIGHT"
     scene black with dissolve
     scene bg forest camp with dissolve
@@ -1104,7 +1120,7 @@ label to_treasure_step4:
 ### Chapter 2: Sunrise at Dawn###
 label treasure_groove:
     stop music fadeout 2.0
-    play music "audio/ambience/bgm treasure groove.mp3" fadein 1.0
+    play music "audio/ambience/bgm treasure groove.ogg" fadein 1.0
     $ time_of_day = "NIGHT"
     scene bg treasure groove with dissolve
     window show
@@ -1139,7 +1155,7 @@ label treasure_groove:
     stop music
     $ quick_menu = False
     window hide
-    play sound "audio/sfx/meteor impact.mp3"
+    play sound "audio/sfx/meteor-impact.ogg"
     show screen meteor_impact_fx
     camera at meteor_shake
     hide Dawn with dissolve
@@ -1151,7 +1167,7 @@ label treasure_groove:
     hide screen meteor_impact_fx
     scene white with fade
     pause 2.0
-    play sound "audio/sfx/clank.mp3"
+    play sound "audio/sfx/clank.ogg"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=120}{color=#000000}Chapter 2: \nSunrise at Dawn{/color}{/size}{/font}"    
     pause (3.0)
     hide text
@@ -1164,7 +1180,7 @@ label forest_camp_2:
     window auto
 
     if not visited_forest_camp_2:
-        play music "audio/sfx/dragging.mp3"
+        play music "audio/sfx/dragging.ogg"
         hide screen gameUI
         scene black with fade
         $ visited_forest_camp_2 = True
@@ -1179,7 +1195,7 @@ label forest_camp_2:
         d "Maybe I should just leave you here"
         scene bg forest camp 2 with eyeopen
         stop music
-        play music "audio/ambience/bgm forest camp 2.mp3"
+        play music "audio/ambience/bgm forest camp 2.ogg"
         show Dawn lookaway with dissolve
         show screen gameUI
         player_name "hey..."
@@ -1191,19 +1207,30 @@ label forest_camp_2:
         show Dawn smile
         d "Luckily we're just caught by it's shockwave, and didn't get vaporized"
         d "I've taken some fragment hehe. here take a look"
+        $ quick_menu = False
+        call screen meteorite_interaction
+        $ quick_menu = True
         show Dawn normal
         d "Did you know it's called Meteoroid when it's floating in space"
         d "Meteor when it entered the atmosphere"
         d "And Meteorite when it falls on the ground"
         player_name "Oh really? thanks but that did not really help our situation"
         player_name "I'm ready to go now, let's get out of here"
-        show Dawn normal2
+        show Dawn surprised
         d "I just remembered today is the peak of the Lyrid Meteor Shower"
         d "I know just a place in this forest where we can perfectly watch it"
+        show Dawn normal2
         d "It's almost just about, the best time to see it let's hurry"
         d "And by the way since it's already past midnight Orion now points at west"
+        show screen wind_particles(xpos=0.5, ypos=0.45)
+        show Dawn smile 
+        show Dawn smile at crumble_dissolve
+        play sound "audio/sfx/dawn-theme.ogg"
+        d "I'll be heading first, see yah"
         hide Dawn with dissolve
+        hide screen wind_particles
         player_name "*sigh* Here we go again"
+        player_name "How can she just disappear like that?"
     else:
         scene bg forest camp 2 with dissolve
         show screen gameUI
@@ -1290,7 +1317,12 @@ label to_lyrid_point_2:
         show Dawn smile
         d "Now with that let's head further down West"
         d "The place I knew to watch the Lyrid Meteor shower is near now"
+        show screen wind_particles(xpos=0.5, ypos=0.45)
+        show Dawn smile at crumble_dissolve
+        play sound "audio/sfx/dawn-theme.ogg"
+        d "I'll see you there"
         hide Dawn with dissolve
+        hide screen wind_particles
         player_name "She disappeared like a wind again"
         player_name "There's something myterious about her"
         player_name "We've been running on some sidequest I literally dont know where I am at"
@@ -1405,7 +1437,7 @@ label lyrid_meteor_shower:
                 hide screen gameUI
                 scene black with fade
                 stop music fadeout 2.0
-                play music "audio/ambience/bgm meteor shower.mp3"
+                play music "audio/ambience/bgm meteor shower.ogg"
                 show meteor_shower with dissolve
                 pause 30.0
                 stop music fadeout 2.0
@@ -1451,7 +1483,7 @@ label lyrid_meteor_shower:
                 window hide
                 call navigate_to_road_1
     else:
-        show Dawn normal with dissolve
+        show Dawn surprised with dissolve
         player_name "Wait, this place again?"
         show Dawn surprised
         d "How did you end up back here?"
@@ -1466,7 +1498,7 @@ label lyrid_meteor_shower:
 
 label to_road_point_1:
     stop music fadeout 2.0
-    play music "audio/ambience/bgm to road.mp3" if_changed
+    play music "audio/ambience/bgm to road.ogg" if_changed
     $ time_of_day = "NIGHT"
     $ quick_menu = True
     window hide
@@ -1538,12 +1570,16 @@ label dawn_goodbye:
             scene sunrise_scene with eyeopen
             player_name "Huh???"
             player_name "At the sky?"
-            player_name "But how can we--"
+            player_name "But how can we--?"
+            play sound "audio/sfx/dawn-theme.ogg"
             d "Goodbye"
             scene black with eyeclose
             scene bg Goodbye Dawn with eyeopen
-            player_name "Where did she we--??"
-            player_name "Well I guess that's it then I have to keep moving"
+            player_name "Wait, where did she--??"
+            player_name "What does she even wants to say?"
+            player_name "I dont get it"
+            player_name "...."
+            player_name "But I guess that's it then, I have to keep moving"
             $ quick_menu = False
             window hide
             call screen direction_menu_forward
@@ -1586,39 +1622,44 @@ label to_road_point_3:
 
 label roadside:
     stop music fadeout 2.0
+    play music "audio/ambience/bgm mountain camp.ogg" fadein 1.0
     scene black with arrow_wipe_down_slow
     scene black with fade
     $ time_of_day = "DAY"
-    scene bg roadside with dissolve
+    scene bg roadside onlayer master:
+        zoom 1.2
+        anchor (0.5, 0.5) pos (0.5, 0.5) 
+    with dissolve    
     $ quick_menu = True
     window hide
     player_name "*huff...* *huff...* *huff...*"
-    player_name "Finally the road it's over"
+    player_name "Finally the road it's over there"
+    player_name "I miss seeing trace of civilation"
     player_name "I can finally go home"
     player_name "I'll rest for an eternity after this"
-
-    play sound "audio/sfx/paper crumple.mp3" 
+    stop music
+    play sound "audio/sfx/wind-gust.ogg"
+    pause 1.0
     player_name "Wait what's this a poster?"
     window hide
     $ quick_menu = False
+    play sound "audio/sfx/paper-crumple.ogg"
     show missing_poster_back:
         "images/objects/missing poster back.webp"
         zoom 0.25
         truecenter
     with dissolve
     pause
+    play sound "audio/sfx/paper-crumple.ogg"
     hide missing_poster_back
     show missing_poster_front:
         "images/objects/missing poster front.webp"
-        zoom 0.5
+        zoom 0.35
         truecenter
     with dissolve
     pause
-    hide missing_poster_front with dissolve
     window show
     $ quick_menu = True
-    play sound "audio/sfx/paper crumple.mp3"
-    
     player_name "Missing Dawn Last seen April 16, 2003"
     player_name "This is exactly her in this poster"
     player_name "Wait this is more than two decades ago?"
@@ -1626,39 +1667,59 @@ label roadside:
     player_name "What about???"
     player_name "Hmmmm.... so Dawn the one I met is"
     player_name "Dea--"
-    # SFX chilling touch wind
-    player_name "WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
-    # SFX Running
+    play sound "audio/sfx/wind-gust.ogg"
+    hide missing_poster_front with dissolve
+    
+    camera at frantic_shake
+    play music "audio/dialogue_sfx/Honk-distorted.ogg"
     $ quick_menu = False
     window hide
-    play sound "audio/ambience/ending theme.mp3" fadein 1.0
-    pause 1.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Directed by \n Christopher Fiel Jr.{/size}{/font}"
+    show screen infinite_scream
+    pause 10.0
+    show layer master
+    show bg roadside onlayer master:
+        easeout 4.0 zoom 1.0
+        anchor (0.5, 0.5) pos (0.5, 0.5)
+    stop music fadeout 2.0
+    hide screen infinite_scream with dissolve
+    play sound "audio/ambience/ending theme.ogg" fadein 2.0
+    camera at shake_settle
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Written by \n  Christopher Fiel Jr.{/size}{/font}"
+
+    # ── Credits ──────────────────────────────────────────────────
+    $ time_of_day = "NIGHT"
+    $ _credit = "{font=Midnightconstellations-YLgo.ttf}{size=120}"
+    $ _end    = "{/size}{/font}"
+
+    show text "[_credit]Directed by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Backgrounds by \n Marie Elyze Sarmiento{/size}{/font}"
+    show text "[_credit]Written by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Gameplay by \n Marie Elyze Sarmiento{/size}{/font}"
+    show text "[_credit]Backgrounds by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Programmed by \n Christopher Fiel Jr.{/size}{/font}"
+    show text "[_credit]Gameplay by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Maps by \n Marie Elyze Sarmiento{/size}{/font}"
+    show text "[_credit]Programmed by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Audios by \n Christopher Fiel Jr.{/size}{/font}"
+    show text "[_credit]Maps by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Character sprites by \n Koto \n https://kotocoffee.itch.io/{/size}{/font}"
+    show text "[_credit]Audio design by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}UI by \n Chiara \n https://tenshi-yoru.itch.io/{/size}{/font}"
+    show text "[_credit]Song by\nUchu nekoko\nI'm waiting for the Sun[_end]"
     pause 3.0
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Bgs from \n Unsplasm \n forest2sea{/size}{/font}"
+    show text "[_credit]Character sprites by\nKoto\nhttps://kotocoffee.itch.io/[_end]"
     pause 3.0
+    show text "[_credit]UI by\nChiara\nhttps://tenshi-yoru.itch.io/[_end]"
+    pause 3.0
+    show text "[_credit]Bgs from\nUnsplash & forest2sea[_end]"
+    pause 3.0
+    show text "[_credit]Made with\nRenpy 8.5.2[_end]"
+    pause 3.0
+
     show text "{font=Midnightconstellations-YLgo.ttf}{size=160}Thank you for Playing :3{/size}{/font}"
     pause 5.0
+    
+    stop music fadeout 2.0
     scene black with fade
     $ renpy.full_restart()
 
