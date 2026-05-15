@@ -1702,7 +1702,7 @@ label roadside:
     show text "{font=Midnightconstellations-YLgo.ttf}{size=160}AH{/size}{/font}"
     stop music fadeout 2.0
     hide screen infinite_scream with dissolve
-    play sound "audio/ambience/ending theme.theme" fadein 2.0
+    play sound "audio/ambience/ending theme.mp3" fadein 2.0
     camera at shake_settle
     pause 3.0
 
@@ -1717,7 +1717,7 @@ label roadside:
     pause 3.0
     show text "[_credit]Backgrounds by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "[_credit]Gameplay by\nMarie Elyze Sarmiento[_end]"
+    show text "[_credit]Gameplay design by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
     show text "[_credit]Programmed by\nChristopher Fiel Jr.[_end]"
     pause 3.0
@@ -1725,7 +1725,7 @@ label roadside:
     pause 3.0
     show text "[_credit]Audio design by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "[_credit]Song by\nUchu nekoko\nI'm waiting for the Sun[_end]"
+    show text "[_credit]ED by\nYevhenAstafiev[_end]"
     pause 3.0
     show text "[_credit]Character sprites by\nKoto\nhttps://kotocoffee.itch.io/[_end]"
     pause 3.0
