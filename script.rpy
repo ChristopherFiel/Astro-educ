@@ -451,7 +451,7 @@ label dawn_first_meeting:
     $ player_name = renpy.input("{size=40}Enter your name{/size}")
     $ player_name = player_name.strip()
     if player_name == "":
-        $ player_name="Podziemski is garbage"
+        $ player_name="Alice"
     
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
@@ -592,7 +592,7 @@ label to_basecamp_forest_with_dawn:
         $ forest_intro_seen = True
     else:
         $ forest_mistakes += 1
-        call forest_wrong_dialogue
+        call forest_wrong_dialogue from _call_forest_wrong_dialogue
 
     $ quick_menu = False
     window hide
@@ -773,7 +773,7 @@ label forest_camp:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map
+                call navigate_from_map from _call_navigate_from_map
 
             "No":
                 $ no_count += 1
@@ -805,14 +805,14 @@ label forest_camp:
                 $ quick_menu = False
                 window hide
                 call screen show_treasure_map
-                call navigate_from_map
+                call navigate_from_map from _call_navigate_from_map_1
 
             "No, let's just go":
                 player_name "I now remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map
+                call navigate_from_map from _call_navigate_from_map_2
     
 
 label to_treasure_step1:
@@ -891,13 +891,13 @@ label to_treasure_step1:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step2
+                call navigate_from_map_to_step2 from _call_navigate_from_map_to_step2
             "No, let's just go":
                 player_name "I get it now, I can get it right this time."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step2
+                call navigate_from_map_to_step2 from _call_navigate_from_map_to_step2_1
     
     else:
         show Dawn surprised with dissolve
@@ -913,17 +913,17 @@ label to_treasure_step1:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step2
+                call navigate_from_map_to_step2 from _call_navigate_from_map_to_step2_2
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step2
+                call navigate_from_map_to_step2 from _call_navigate_from_map_to_step2_3
         hide Dawn with dissolve
         $ quick_menu = False
         window hide
-        call navigate_from_map_to_step2
+        call navigate_from_map_to_step2 from _call_navigate_from_map_to_step2_4
 
 
 label to_treasure_step2:
@@ -998,13 +998,13 @@ label to_treasure_step2:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step3
+                call navigate_from_map_to_step3 from _call_navigate_from_map_to_step3
             "No, let's just go":
                 player_name "I think I've got it"
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step3
+                call navigate_from_map_to_step3 from _call_navigate_from_map_to_step3_1
 
     else:
         show Dawn normal with dissolve
@@ -1023,13 +1023,13 @@ label to_treasure_step2:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step3
+                call navigate_from_map_to_step3 from _call_navigate_from_map_to_step3_2
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step3
+                call navigate_from_map_to_step3 from _call_navigate_from_map_to_step3_3
 
 
 label to_treasure_step3:
@@ -1060,13 +1060,13 @@ label to_treasure_step3:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step4
+                call navigate_from_map_to_step4 from _call_navigate_from_map_to_step4
             "No, let's just go":
                 player_name "I am a professional celestial navigator don't worry"
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step4
+                call navigate_from_map_to_step4 from _call_navigate_from_map_to_step4_1
 
     else:
         show Dawn surprised with dissolve
@@ -1085,13 +1085,13 @@ label to_treasure_step3:
                 $ quick_menu = False
                 window hide
                 pause
-                call navigate_from_map_to_step4
+                call navigate_from_map_to_step4 from _call_navigate_from_map_to_step4_2
             "No, let's just go":
                 player_name "I am a professional celestial navigator don't worry"
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_from_map_to_step4
+                call navigate_from_map_to_step4 from _call_navigate_from_map_to_step4_3
 
 
 label to_treasure_step4:
@@ -1112,14 +1112,14 @@ label to_treasure_step4:
                 $ quick_menu = False
                 window hide
                 pause
-                call to_treasure_groove
+                call to_treasure_groove from _call_to_treasure_groove
 
             "No, let's just go":
                 player_name "I remember the way, let's move."
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call to_treasure_groove
+                call to_treasure_groove from _call_to_treasure_groove_1
 
 
 ### Chapter 2: Sunrise at Dawn###
@@ -1251,7 +1251,7 @@ label forest_camp_2:
             player_name "I've got to hurry"
             $ quick_menu = False
             window hide
-            call navigate_to_lyrid_1
+            call navigate_to_lyrid_1 from _call_navigate_to_lyrid_1
         "Get out of the forest":
             player_name "How do I even get out of this forest"
             player_name "Even if I know now how to navigate directions I still don't know which
@@ -1284,7 +1284,7 @@ label to_lyrid_point_1:
 
     $ quick_menu = False
     window hide
-    call navigate_to_lyrid_2
+    call navigate_to_lyrid_2 from _call_navigate_to_lyrid_2
     
 
 label to_lyrid_point_2:
@@ -1335,14 +1335,14 @@ label to_lyrid_point_2:
         player_name "First I just need to head down West"
         $ quick_menu = False
         window hide
-        call navigate_to_lyrid_3
+        call navigate_to_lyrid_3 from _call_navigate_to_lyrid_3
     else:
         player_name "Did I get lost?"
         player_name "again?"
         player_name "Oh... right it's ok I just need to head down West"
         $ quick_menu = False
         window hide
-        call navigate_to_lyrid_3
+        call navigate_to_lyrid_3 from _call_navigate_to_lyrid_3_1
 
 
 label to_lyrid_point_3:
@@ -1384,14 +1384,14 @@ label to_lyrid_point_3:
         hide Dawn with dissolve
         $ quick_menu = False
         window hide
-        call navigate_to_lyrid_path
+        call navigate_to_lyrid_path from _call_navigate_to_lyrid_path
     else:
         player_name "Hmmm... I'm back here"
         player_name "Did I get my directions wrong?"
         player_name "It's ok I just need to go North and then West"
         $ quick_menu = False
         window hide
-        call navigate_to_lyrid_path
+        call navigate_to_lyrid_path from _call_navigate_to_lyrid_path_1
 
 
 label to_meteor_shower:
@@ -1404,7 +1404,7 @@ label to_meteor_shower:
 
     $ quick_menu = False
     window hide
-    call navigate_to_lyrid_meteor_shower
+    call navigate_to_lyrid_meteor_shower from _call_navigate_to_lyrid_meteor_shower
 
 
 label lyrid_meteor_shower:
@@ -1486,7 +1486,7 @@ label lyrid_meteor_shower:
                 hide Dawn with dissolve
                 $ quick_menu = False
                 window hide
-                call navigate_to_road_1
+                call navigate_to_road_1 from _call_navigate_to_road_1
     else:
         show Dawn surprised with dissolve
         player_name "Wait, this place again?"
@@ -1498,7 +1498,7 @@ label lyrid_meteor_shower:
         hide Dawn
         $ quick_menu = False
         window hide
-        call navigate_to_road_1
+        call navigate_to_road_1 from _call_navigate_to_road_1_1
 
 
 label to_road_point_1:
@@ -1521,7 +1521,7 @@ label to_road_point_1:
         hide Dawn with dissolve
         $ quick_menu = False
         window hide
-        call navigate_to_dawn_goodbye
+        call navigate_to_dawn_goodbye from _call_navigate_to_dawn_goodbye
     else:
         show Dawn surprised with dissolve
         d "You went the wrong way again?"
@@ -1531,7 +1531,7 @@ label to_road_point_1:
         hide Dawn with dissolve
         $ quick_menu = False
         window hide
-        call navigate_to_dawn_goodbye
+        call navigate_to_dawn_goodbye from _call_navigate_to_dawn_goodbye_1
 
 
 label dawn_goodbye:
