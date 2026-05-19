@@ -271,8 +271,8 @@ label mountain_summit:
 
 label to_basecamp_forest:
     play music "audio/ambience/bgm night-1.ogg" if_changed fadein 1.0
-    $ time_of_day = "NIGHT"
     scene black with fade
+    $ time_of_day = "NIGHT"
     scene bg to basecamp forest with dissolve
 
     default lost_count = 0
@@ -512,43 +512,54 @@ label forest_stargazing:
 
     show Dawn smile
     d "Oh, I'll explain it to you. Stars form images in the night sky, and that is what we call constellations."
-    d "Common, let's look up. Did you see that star? That star is the North Star."
+    d "Let's look up. Did you see that star? That star is the North Star."
     
     show Dawn normal
     d "Wait, let me get my laser."
-    player_name "Woah, a laser??"
     d "I use it to point things at the night sky and also this has a flashlight, so it's dual purpose. Very handy for night treks like this."
     player_name "Why do you need it though?"
     
     show Dawn smile  
-    d "I always go here and I use this to point to stars accurately. Like for example..."
+    d "I always go here and use this to point to stars accurately. Like for example..."
     hide Dawn with dissolve
     show map at pan_to(0.5, 0.0, 1.8, 0.8)
     
     pause 1.0
-    d "Do you see this star here? This star is Polaris. It's a circumpolar star, which means it’s always visible and it points to this contellation."
-    d "This is how you navigate using the Big Dipper. Look at the Dipper up here, those two stars at the edge? They point straight to Polaris."
-    d "That constellation points and is located in the North part of the sky."
+    d "This constellation is called the big dipper, because it's looks like a big dipper"
+    d "See those two stars at the edge of the Big Dipper? They point straight to Polaris, the North Star"
+    d "Since it's a circumpolar star, it never sets and always points at North whatever time of the night it is"
+    d "So whenever you need to move towards North just follow the big dipper"
 
     show map at pan_to(1.0, 0.5, 1.8, 0.4)
     pause 1.0
 
     d "Now look over here. This is Orion."
-    d "Orion is easy to spot because of his belt. It’s a great marker because Orion generally located in the East. If you need to head East, follow him."
+    d "Orion is easy to spot because of his belt with the three bright stars named Alnitak, Alnilam, and Mintaka"
+    d "It's easily recognizable because it looks like a hunter with an arrow"
+    d "I wonder what's its hunting for"
+    d "It’s a great marker because Orion generally located in the East"
+    d "If you need to head East just follow him. And if you need to go West, just go opposite of him"
+    d "But it moves over the West after midnight so always check on the time"
 
     $ quick_menu = False
     show map at pan_to(0.5, 1.0, 1.8, 0.4)
     pause 1.0
 
-    d_top "And way down here, we have the Crux—or the Southern Cross."
-    d_top "This constellation is what you look for to find South."
+    d_top "And way down here, we have the Crux or the Southern Cross"
+    d_top "Can you guess why it's called Crux"
+    player_name "are you serious"
+    d_top "No"
+    d_top "It consists of four stars Acrux, Mimosa, Gacrux, and Imai"
+    d_top "This constellation is what you look for if you are heading South"
 
     show map at pan_to(0.5, 0.5, 1.0, 0.5)
     pause 0.5
     $ quick_menu = True
 
-    d "I always used this technique, when I'm lost."
-    d "that's everything you need to know. Keep your eyes up the stars, and you won't get lost too."
+    d "I always just look at them when I'm lost"
+    d "They always gives me direction and points me wherever I need to go"
+    d "Maybe I found you because of them too, so you should thank them"
+    d "That's everything you need to know about constellation. Keep your eyes up the stars, and you won't get lost too."
 
     jump to_basecamp_forest_with_dawn
 
@@ -1598,8 +1609,8 @@ label dawn_goodbye:
         
 
 label to_road_point_2:
-    $ time_of_day = "DAWN"
     scene black with arrow_wipe_down_slow
+    $ time_of_day = "DAWN"
     scene bg to road path 2 at resizer with arrow_wipe_down_slow
     $ quick_menu = True
     window hide
@@ -1611,8 +1622,8 @@ label to_road_point_2:
 
 
 label to_road_point_3:
-    $ time_of_day = "DAWN"
     scene black with arrow_wipe_down_slow
+    $ time_of_day = "DAWN"
     scene bg to road path 3 with arrow_wipe_down_slow
     $ quick_menu = True
     window hide
