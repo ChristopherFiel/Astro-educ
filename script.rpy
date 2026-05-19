@@ -453,7 +453,7 @@ label dawn_first_meeting:
     if player_name == "":
         $ player_name="Alice"
 
-    if player_name in ("Alex"):
+    if player_name.lower() == "alex":
         show Dawn surprised
         d "Go fuck urself"
         $ renpy.quit()
