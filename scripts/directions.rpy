@@ -6,70 +6,80 @@ style navigation_button_text:
     hover_color "#ff0"
 
 screen direction_menu():
-    textbutton "Go Forward":
-        xalign 0.5 yalign 0.15
-        text_style "navigation_button_text"
-        selected False
+    imagebutton:
+        xalign 0.5
+        yalign 0.1
+        idle  Transform("images/arrow_ui/idle/forward.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/forward.png",  zoom=0.6)
         action [SetVariable("current_map", "map-north"), Return("straight")]
 
-    textbutton "Go Left":
-        xalign 0.1 yalign 0.5
-        text_style "navigation_button_text"
-        selected False
+    imagebutton:
+        xalign 0.1
+        yalign 0.5
+        idle  Transform("images/arrow_ui/idle/left.png",     zoom=0.6)
+        hover Transform("images/arrow_ui/hover/left.png",     zoom=0.6)
         action [SetVariable("current_map", "map-west"), Return("left")]
 
-    textbutton "Go Right":
-        xalign 0.9 yalign 0.5
-        text_style "navigation_button_text"
-        selected False
+    imagebutton:
+        xalign 0.9
+        yalign 0.5
+        idle  Transform("images/arrow_ui/idle/right.png",    zoom=0.6)
+        hover Transform("images/arrow_ui/hover/right.png",    zoom=0.6)
         action [SetVariable("current_map", "map-east"), Return("right")]
 
-    textbutton "Go Backward":
-        xalign 0.5 yalign 0.85
-        text_style "navigation_button_text"
-        selected False
+    imagebutton:
+        xalign 0.5
+        yalign 0.9
+        idle  Transform("images/arrow_ui/idle/backward.png", zoom=0.6)
+        hover Transform("images/arrow_ui/hover/backward.png", zoom=0.6)
         action [SetVariable("current_map", "map-south"), Return("back")]
 
 
 screen direction_menu_horizontal():
-    textbutton "Go Left":
+    imagebutton:
         xalign 0.1
         yalign 0.5
-        text_style "navigation_button_text"
+        idle  Transform("images/arrow_ui/idle/left.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/left.png", zoom=0.6)
         action Return("left")
 
-    textbutton "Go Right":
+    imagebutton:
         xalign 0.9
         yalign 0.5
-        text_style "navigation_button_text"
-        action Return("right") 
+        idle  Transform("images/arrow_ui/idle/right.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/right.png", zoom=0.6)
+        action Return("right")
 
 
 screen direction_menu_forward():
-    textbutton "Go Forward":
+    imagebutton:
         xalign 0.5
-        yalign 0.15
-        text_style "navigation_button_text"
-        action Return("straight") 
+        yalign 0.1
+        idle  Transform("images/arrow_ui/idle/forward.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/forward.png", zoom=0.6)
+        action Return("straight")
 
 
 screen direction_menu_no_map():
-    textbutton "Go Forward":
+    imagebutton:
         xalign 0.5
-        yalign 0.15
-        text_style "navigation_button_text"
+        yalign 0.1
+        idle  Transform("images/arrow_ui/idle/forward.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/forward.png", zoom=0.6)
         action Return("straight")
 
-    textbutton "Go Left":
+    imagebutton:
         xalign 0.1
         yalign 0.5
-        text_style "navigation_button_text"
+        idle  Transform("images/arrow_ui/idle/left.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/left.png", zoom=0.6)
         action Return("left")
 
-    textbutton "Go Right":
+    imagebutton:
         xalign 0.9
         yalign 0.5
-        text_style "navigation_button_text"
+        idle  Transform("images/arrow_ui/idle/right.png",  zoom=0.6)
+        hover Transform("images/arrow_ui/hover/right.png", zoom=0.6)
         action Return("right")
     
 

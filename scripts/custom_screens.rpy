@@ -155,6 +155,9 @@ screen meteorite_interaction():
 screen show_treasure_map():
     modal True
 
+    ## Play sfx instantly when screen opens
+    timer 0.01 action Play("sound", "audio/sfx/paper-crumple.ogg")
+
     frame:
         xalign     0.5
         yalign     0.5

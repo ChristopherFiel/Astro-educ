@@ -272,8 +272,8 @@ label mountain_summit:
 label to_basecamp_forest:
     play music "audio/ambience/bgm night-1.ogg" if_changed fadein 1.0
     $ time_of_day = "NIGHT"
-    scene black with arrow_wipe_up_slow
-    scene bg to basecamp forest with arrow_wipe_up_slow
+    scene black with fade
+    scene bg to basecamp forest with dissolve
 
     default lost_count = 0
     if lost_count == 0:
@@ -364,7 +364,7 @@ label lost_path_straight:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with arrow_wipe_up
+        scene black with arrow_wipe_down
     elif choice == "left":
         scene black with arrow_wipe_right
     elif choice == "right":
@@ -383,7 +383,7 @@ label lost_path_left:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with arrow_wipe_up
+        scene black with arrow_wipe_down
     elif choice == "left":
         scene black with arrow_wipe_right
     elif choice == "right":
@@ -402,7 +402,7 @@ label lost_path_right:
     $ choice = renpy.call_screen("direction_menu_no_map")
 
     if choice == "straight":
-        scene black with arrow_wipe_up
+        scene black with arrow_wipe_down
     elif choice == "left":
         scene black with arrow_wipe_right
     elif choice == "right":
@@ -452,6 +452,15 @@ label dawn_first_meeting:
     $ player_name = player_name.strip()
     if player_name == "":
         $ player_name="Alice"
+
+    if player_name in ("Alex"):
+        show Dawn surprised
+        d "Alex? That name... I've heard it before. Something feels wrong."
+        p "Is there a problem with my name?"
+        d "I'm sorry, but you can't be here. You need to leave."
+        p "What? Why?!"
+        d "Just go. Now."
+        $ renpy.quit()
     
     show Dawn smile
     d "%(player_name)s wow what a beautiful name"
@@ -474,18 +483,11 @@ label dawn_first_meeting:
     d "Don't worry I know a way to navigate this forest without a compass"
     show Dawn smile
     d "{size=60}Just...{/size}"
-
-    scene black with fade
-    jump star_map
-
-
-label star_map:
-    $ time_of_day = "NIGHT"
-    $ quick_menu = False
-    window hide
-    show map at zoom_to(0.5, 0.4, 1.8) with dissolve
+    hide Dawn with dissolve
     pause 1.0
 
+    $ quick_menu = False
+    window hide
     play sound "audio/sfx/clank.ogg"
     show text "{font=Midnightconstellations-YLgo.ttf}{size=240}Look Up{/size}{/font}"
     pause (3.0)
@@ -500,8 +502,8 @@ label star_map:
 
 label forest_stargazing:
     $ time_of_day = "NIGHT"
-    scene black with fade
-    scene bg forest starry sky with dissolve
+    scene black with eyeclose
+    scene map with eyeopen
     pause 1.0
     $ quick_menu = True
 
@@ -524,23 +526,20 @@ label forest_stargazing:
     
     show Dawn smile  
     d "I always go here and I use this to point to stars accurately. Like for example..."
-    # BIG DIPPER / NORTH SECTION
-    scene black with eyeclose
-    show map at pan_to(0.5, 0.0, 1.8, 0.8) with eyeopen
+    hide Dawn with dissolve
+    show map at pan_to(0.5, 0.0, 1.8, 0.8)
     
     pause 1.0
     d "Do you see this star here? This star is Polaris. It's a circumpolar star, which means it’s always visible and it points to this contellation."
     d "This is how you navigate using the Big Dipper. Look at the Dipper up here, those two stars at the edge? They point straight to Polaris."
     d "That constellation points and is located in the North part of the sky."
 
-    # ORION / EAST SECTION
     show map at pan_to(1.0, 0.5, 1.8, 0.4)
     pause 1.0
 
     d "Now look over here. This is Orion."
     d "Orion is easy to spot because of his belt. It’s a great marker because Orion generally located in the East. If you need to head East, follow him."
 
-    # CRUX / SOUTH SECTION
     $ quick_menu = False
     show map at pan_to(0.5, 1.0, 1.8, 0.4)
     pause 1.0
@@ -548,21 +547,20 @@ label forest_stargazing:
     d_top "And way down here, we have the Crux—or the Southern Cross."
     d_top "This constellation is what you look for to find South."
 
-    # This line zooms the map out to show the full sky/map again
     show map at pan_to(0.5, 0.5, 1.0, 0.5)
     pause 0.5
     $ quick_menu = True
 
-    d "Back when there were no maps or any navigating apps, our ancestors just used these. They looked at the same sky we're looking at now."
-    d "And that's everything you need to know. Keep your eyes up the stars, and you won't get lost."
+    d "I always used this technique, when I'm lost."
+    d "that's everything you need to know. Keep your eyes up the stars, and you won't get lost too."
 
     jump to_basecamp_forest_with_dawn
 
 
 label to_basecamp_forest_with_dawn:
     $ time_of_day = "NIGHT"
-    scene black with dissolve
-    scene bg forest starry sky with dissolve
+    scene black with eyeclose
+    scene bg forest starry sky with eyeopen
 
     if not forest_intro_seen:
         $ quick_menu = True
@@ -587,7 +585,7 @@ label to_basecamp_forest_with_dawn:
         d "Good luck!"
         hide Dawn with dissolve
         hide screen wind_particles
-        "Dawn disappeared like with the wind"
+        "Dawn disappeared with the wind"
         player_name "Well, she seems trustworthy. I should follow her."
         $ forest_intro_seen = True
     else:
@@ -717,16 +715,7 @@ label forest_camp:
         d "Tell me if you find anything interesting"
         hide Dawn with dissolve
         player_name "Is there even something interesting in a place like this?"
-
-        $ quick_menu = False
-        window hide
-        pause 1.0
-        show screen click_objects with dissolve
         pause
-        hide screen click_objects
-        $ quick_menu = True
-        window auto
-
         show Dawn surprised with dissolve
         d "Look over here, I found a treasure map!"
         window hide
@@ -1673,7 +1662,7 @@ label roadside:
     hide missing_poster_back
     show missing_poster_front:
         "images/objects/missing poster front.webp"
-        zoom 0.35
+        zoom 0.5
         truecenter
     with dissolve
     pause
@@ -1715,15 +1704,15 @@ label roadside:
     pause 3.0
     show text "[_credit]Written by\nChristopher Fiel Jr.[_end]"
     pause 3.0
-    show text "[_credit]Backgrounds by\nMarie Elyze Sarmiento[_end]"
+    show text "[_credit]Gameplay design by\nChristopher Fiel Jr. [_end]"
     pause 3.0
-    show text "[_credit]Gameplay design by\nMarie Elyze Sarmiento[_end]"
+    show text "[_credit]Backgrounds design by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "[_credit]Programmed by\nChristopher Fiel Jr.[_end]"
+    show text "[_credit]Audio design by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
     show text "[_credit]Maps by\nMarie Elyze Sarmiento[_end]"
     pause 3.0
-    show text "[_credit]Audio design by\nChristopher Fiel Jr.[_end]"
+    show text "[_credit]Programmed by\nChristopher Fiel Jr.[_end]"
     pause 3.0
     show text "[_credit]ED by\nYevhenAstafiev[_end]"
     pause 3.0
