@@ -459,7 +459,7 @@ label dawn_first_meeting:
         $ renpy.quit()
     
     show Dawn smile
-    d "%(player_name)s wow what a beautiful name"
+    d "I see nice to meet you %(player_name)s"
     show Dawn normal
     d "Don't worry, I am not a monster. I'm not gonna eat you"
     show Dawn surprised
