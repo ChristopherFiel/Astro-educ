@@ -1167,10 +1167,9 @@ label treasure_groove:
     camera 
     pause 0.15 
     hide screen meteor_impact_fx
-    scene white with fade
-    pause 2.0
+    pause 1.0
     play sound "audio/sfx/clank.ogg"
-    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}{color=#000000}Chapter 2: \nSunrise at Dawn{/color}{/size}{/font}"    
+    show text "{font=Midnightconstellations-YLgo.ttf}{size=120}Chapter 2: \nSunrise at Dawn{/color}{/size}"    
     pause (3.0)
     hide text
     jump forest_camp_2
@@ -1200,7 +1199,6 @@ label forest_camp_2:
         stop music
         play music "audio/ambience/bgm forest camp 2.ogg"
         show Dawn lookaway with dissolve
-        show screen gameUI
         player_name "hey..."
         player_name "I'm still here. I'm just resting my eyes"
         player_name "What does even happened"
@@ -1225,6 +1223,7 @@ label forest_camp_2:
         show Dawn normal2
         d "It's almost just about, the best time to see it let's hurry"
         d "And by the way since it's already past midnight Orion now points at west"
+        show screen gameUI
         show screen wind_particles(xpos=0.5, ypos=0.45)
         show Dawn smile 
         show Dawn smile at crumble_dissolve
