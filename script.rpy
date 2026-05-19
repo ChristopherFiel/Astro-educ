@@ -455,11 +455,7 @@ label dawn_first_meeting:
 
     if player_name in ("Alex"):
         show Dawn surprised
-        d "Alex? That name... I've heard it before. Something feels wrong."
-        p "Is there a problem with my name?"
-        d "I'm sorry, but you can't be here. You need to leave."
-        p "What? Why?!"
-        d "Just go. Now."
+        d "Go fuck urself"
         $ renpy.quit()
     
     show Dawn smile
