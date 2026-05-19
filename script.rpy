@@ -568,6 +568,7 @@ label to_basecamp_forest_with_dawn:
     $ time_of_day = "NIGHT"
     scene black with eyeclose
     scene bg forest starry sky with eyeopen
+    $ renpy.notify("10:00 PM")
 
     if not forest_intro_seen:
         $ quick_menu = True
@@ -1195,6 +1196,7 @@ label forest_camp_2:
         d "What do I even do"
         d "Maybe I should just leave you here"
         scene bg forest camp 2 with eyeopen
+        $ renpy.notify("1:00 AM")
         stop music
         play music "audio/ambience/bgm forest camp 2.ogg"
         show Dawn lookaway with dissolve
