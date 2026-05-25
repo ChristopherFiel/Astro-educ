@@ -91,7 +91,7 @@ label mountain_basecamp:
     $ quick_menu = True
     window hide
     
-    p "The weather's today perfect but..."
+    p "The weather's perfect today but..."
     p "Why is there no one climbing up this mountain today??"
     p "I hope I won't get lost"
     # p "Hmm... what's this?"
@@ -559,7 +559,7 @@ label forest_stargazing:
     d "I always just look at them when I'm lost"
     d "They always gives me direction and points me wherever I need to go"
     d "Maybe I found you because of them too, so you should thank them"
-    d "That's everything you need to know about constellation. Keep your eyes up the stars, and you won't get lost too."
+    d "That's everything you need to know about constellation. Keep your eyes up the stars, and you won't get lost either."
 
     jump to_basecamp_forest_with_dawn
 
@@ -584,7 +584,7 @@ label to_basecamp_forest_with_dawn:
         d "Now, I know a mountaineer camp near us"
         d "Let's head over there now I think it's about..."
         show Dawn normal
-        d "North East from here"
+        d "First Go North, then head East from here"
         d "If you get lost just remember to look up"
         d "Well, I'll be heading first"
         show screen wind_particles(xpos=0.5, ypos=0.45)        
@@ -719,7 +719,7 @@ label forest_camp:
         d "You're now a certified celestial navigator"
         player_name "What does that even mean?"
         show Dawn normal
-        d "Well, anyway I think we should rest and look around for now before get going"
+        d "Well, anyway I think we should rest and look around for now before we get going"
         d "Tell me if you find anything interesting"
         hide Dawn with dissolve
         player_name "Is there even something interesting in a place like this?"
@@ -749,20 +749,27 @@ label forest_camp:
         show Dawn surprised
         d "No way, you dont know Juano Piece?"
         d "It's a treasure piece left by Don Juano"
-        d "Legend says that it has everything a man wants, and needs. Wealth, Fame, Glory, it had everything"
+        d "Legend says that it has everything a man desires, and wishes. Wealth, Fame, Power, Glory, it had EVERYTHING!!!"
         d "It says that Don Juano got lost in this Mountain while trying to hide his treasure,
         and was never found again along with his treasure"
         show Dawn lookaway
         d "I know it could be fake, but lets go anyways"
-        d "It's not that everyday we get a chance to go to an adventure like this"
+        d "It's not that everyday we get a chance to go on an adventure like this"
 
         menu start_adventure:
             "Should we follow the map?"
             "Yes":
                 show Dawn smile
-                player_name "Alright it's not like I would miss the chance to get rich"
-                player_name "Plus I want to use my new navigation skills"
+                player_name "Alright let's go, I'll test my new navigation skills"
                 d "Yay, let's hurry"
+                d "Do you have anything in mind that you want to find on that treasure?"
+                d "For me I want to find a potion that brings dead people back, how about you?"
+                player_name "That's a weird wish, but for me I want find..."
+                $ player_find = renpy.input("{size=40}What's do you want to find{/size}")
+                if player_find == "":
+                    $ player_find ="teleporter that would get me out of this place"
+                player_name "I want to find a %(player_find)s"
+                d "I see let's go get your %(player_find)s"
                 d "Lead the way, I trust you we won't get lost"
                 d "But first, let's take a final look at the map before going"
                 show screen show_treasure_map
@@ -778,7 +785,7 @@ label forest_camp:
                     player_name "The map looks so fake, it's a waste of time, and energy"
                     player_name "Let's hurry up, and leave this forest"
                     show Dawn lookaway
-                    d "But what if its real? we could've missed the chance to become billionaires"
+                    d "But what if its real? we would've missed the chance to become billionaires"
                     d "Let's go Please"
                     jump start_adventure
                 else:
@@ -828,14 +835,14 @@ label to_treasure_step1:
         menu dream:
             "Do you have a dream"
             "Yes":
-                player_name "Of course, I have one in minde"
+                player_name "Of course, I have one in mind"
                 player_name "But I'm keeping it a secret so that no one can jinx it"
                 show Dawn smile
                 d "Oh, I hope your dreams come true"
                 d "I'll be rooting for you"
                 d "Well for me I want to become an Astrobiologist"
-                d "I want to become the one that would make life in other planets possible"
-                d "Or maybe even discover life in other planets as well"
+                d "I want to become the one that would make life on other planets possible"
+                d "Or maybe even discover life on other planets as well"
             "Not yet":
                 player_name "I'm still figuring it out"
                 player_name "There's a ton of things to do out there I find it hard to decide"
@@ -956,13 +963,13 @@ label to_treasure_step2:
         show Dawn smile
         d "hehe"
         show Dawn normal2
-        d "Anyways the phases in order are, New Moon, Waxing Crescent, First Quarter, Waxing Gibbous, Full Moon, Waning Gibbous, Third Quarter, Waning Crescent"
+        d "Anyways the phases in order are, New Moon, 'Waxing' Crescent, First Quarter, 'Waxing' Gibbous, Full Moon, 'Waning' Gibbous, Third Quarter, 'Waning' Crescent"
         d "The brightest phase is the Full Moon in where we can see the Moon at it's full form, and the darkest phase is the New Moon in where the Moon is not visible to us all"
         show Dawn smile
-        d "before it reaches Full Moon it goes through waxing which means 'growing', on the other hand before it reached New moon it goes through waning which means 'shrinking'"
+        d "before it reaches Full Moon it goes through waxing which means 'growing', on the other hand before it reached New moon it goes through 'waning' which means 'shrinking'"
         d "And the Moon does not actually shine but only reflects light from the Sun"
         show Dawn normal
-        d "You can actually tell by just looking at the moon whether it's waxing or waning"
+        d "You can actually tell by just looking at the moon whether it's 'waxing' or 'waning'"
         d "When the moon looks like a capital D it's waxing, while if it looks like capital C it's waning"
         player_name "I didn't really consider that when planning my hike"
         player_name "The Moon is certainly interesting"
@@ -982,7 +989,7 @@ label to_treasure_step2:
         show Dawn smile
         d "Personally I love seeing the dark skies"
         d "The darker the night the brighter the stars"
-        d "It reminds me that there's always something to look forward to no matter how dark the times becomes"
+        d "It reminds me that there's always something to look forward to no matter how dark the times become"
         player_name "You're right the Moon might be absent but the stars are literally here to guide us"
         show Dawn normal
         d "Let's head out now. I still have the map by the way if you want to take another look"
@@ -1201,12 +1208,12 @@ label forest_camp_2:
         show Dawn lookaway with dissolve
         player_name "hey..."
         player_name "I'm still here. I'm just resting my eyes"
-        player_name "What does even happened"
+        player_name "What did just happen?"
         show Dawn surprised
         d "Oh your'e still alive"
-        d "A meteor fell near us, and cause an explosion"
+        d "A meteor fell near us, and caused an explosion"
         show Dawn smile
-        d "Luckily we're just caught by it's shockwave, and didn't get vaporized"
+        d "Luckily we're were caught by it's shockwave, and didn't get vaporized"
         d "I've taken some fragment hehe. here take a look"
         $ quick_menu = False
         call screen meteorite_interaction
@@ -1215,14 +1222,14 @@ label forest_camp_2:
         d "Did you know it's called Meteoroid when it's floating in space"
         d "Meteor when it entered the atmosphere"
         d "And Meteorite when it falls on the ground"
-        player_name "Oh really? thanks but that did not really help our situation"
+        player_name "Oh really? thanks but that does not really help our situation"
         player_name "I'm ready to go now, let's get out of here"
         show Dawn surprised
         d "I just remembered today is the peak of the Lyrid Meteor Shower"
         d "I know just a place in this forest where we can perfectly watch it"
         show Dawn normal2
         d "It's almost just about, the best time to see it let's hurry"
-        d "And by the way since it's already past midnight Orion now points at west"
+        d "And by the way since it's already past midnight Orion now points to the west"
         show screen gameUI
         show screen wind_particles(xpos=0.5, ypos=0.45)
         show Dawn smile 
@@ -1238,7 +1245,7 @@ label forest_camp_2:
         show screen gameUI
         player_name "I'm certain that I've been here before"
         player_name "What does Dawn said again?"
-        player_name "Right. Orion now points at West"
+        player_name "Right. Orion now points to the West"
 
     menu follow_dawn:
         "What should I do?"
@@ -1296,23 +1303,23 @@ label to_lyrid_point_2:
         d "Oh wow you found me, quite fast"
         d "I'm surprised you did not get confused with the position of Orion"
         show Dawn pout
-        d "It might be already too late since you alread learned it on you own"
+        d "It might be already too late since you alread learned it on your own"
         d "But let me explain anyways"
         show Dawn normal2
         d "In the Northern Hemisphere, stars appear to rotate counter-clockwise around a point
             called the North Celestial Pole, which is marked almost exactly by the North Star, Polaris."
         d "But actually the stars do not move, it's just the Earth Spinning on it's axis"
         show Dawn smile
-        d "Our favourite constellation Orion is an is an equatorial constellation,
+        d "Our favourite constellation Orion is an equatorial constellation,
             meaning it sits right above the Earth's equator."
-        d "And because of that it takes a follows a wide arc across the sky, much like the Sun"
+        d "And because of that it follows a wide arc across the sky, much like the Sun"
         show Dawn normal2
-        d "It rises in the east and sets in the west, so by after midnight, its already heading going
+        d "It rises in the east and sets in the west, so by after midnight, its already heading
             down the western horizon."
-        d "On the other hand, Big Dipper is circumpolar its circle of rotation is very small.
+        d "Whereas, Big Dipper is circumpolar its circle of rotation is very small.
             Instead of rising and setting, it simply circles Polaris like a hand on a clock."
         show Dawn normal
-        d "And lastly Crux, can be called as the Big Dipper of the South."
+        d "And lastly Crux, called the Big Dipper of the South."
         show Dawn normal2
         d "If you're near the tropics like us, it just barely peeks over the southern horizon and
             hugs that spot because it's circling the South Pole, which is hidden below your view."
@@ -1351,9 +1358,9 @@ label to_lyrid_point_3:
     if not visited_lyrid_point_3:
         $ visited_lyrid_point_3 = True
         show Dawn normal with dissolve
-        d "Hey, have you watched meteor shower before?"
+        d "Hey, have you watched a meteor shower before?"
         menu meteor_shower_experience:
-            "Have you watched meteor shower before?"
+            "Have you watched a meteor shower before?"
             "I have":
                 player_name "Yes, I've watched a meteor shower before, in my garden"
                 show Dawn surprised
@@ -1370,7 +1377,7 @@ label to_lyrid_point_3:
             left behind by a comet or an asteroid."
         d "When a comet nears the sun, it sheds a trail of dust and rock fragments in its wake."
         d "As Earth orbits through this debris, the particles slam into our atmosphere and burn up,
-            creating the bright streaks we see as meteor showers."
+            creating the bright streaks we see as the meteor showers."
         show Dawn normal
         d "And tonight is the peak of the Lyrid Meteor shower, one of the oldest known meteor showers"
         d "These meteors appear to come from the constellation Lyra,
@@ -1414,24 +1421,24 @@ label lyrid_meteor_shower:
         $ visited_lyrid_meteor_shower = True
         show Dawn smile
         d "We're here"
-        d "This place sits at the right elevation, with an onobstructed view of the night sky"
+        d "This place sits at the right elevation, with onobstructed view of the night sky"
         d "The perfect place to watch the Lyrid Meteor shower"
-        d "And we've just arrive at the perfect time where the meteor shower it's at it's peak"
+        d "And we've just arrive, the perfect time when the meteor shower is at it's peak"
         d "Yayy!"
         show Dawn lookaway
         d "This is actually my secret spot, so I'm trusting you to keep this place a secret"
         show Dawn pout
         d "You know your'e so lucky"
-        d "When I watched the Lyrid Meteor shower before all of a sudden it always gets cloudy"
+        d "When I watched the Lyrid Meteor shower before all of a sudden it usually gets cloudy"
         d "And I barely see any shooting stars"
-        d "But tonight the sky is clear as day"
+        d "But tonight the sky is as clear as day"
         d "It's unfair"
         player_name "..."
         player_name "I'm sorry, I guess?"
         show Dawn lookaway
         d "Nevermind, anyways let's sit somewhere and watch the Lyrid Meteor shower"
         show Dawn smile
-        d "Here should fine, are you ready?"
+        d "Here should be fine, are you ready?"
         menu watch_meteor_shower:
             "Are you ready?"
             "Watch the Meteor shower":
@@ -1449,29 +1456,29 @@ label lyrid_meteor_shower:
                 show screen gameUI
                 show Dawn smile
                 d "The shooting stars are always so beautiful I think I've seen 23"
-                d "They never failed to impress me even though I've seen them countless of times"
-                d "Have you make your wish?"
+                d "They never fail to impress me even though I've seen them countless times"
+                d "Have you made your wish?"
                 menu wishes:
                     "Have you make your wish?"
                     "Yes":
-                        player_name "Yes' I've wish to"
+                        player_name "Yes' I've wish to..."
                         $ player_wish = renpy.input("{size=40}What's your wish{/size}")
                         if player_wish == "":
-                            $ player_wish ="Lebron to win another ring"
+                            $ player_wish ="Pass this semester's finals"
                         player_name "Yes, I wished to %(player_wish)s"
                         show Dawn surprised
                         d "SHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!"
                         d "Your'e supposed to not say your wish otherwise it won't come true"
                     "No":
-                        player_name "No, I think I've doze off but I dont really believe in wishing on a star"
+                        player_name "No, I think I've dozed off but I dont really believe in wishing on a star"
                         show Dawn pout
-                        d "Oh really? I think there's nothing wrong on putting your faith onto something"
+                        d "Oh really? I think there's nothing wrong on putting your faith in something"
                         d ""
                 show Dawn normal
-                d "Don't worry I've wished for both of us in all the shooting stars I've seen"
+                d "Don't worry I've wished for both of us with each shooting stars I've seen"
                 show Dawn lookaway
-                d "Anyways dont worry I didn't forgot I'll get you out of here from this forest"
-                d "It's actually really easy now we're at this place"
+                d "Anyways dont worry I didn't forget I'll get you out of this forest"
+                d "It's actually really easy now, we're at this place"
                 show Dawn normal2
                 d "All you gotta do from here is head down South"
                 d "And you'll see a road there and a bus stop"
@@ -1540,7 +1547,7 @@ label dawn_goodbye:
     
     show Dawn lookaway with dissolve
     d "It's almost sunrise"
-    d "You can go straight forward from here"
+    d "You can go straight ahead from here"
     player_name "Yeah, lets go"
     show Dawn pout
     d "I'm sorry but I can't come with you"
@@ -1591,7 +1598,7 @@ label dawn_goodbye:
                 $ convince_count += 1
                 if convince_count == 1:
                     player_name "I won't leave here without you"
-                    player_name "What is it that why you can't leave this place"
+                    player_name "Why you can't leave this place?"
                     player_name "It's not that you can never come here again"
                     show Dawn pout
                     d "I'm sorry I can't tell you but I must stay here for now"
@@ -1650,13 +1657,13 @@ label roadside:
     window hide
     player_name "*huff...* *huff...* *huff...*"
     player_name "Finally the road it's over there"
-    player_name "I miss seeing trace of civilation"
+    player_name "I miss seeing the trace of civilation"
     player_name "I can finally go home"
     player_name "I'll rest for an eternity after this"
     stop music
     play sound "audio/sfx/wind-gust.ogg"
     pause 1.0
-    player_name "Wait what's this a poster?"
+    player_name "Wait what's this? a poster?"
     window hide
     $ quick_menu = False
     play sound "audio/sfx/paper-crumple.ogg"
