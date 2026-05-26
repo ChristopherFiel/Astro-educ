@@ -453,10 +453,52 @@ label dawn_first_meeting:
     if player_name == "":
         $ player_name="Alice"
 
-    if player_name.lower() == "alex":
+    if player_name.lower() in ["ren", "renee"]:
         show Dawn surprised
-        d "Go fuck urself"
-        $ renpy.quit()
+        d "So you're her"
+        d "A friend of mine has talked a lot about"
+        show Dawn pout
+        d "He said you were mean to him"
+        d "But he misses you"
+        d "Would you be more kinder to him"
+        show Dawn surprised
+        d "He said to get you out of this forest immediately when I see you"
+        d "He also left a message for you"
+        $ quick_menu = False
+        window hide
+        show screen easter_egg_prompt
+        hide Dawn with dissolve
+        $ easter_egg_choice = renpy.call_screen("easter_egg_prompt")
+
+        if easter_egg_choice == "open":
+            $ renpy.open_url("https://www.youtube.com/watch?v=Gw7KnM98RpA")
+            pause 3.0
+            show text "{size=80}This song reminds me of you{/size}" at truecenter
+            pause
+            show text "{size=80}This suddenly got recommended on my youtube playlist{/size}" at truecenter
+            pause
+            show text "{size=80}AAAAAAAAAAAAAAAAAAAAAA{/size}" at truecenter
+            pause
+            show text "{size=80}It's 1 am and I'm writing this shit{/size}" at truecenter
+            pause
+            show text "{size=80}You might not even see this :<<<<<{/size}" at truecenter
+            pause
+            show text "{size=80}I am sorry I realized I didn't really put in the effort to get to know you better{/size}" at truecenter
+            pause
+            show text "{size=80}AAAAAAAAAAAAAAAAAAAAAAAAAAAA{/size}" at truecenter
+            pause
+            show text "{size=80}Writing this makes me cringe physically{/size}" at truecenter
+            pause
+            show text "{size=320}GOODBYE{/size}" at truecenter
+            pause
+            hide text
+        pause
+
+        show Dawn smile with dissolve
+        $ quick_menu = True
+        window auto
+        d "Let's go now"
+        jump roadside
     
     show Dawn smile
     d "I see nice to meet you %(player_name)s"
