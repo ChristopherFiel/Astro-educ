@@ -205,27 +205,3 @@ screen infinite_scream():
         xalign 0.5
         yalign 0.5
         text_align 0.5
-
-
-screen easter_egg_prompt():
-    modal True
-
-    add "#000a"
-
-    text "A message from a friend...":
-        xalign 0.5
-        yalign 0.4
-        color  "#fff"
-        size   55
-
-    textbutton "Read message":
-        xalign 0.5
-        yalign 0.55
-        text_size 45
-        action Return("open")
-
-    textbutton "Maybe later":
-        xalign 0.5
-        yalign 0.65
-        text_size 45
-        action Return("skip")
